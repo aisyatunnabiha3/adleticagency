@@ -1,8 +1,7 @@
 .navigation {
   position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 120px;
+  left: 20px;
   z-index: 1000;
   border-radius: 25px;
   padding: 10px;
@@ -10,6 +9,7 @@
 
 .nav-items {
   display: flex;
+  flex-direction: column;
   gap: 5px;
   align-items: center;
 }
@@ -71,6 +71,7 @@
 /* Mobile Navigation */
 @media (max-width: 768px) {
   .navigation {
+    top: auto;
     bottom: 10px;
     left: 10px;
     right: 10px;
@@ -79,6 +80,7 @@
   }
   
   .nav-items {
+    flex-direction: row;
     justify-content: space-around;
     gap: 2px;
   }

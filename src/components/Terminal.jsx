@@ -95,11 +95,11 @@ export default function Terminal({ onClose }) {
       '',
       '🚀 AI Sales System',
       '   SaaS platform automating sales pipelines with AI',
-      '   Tech: React, Flutter, AI, Node.js',
+      '   Tech: React, Flutter, OpenAI API, Node.js',
       '',
       '🧠 Second Brain',
       '   WhatsApp productivity AI detecting tasks & reminders',
-      '   Tech: Python, AI, WhatsApp API',
+      '   Tech: React, Node.js, wweb.js',
       '',
       '💼 Aper & Alist Databases',
       '   Business and influencer management CRM systems',
@@ -113,9 +113,9 @@ export default function Terminal({ onClose }) {
       '   Unity multiplayer PvP shooter game',
       '   Tech: Unity, C#, Multiplayer',
       '',
-      '👥 Buds App',
-      '   Social activity coordination mobile app',
-      '   Tech: Flutter, Firebase'
+      '🏥 TdLabs Health App',
+      '   Health tools mobile app with QR scanning & HealthKit integration',
+      '   Tech: Flutter, Yii PHP, HealthKit'
     ],
     
     contact: () => [

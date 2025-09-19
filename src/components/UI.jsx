@@ -85,20 +85,54 @@ function AboutSection() {
     >
       <div className="about-content glass-dark">
         <h2 className="section-title neon-glow">ABOUT_ME.exe</h2>
-        <div className="about-main">
-          <div className="about-text">
-            <p>
-              Software engineer and entrepreneur with 4+ years of experience in AI automation, 
-              SaaS development, and mobile applications. I've always loved programming since I was 14, 
-              and this passion has driven me to found and scale Juta Teknologi to $20K/month revenue, 
-              delivering AI-driven products and workflow automation solutions for clients across multiple industries.
-            </p>
-            <p>
-              Skilled in building AI agents, full-stack systems, and mobile apps. Seeking 
-              software engineering or AI-focused roles to apply technical expertise and 
-              product execution experience.
+        
+        {/* Professional Summary */}
+        <div className="professional-summary">
+          <div className="summary-card glass">
+            <h3 className="summary-title neon-glow-pink">Hello, I'm Firaz!</h3>
+            <p className="summary-text">
+              25-year-old software engineer from Malaysia. Founded a tech company that scaled to $20K/month revenue. 
+              Passionate about AI, automation, and turning complex problems into elegant solutions.
             </p>
           </div>
+        </div>
+
+        <div className="about-main">
+          <div className="about-text">
+            {/* Key Info */}
+            <div className="info-section">
+              <div className="info-grid">
+                <div className="info-item">
+                  <span className="info-label">Age:</span>
+                  <span className="info-value">25</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">Location:</span>
+                  <span className="info-value">Shah Alam, Malaysia</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">Experience:</span>
+                  <span className="info-value">6+ years</span>
+                </div>
+                <div className="info-item">
+                  <span className="info-label">Education:</span>
+                  <span className="info-value">Computer Science Diploma</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Interests */}
+            <div className="interests-section">
+              <h4 className="section-subtitle neon-glow">Interests</h4>
+              <div className="interests-grid">
+                <div className="interest-item">🎮 Gaming</div>
+                <div className="interest-item">🤖 AI & Automation</div>
+                <div className="interest-item">🚀 Startups</div>
+                <div className="interest-item">⚡ Problem Solving</div>
+              </div>
+            </div>
+          </div>
+          
           <div className="about-image">
             <img 
               src="/images/firaz-laptop.png" 
@@ -107,26 +141,27 @@ function AboutSection() {
             />
           </div>
         </div>
+
+        {/* Contact */}
         <div className="contact-info">
-          <div className="contact-item">
-            <span className="neon-glow-pink">📍</span> Shah Alam, Selangor, Malaysia
-          </div>
-          <div className="contact-item">
-            <span className="neon-glow-pink">📞</span> +60 11-2167 7672
-          </div>
-          <div className="contact-item">
-            <span className="neon-glow-pink">✉️</span> ferazfhansurie@gmail.com
-          </div>
-          <div className="contact-item">
-            <span className="neon-glow-pink">💻</span> 
-            <a 
-              href="https://github.com/ferazfhansurie" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="github-link"
-            >
-              @ferazfhansurie
-            </a>
+          <div className="contact-grid">
+            <div className="contact-item">
+              <span className="neon-glow-pink">📞</span> +60 11-2167 7672
+            </div>
+            <div className="contact-item">
+              <span className="neon-glow-pink">✉️</span> ferazfhansurie@gmail.com
+            </div>
+            <div className="contact-item">
+              <span className="neon-glow-pink">💻</span> 
+              <a 
+                href="https://github.com/ferazfhansurie" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="github-link"
+              >
+                @ferazfhansurie
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -142,10 +177,11 @@ function ExperienceSection() {
       period: "Sep 2023 – Aug 2025",
       location: "Shah Alam, Malaysia",
       highlights: [
-        "Founded and scaled from $0 → $20K/month",
-        "Built AI Sales System, Second Brain, multiple databases",
-        "Delivered 10+ websites and apps for SMEs",
-        "Led product roadmap and team management"
+        "Founded company using Facebook ads and webhook integrations",
+        "Built WhatsApp AI system with team of 4, achieving 30 monthly active companies",
+        "Scaled to hundreds of users processing thousands of messages",
+        "Peaked at $20K/month revenue before company dissolution",
+        "Learned business management and software scaling challenges"
       ]
     },
     {
@@ -156,17 +192,32 @@ function ExperienceSection() {
       highlights: [
         "Developed Flutter and React Native apps",
         "Delivered new features and performance improvements",
-        "Collaborated with cross-functional teams"
+        "Collaborated with cross-functional teams",
+        "Gained experience in mobile development while exploring AI interests"
       ]
     },
     {
-      title: "Web Developer",
-      company: "NDE Consultancy Services",
-      period: "Sep 2021 – Dec 2021",
-      location: "Terengganu, Malaysia",
+      title: "Web Developer (Part-time)",
+      company: "Freelance & NDE Consultancy",
+      period: "2019 – 2021",
+      location: "UITM Segamat & Terengganu, Malaysia",
       highlights: [
-        "Built corporate websites with PHP and JavaScript",
+        "Built websites and apps for dad's friends using PHP",
+        "Worked part-time as web developer throughout diploma studies",
+        "Developed corporate websites with PHP and JavaScript",
         "Optimized front-end performance and responsiveness"
+      ]
+    },
+    {
+      title: "Student & Early Developer",
+      company: "Self-taught Programming",
+      period: "2014 – 2019",
+      location: "Malaysia",
+      highlights: [
+        "Started programming at age 14 with Lego robots (color detection & movement)",
+        "Created games using Godot engine at age 16",
+        "Pursued Diploma in Computer Science at UITM Segamat, Johor",
+        "Built foundation in software development and problem-solving"
       ]
     }
   ]
@@ -214,23 +265,23 @@ function ProjectsSection() {
     {
       name: "AI Sales System",
       description: "SaaS platform automating sales pipelines with AI (Web + Flutter app)",
-      tech: ["React", "Flutter", "AI", "Node.js"],
-      status: "Production",
+      tech: ["React", "Flutter", "OpenAI API", "Node.js"],
+      status: "Discontinued",
       link: "https://jutateknologi.com"
     },
     {
       name: "Second Brain",
       description: "WhatsApp productivity AI detecting reminders and tasks",
-      tech: ["Python", "AI", "WhatsApp API"],
-      status: "Active",
-      link: "https://app.jutateknologi.com"
+      tech: ["React", "Node.js"],
+      status: "Discontinued",
+      link: "https://app.jutateknologi.com/register"
     },
     {
       name: "Aper & Alist Databases",
       description: "Business and influencer management CRM systems",
-      tech: ["JavaScript", "MySQL", "PHP"],
+      tech: ["JavaScript", "MySQL"],
       status: "Deployed",
-      link: "https://alist-database.vercel.app/"
+      link: "https://aper-dun.vercel.app/"
     },
     {
       name: "NewText Carpet Stock",
@@ -240,19 +291,13 @@ function ProjectsSection() {
       link: "https://apps.apple.com/us/app/cnb/id6743068002"
     },
     {
-      name: "Buds App",
-      description: "Social activity coordination mobile application",
-      tech: ["Flutter", "Firebase"],
+      name: "TdLabs Health App",
+      description: "Health tools mobile application with QR code scanning, booking system, and HealthKit integration",
+      tech: ["Flutter", "Yii PHP", "HealthKit"],
       status: "Published",
-      link: "https://apps.apple.com/us/app/buds-groups-plans-friends/id1658251383"
+      link: "https://apps.apple.com/my/app/tdlabs/id1554227226"
     },
-    {
-      name: "PRIMUSGPT.AI",
-      description: "Your AI-Powered Trading Companion",
-      tech: ["AI", "Telegram Bot", "Trading"],
-      status: "Live",
-      link: "https://web.telegram.org/k/#@trading_ajaib_bot"
-    }
+ 
   ]
 
   return (
