@@ -1,53 +1,105 @@
 .navigation {
-  position: fixed;
-  top: 120px;
-  left: 20px;
+  position: sticky;
+  top: 0;
   z-index: 1000;
-  border-radius: 25px;
-  padding: 10px;
+  background: var(--brand-white);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.logo-image {
+  height: 40px;
+  width: auto;
+  margin-bottom: 0.25rem;
+}
+
+.logo-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--brand-navy);
+  line-height: 1;
+}
+
+.logo-subtitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .nav-items {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  gap: 2rem;
   align-items: center;
 }
 
 .nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  padding: 10px 15px;
   background: none;
-  border: 1px solid rgba(0, 255, 0, 0.3);
-  border-radius: 15px;
-  color: #00ff00;
+  border: none;
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  min-width: 80px;
+  transition: color 0.3s ease;
+  position: relative;
+  padding: 0.5rem 0;
 }
 
 .nav-item:hover {
-  background: rgba(0, 255, 0, 0.1);
-  border-color: #00ff00;
-  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  color: var(--accent-primary);
 }
 
-.nav-item.active {
-  background: rgba(0, 191, 255, 0.2);
-  border-color: #00bfff;
-  color: #00bfff;
-  box-shadow: 0 0 25px rgba(0, 191, 255, 0.4);
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-primary);
+  transition: width 0.3s ease;
 }
 
-.nav-icon {
+.nav-item:hover::after {
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .nav-items {
+    gap: 1rem;
+    order: 3;
+    width: 100%;
+  }
+
+  .nav-item {
+    font-size: 0.85rem;
+  }
+}
   font-size: 1.5rem;
   filter: grayscale(1);
   transition: filter 0.3s ease;

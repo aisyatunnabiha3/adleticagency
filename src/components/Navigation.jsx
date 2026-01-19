@@ -1,30 +1,54 @@
 import { motion } from 'framer-motion'
 import './Navigation.css'
 
-export default function Navigation({ sections, currentSection, setCurrentSection }) {
+export default function Navigation() {
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const navItems = [
+    { id: 'home', label: 'Home' },
+    { id: 'services', label: 'Services' },
+    { id: 'pricing', label: 'Pricing' },
+    { id: 'about', label: 'About' },
+    { id: 'contact', label: 'Contact' }
+  ]
+
   return (
     <motion.nav 
-      className="navigation glass"
-      initial={{ y: 100, opacity: 0 }}
+      className="navigation"
+      initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 1, delay: 0.8 }}
+      transition={{ duration: 0.6 }}
     >
-      <div className="nav-items">
-        {sections.map((section, index) => (
-          <motion.button
-            key={section.id}
-            className={`nav-item ${currentSection === section.id ? 'active' : ''}`}
-            onClick={() => setCurrentSection(section.id)}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1 + (index * 0.1) }}
-            whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className="nav-icon">{section.icon}</span>
-            <span className="nav-text">{section.title}</span>
-          </motion.button>
-        ))}
+      <div className="nav-container">
+        <div className="nav-logo">
+          <img src="/images/Adetic.png" alt="Adletic Agency" className="logo-image" />
+        </div>
+        <div className="nav-items">
+          {navItems.map((item) => (
+            <motion.button
+              key={item.id}
+              className="nav-item"
+              onClick={() => scrollToSection(item.id)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {item.label}
+            </motion.button>
+          ))}
+        </div>
+        <motion.button
+          className="btn btn-primary"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => scrollToSection('contact')}
+        >
+          Get Started
+        </motion.button>
       </div>
     </motion.nav>
   )
