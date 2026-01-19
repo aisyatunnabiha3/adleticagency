@@ -13,8 +13,8 @@ export default function Pricing() {
         '1x Ad Poster',
         '1x Ad Copywriting',
         'Re-targeting Audiences',
-        '3 Weeks Duration',
-        'Trial Discount'
+        'Dedicated Support Team'
+
       ],
       cta: 'Start Trial',
       highlighted: false
@@ -84,8 +84,8 @@ export default function Pricing() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2>Simple, Transparent Pricing</h2>
-          <p>Choose the perfect Meta Ads package for your business. All plans include expert campaign management and optimization.</p>
+          <h2>Our Packages</h2>
+          <p>Choose what works for your business. All packages include full campaign management and support.</p>
         </motion.div>
 
         <motion.div 
@@ -141,7 +141,7 @@ export default function Pricing() {
           transition={{ duration: 0.6, delay: 0.5 }}
           viewport={{ once: true }}
         >
-          <p>All plans include expert Meta Ads campaign management, copywriting, targeting optimization, and ongoing support. Contact us for custom packages.</p>
+          <p>Questions about which package is right for you? We can help you figure it out. Reach out and let's chat.</p>
         </motion.div>
       </div>
     </section>

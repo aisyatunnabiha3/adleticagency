@@ -4,34 +4,34 @@ import './Benefits.css'
 export default function Benefits() {
   const benefits = [
     {
-      icon: '📊',
-      title: 'Proven Results',
-      description: 'Businesses see an average 12x ROAS increase within 90 days'
-    },
-    {
-      icon: '⚡',
-      title: 'Fast Implementation',
-      description: 'Campaigns running and generating leads within 7 days'
-    },
-    {
       icon: '🎯',
-      title: 'Expert Team',
-      description: 'Certified Meta Ads specialists with 5+ years experience'
+      title: 'Clear Strategy',
+      description: 'We understand your business first. Then we build campaigns that actually align with your goals.'
     },
     {
-      icon: '💰',
-      title: 'Budget Efficient',
-      description: 'Maximize ROI with intelligent bidding and audience targeting'
+      icon: '⚙️',
+      title: 'Continuous Optimization',
+      description: 'We test, measure, and refine. Results improve over time because we constantly find what works better.'
     },
     {
-      icon: '📱',
-      title: 'Full Service',
-      description: 'Creative design, copywriting, setup, and optimization included'
+      icon: '🎨',
+      title: 'Creative That Converts',
+      description: 'Great ad copy and design matter. We create content that speaks to your audience, not at them.'
     },
     {
-      icon: '🤝',
-      title: 'Dedicated Support',
-      description: 'WhatsApp support and regular strategy reviews'
+      icon: '📊',
+      title: 'You Understand Everything',
+      description: 'No mystery box. We explain what we\'re doing, why, and what the numbers actually mean for your business.'
+    },
+    {
+      icon: '🚀',
+      title: 'Built to Scale',
+      description: 'Whether you spend $500 or $5,000 a month, our approach grows with your business.'
+    },
+    {
+      icon: '💬',
+      title: 'You Have a Partner',
+      description: 'Questions at 3pm? Insights you need to share? We\'re here to listen and support you.'
     }
   ]
 
@@ -65,8 +65,8 @@ export default function Benefits() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2>Why Choose Adletic?</h2>
-          <p>We don't just run ads. We build profitable campaigns that grow your business.</p>
+          <h2>How We Work</h2>
+          <p>Simple, straightforward, and focused on your success.</p>
         </motion.div>
 
         <motion.div 

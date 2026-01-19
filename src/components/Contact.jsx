@@ -18,8 +18,8 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2>Ready to Transform Your Ad Spend?</h2>
-          <p>Get a free Meta Ads audit and discover exactly how much revenue you're leaving on the table.</p>
+          <h2>Get In Touch</h2>
+          <p>Ready to talk about your Meta Ads? We're here to listen and help you figure out the best approach.</p>
         </motion.div>
 
         <motion.div 
@@ -43,7 +43,13 @@ export default function Contact() {
             <div className="info-item">
               <div className="info-icon">📍</div>
               <h3>Location</h3>
-              <p>Shah Alam, Selangor Darul Ehsan, Malaysia</p>
+              <p>
+                No. 27-1, Jalan Neutron Q,<br />
+                U16/Q Denai Alam,<br />
+                Seksyen U16,<br />
+                40160 Shah Alam,<br />
+                Selangor Darul Ehsan
+              </p>
             </div>
           </div>
 

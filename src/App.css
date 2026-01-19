@@ -1,23 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
 
 :root {
-  /* Color Palette */
+  /* Color Palette - Premium Enhanced */
   --brand-white: #FFFFFF;
   --brand-navy: #0B1E37;
   --brand-navy-light: #1a3a52;
+  --brand-navy-lighter: #2d5a7b;
   --brand-orange: #F26522;
+  --brand-orange-light: #FF7F3F;
   --brand-yellow: #FFB800;
+  --brand-yellow-light: #FFC933;
   --brand-grey-light: #F4F4F4;
+  --brand-grey-lighter: #FAFAFA;
   --brand-grey-text: #4a4a4a;
+  --brand-grey-muted: #808080;
   
   /* Semantic colors */
   --bg-primary: var(--brand-white);
   --bg-secondary: var(--brand-grey-light);
   --text-primary: var(--brand-navy);
   --text-secondary: var(--brand-grey-text);
+  --text-muted: var(--brand-grey-muted);
   --accent-primary: var(--brand-orange);
   --accent-secondary: var(--brand-yellow);
   --border-color: #e0e0e0;
+  --border-light: #f0f0f0;
+  
+  /* Shadows - Premium */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 20px 60px rgba(242, 101, 34, 0.15);
+  
+  /* Gradients - Premium */
+  --grad-orange-yellow: linear-gradient(135deg, #F26522, #FFB800);
+  --grad-orange-light: linear-gradient(135deg, #F26522, #FF7F3F);
+  --grad-navy-light: linear-gradient(135deg, #0B1E37, #2d5a7b);
+  --grad-subtle: linear-gradient(135deg, rgba(242, 101, 34, 0.03), rgba(255, 184, 0, 0.03));
 }
 
 * {
@@ -33,6 +53,8 @@ html, body {
   background: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .app {
@@ -61,11 +83,13 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: clamp(2rem, 5vw, 3.5rem);
   margin-bottom: 1.5rem;
+  letter-spacing: -0.5px;
 }
 
 h2 {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   margin-bottom: 1.25rem;
+  letter-spacing: -0.3px;
 }
 
 h3 {
@@ -77,6 +101,7 @@ p {
   color: var(--text-secondary);
   font-size: 1rem;
   margin-bottom: 1rem;
+  line-height: 1.7;
 }
 
 /* Buttons */
@@ -87,33 +112,48 @@ p {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Inter', sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
 }
 
 .btn-primary {
   background: var(--accent-primary);
   color: white;
   border: 2px solid var(--accent-primary);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(242, 101, 34, 0.3);
+  box-shadow: var(--shadow-xl);
+  background: #d9531a;
+}
+
+.btn-primary:active {
+  transform: translateY(0);
 }
 
 .btn-secondary {
   background: transparent;
   color: var(--text-primary);
-  border: 2px solid var(--text-primary);
+  border: 2px solid var(--border-color);
 }
 
 .btn-secondary:hover {
   background: var(--bg-secondary);
   transform: translateY(-2px);
+  border-color: var(--text-primary);
 }
 
 .btn-outline-orange {
@@ -123,23 +163,29 @@ p {
 }
 
 .btn-outline-orange:hover {
-  background: rgba(242, 101, 34, 0.1);
+  background: rgba(242, 101, 34, 0.08);
   transform: translateY(-2px);
+}
+
+.btn-large {
+  padding: 16px 40px;
+  font-size: 1.1rem;
 }
 
 /* Card */
 .card {
   background: var(--brand-white);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-light);
   border-radius: 12px;
   padding: 2rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
 }
 
 .card:hover {
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-lg);
   transform: translateY(-4px);
+  border-color: var(--border-color);
 }
 
 /* Section spacing */

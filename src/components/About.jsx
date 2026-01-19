@@ -19,8 +19,8 @@ export default function About() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2>Why Choose Adletic?</h2>
-          <p>We're Meta Ads specialists dedicated to delivering exceptional results for your business.</p>
+          <h2>Who We Are</h2>
+          <p>A team focused on one thing: making Meta Ads work for your business.</p>
         </motion.div>
 
         <div className="about-content">
@@ -31,16 +31,23 @@ export default function About() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3>Expert Meta Ads Management</h3>
+            <h3>Real Experience, Real Results</h3>
             <p>
-              At Adletic, we specialize exclusively in Meta Ads platform management. With years of experience and a proven track record of delivering results, we understand the nuances of Facebook, Instagram, and Threads advertising.
+              We've built and optimized hundreds of Meta Ad campaigns across different industries. That experience isn't theoretical—it's the foundation of everything we do. We know what works because we've seen it work repeatedly.
             </p>
             <p>
-              Our team stays current with the latest Meta Ads updates, algorithm changes, and best practices. We don't just run ads—we optimize every aspect of your campaigns to maximize ROI and drive sustainable growth.
+              We don't promise unrealistic returns or use empty jargon. Instead, we're straightforward about what's possible, why it matters, and how we'll get you there. We also make sure you understand what we're doing every step of the way.
             </p>
             <p>
-              Whether you're launching your first campaign or scaling an existing account, we have the expertise to help you succeed.
+              Whether you're just starting with Meta Ads or looking to improve underperforming campaigns, we meet you where you are and build a plan that actually fits your business.
             </p>
+            <ul className="about-list">
+              <li>Hands-on campaign management and optimization</li>
+              <li>Regular communication and transparent reporting</li>
+              <li>Data-driven decisions, not guesswork</li>
+              <li>Flexible packages for businesses of all sizes</li>
+            </ul>
+          </motion.div>
             <ul className="about-list">
               <li>Certified Meta Ads specialists</li>
               <li>Data-driven strategy and optimization</li>

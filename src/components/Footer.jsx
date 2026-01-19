@@ -16,9 +16,9 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <img src="/images/Adetic.png" alt="Adletic Agency" className="footer-logo-image" />
-            <h3 className="footer-logo">Adletic Agency</h3>
+            <h3 className="footer-logo">Adletic</h3>
             <p className="footer-subtitle">Meta Ads Management</p>
-            <p>Expert Meta Ads creation, management, and optimization for businesses that want to scale.</p>
+            <p>We build campaigns that work. Simple strategy, smart optimization, real support.</p>
           </motion.div>
 
           <motion.div 

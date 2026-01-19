@@ -2,9 +2,12 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: var(--brand-white);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  border-bottom: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(242, 101, 34, 0.1);
+  border-bottom: 1px solid rgba(242, 101, 34, 0.12);
+  transition: all 0.3s ease;
 }
 
 .nav-container {
@@ -75,8 +78,12 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--accent-primary);
-  transition: width 0.3s ease;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-item:hover::after {
+  width: 100%;
 }
 
 .nav-item:hover::after {

@@ -23,7 +23,7 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            🎯 Meta Ads Made Simple
+            🎯 Meta Ads Management
           </motion.div>
 
           <motion.h1
@@ -32,7 +32,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            Get More Leads for Less Than <span className="highlight">RM6.90</span> Each
+            Your ads deserve<br />to actually <span className="highlight">work</span>
           </motion.h1>
 
           <motion.p 
@@ -42,7 +42,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Stop wasting money on ads that don't work. Our proven system generates high-quality leads for your business—or we give you your money back.
+            Most businesses throw money at Meta Ads and hope for results. We do that too haha....we just take a different approach. Clear strategy, smart optimization, and genuine support. No fluff. Just split testings & retargeting that improves over time.
           </motion.p>
 
           <motion.div 
@@ -103,8 +103,7 @@ export default function Hero() {
               whileTap={{ scale: 0.95 }}
               onClick={scrollToContact}
             >
-              <span>🚀 Get Free Lead Audit</span>
-              <span className="btn-subtext">See how much you can save</span>
+              <span>Let's Talk</span>
             </motion.button>
             <motion.button 
               className="btn btn-secondary"
