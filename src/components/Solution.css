@@ -57,7 +57,7 @@
   transform: translate(-3px, -3px);
   box-shadow: 6px 6px 0 var(--text-primary);
 }
-
+*\*
 .solution-letter {
   display: inline-flex;
   align-items: center;
