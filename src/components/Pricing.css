@@ -177,41 +177,98 @@
 
 @media (max-width: 768px) {
   .pricing {
-    padding: 60px 0;
+    padding: 60px 20px;
   }
 
   .pricing-grid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 25px;
   }
 
   .pricing-card {
-    padding: 2rem 1.5rem;
+    padding: 1.75rem 1.5rem;
+  }
+
+  .pricing-card h3 {
+    font-size: 1.1rem;
   }
 
   .pricing-card .price {
     font-size: 2rem;
   }
+
+  .pricing-card .description {
+    font-size: 0.85rem;
+    min-height: 2em;
+  }
+
+  .features ul {
+    padding-top: 1.25rem;
+  }
+
+  .features li {
+    font-size: 0.85rem;
+    padding: 0.5rem 0;
+  }
+
+  .pricing-footer {
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .pricing-footer p {
+    font-size: 0.9rem;
+  }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .pricing {
-    padding: 60px 0;
+    padding: 40px 16px;
   }
 
   .pricing-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .pricing-card.highlighted {
-    transform: scale(1);
+    gap: 20px;
   }
 
   .pricing-card {
-    padding: 2rem;
+    padding: 1.5rem 1.25rem;
   }
 
-  .amount {
-    font-size: 2rem;
+  .pricing-card h3 {
+    font-size: 1rem;
+    margin-top: 0.25rem;
+  }
+
+  .pricing-card .price {
+    font-size: 1.75rem;
+  }
+
+  .pricing-card .description {
+    font-size: 0.8rem;
+  }
+
+  .pricing-card .btn {
+    font-size: 0.8rem;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .features li {
+    font-size: 0.8rem;
+    padding: 0.4rem 0;
+  }
+
+  .badge-featured {
+    top: -8px;
+    padding: 4px 12px;
+    font-size: 0.65rem;
+  }
+
+  .pricing-footer {
+    padding: 1.25rem;
+  }
+
+  .pricing-footer p {
+    font-size: 0.85rem;
   }
 }

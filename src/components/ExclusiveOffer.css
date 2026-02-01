@@ -243,28 +243,210 @@
     padding: 60px 20px;
   }
 
+  .exclusive-offer-section .container {
+    max-width: 100%;
+  }
+
   .offer-content {
-    padding: 40px 25px;
+    padding: 35px 20px;
+    border-radius: 0;
+  }
+
+  .offer-badge {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  .offer-content h2 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    margin-bottom: 25px;
+  }
+
+  .offer-highlight {
+    margin: 35px 0;
   }
 
   .highlight-box {
-    padding: 30px 20px;
+    padding: 25px 20px;
+    max-width: 100%;
   }
 
-  .offer-benefits h4 {
+  .highlight-box h3 {
     font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+
+  .offer-amount {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 10px;
+  }
+
+  .highlight-box p {
+    font-size: 1rem;
+    margin: 8px 0;
+  }
+
+  .highlight-box .small-text {
+    font-size: 0.9rem;
+    margin-top: 12px;
+  }
+
+  .countdown {
+    margin: 35px 0;
+    padding: 20px;
+  }
+
+  .countdown-label {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
   }
 
   .countdown-timer {
     gap: 5px;
   }
 
+  .countdown-number {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+  }
+
+  .countdown-label-small {
+    font-size: 0.8rem;
+  }
+
   .countdown-separator {
+    font-size: 1.5rem;
     margin: 0 3px;
   }
 
+  .offer-benefits {
+    margin: 35px 0;
+    max-width: 100%;
+  }
+
+  .offer-benefits h4 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+
+  .offer-benefits li {
+    padding: 10px 0;
+    font-size: 0.95rem;
+  }
+
+  .offer-cta {
+    margin: 35px 0 20px 0;
+    gap: 15px;
+  }
+
+  .urgency-text {
+    font-size: 1rem;
+  }
+
+  .guarantee-text {
+    font-size: 0.95rem;
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .exclusive-offer-section {
+    padding: 40px 16px;
+  }
+
+  .offer-content {
+    padding: 25px 16px;
+  }
+
+  .offer-badge {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+  }
+
   .offer-content h2 {
-    font-size: 1.8rem;
-    margin-bottom: 30px;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    margin-bottom: 20px;
+  }
+
+  .offer-highlight {
+    margin: 25px 0;
+  }
+
+  .highlight-box {
+    padding: 20px 15px;
+  }
+
+  .highlight-box h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+
+  .offer-amount {
+    font-size: clamp(1.3rem, 3vw, 2rem);
+  }
+
+  .highlight-box p {
+    font-size: 0.95rem;
+    margin: 6px 0;
+  }
+
+  .highlight-box .small-text {
+    font-size: 0.85rem;
+  }
+
+  .countdown {
+    margin: 25px 0;
+    padding: 15px;
+  }
+
+  .countdown-label {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  .countdown-timer {
+    gap: 3px;
+  }
+
+  .countdown-number {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .countdown-label-small {
+    font-size: 0.75rem;
+  }
+
+  .countdown-separator {
+    font-size: 1.2rem;
+    margin: 0 2px;
+  }
+
+  .offer-benefits {
+    margin: 25px 0;
+  }
+
+  .offer-benefits h4 {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+
+  .offer-benefits li {
+    padding: 8px 0;
+    font-size: 0.9rem;
+  }
+
+  .offer-cta {
+    margin: 25px 0 15px 0;
+    gap: 12px;
+  }
+
+  .urgency-text {
+    font-size: 0.95rem;
+  }
+
+  .guarantee-text {
+    font-size: 0.9rem;
+    margin-top: 25px;
   }
 }

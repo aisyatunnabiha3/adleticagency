@@ -175,7 +175,7 @@
 
 @media (max-width: 768px) {
   .contact {
-    padding: 60px 0;
+    padding: 60px 20px;
   }
 
   .contact-content {
@@ -189,9 +189,61 @@
 
   .info-item {
     padding: 1.5rem;
+    text-align: center;
   }
 
   .contact-form {
     padding: 1.5rem;
+  }
+
+  .section-header h2 {
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    padding: 40px 16px;
+  }
+
+  .contact-content {
+    gap: 1.5rem;
+  }
+
+  .contact-info {
+    gap: 1rem;
+  }
+
+  .info-item {
+    padding: 1.25rem;
+  }
+
+  .info-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .info-item h3 {
+    font-size: 1.05rem;
+  }
+
+  .info-item p,
+  .info-item a {
+    font-size: 0.9rem;
+  }
+
+  .contact-form {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 10px 12px;
+    font-size: 1rem;
+  }
+
+  .form-group textarea {
+    min-height: 120px;
   }
 }

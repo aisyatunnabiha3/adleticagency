@@ -295,26 +295,152 @@
   }
   
   .chat-header {
-    padding: 15px;
+    padding: 12px;
+  }
+
+  .avatar-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .ai-info h3 {
+    font-size: 0.95rem;
+  }
+  
+  .ai-info p {
+    font-size: 0.8rem;
   }
   
   .chat-messages {
-    padding: 15px;
+    padding: 12px;
+    gap: 15px;
+  }
+  
+  .message {
+    max-width: 90%;
+  }
+
+  .message-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+
+  .message-content {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+    border-radius: 18px;
+  }
+
+  .message-text {
+    font-size: 0.9rem;
+  }
+
+  .message-text strong {
+    font-size: 0.9rem;
+  }
+  
+  .chat-input {
+    padding: 12px;
+  }
+
+  .input-container {
+    gap: 8px;
+  }
+
+  .input-container textarea {
+    font-size: 13px;
+    padding: 10px 14px;
+    min-height: 40px;
+    max-height: 100px;
+  }
+
+  .input-container button {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ai-chat {
+    border-radius: 0;
+  }
+  
+  .chat-header {
+    padding: 10px;
+  }
+
+  .ai-avatar {
+    margin-right: 10px;
+  }
+
+  .avatar-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .status-indicator {
+    width: 10px;
+    height: 10px;
+  }
+
+  .ai-info h3 {
+    font-size: 0.9rem;
+  }
+  
+  .ai-info p {
+    font-size: 0.75rem;
+  }
+  
+  .chat-messages {
+    padding: 10px;
+    gap: 12px;
   }
   
   .message {
     max-width: 95%;
   }
+
+  .message-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .message-content {
+    font-size: 0.85rem;
+    padding: 8px 10px;
+  }
+
+  .message-text {
+    font-size: 0.85rem;
+  }
   
   .chat-input {
-    padding: 15px;
+    padding: 10px;
   }
-  
-  .ai-info h3 {
-    font-size: 1rem;
+
+  .input-container {
+    gap: 6px;
   }
-  
-  .ai-info p {
-    font-size: 0.8rem;
+
+  .input-container textarea {
+    font-size: 12px;
+    padding: 8px 12px;
+    min-height: 36px;
+    max-height: 90px;
+  }
+
+  .input-container button {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .chat-messages::-webkit-scrollbar {
+    width: 4px;
   }
 }

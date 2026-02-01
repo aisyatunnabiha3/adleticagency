@@ -10,13 +10,12 @@ export default function Hero() {
       <div className="container">
         <div className="hero-content">
           <h1 className="hero-title">
-            META ADS THAT <br />
-            ACTUALLY WORK
+            Hit Lower<br />
+            Cost per Inquiry<br />
           </h1>
           <p className="hero-subtitle">
-            Clear strategy. Smart optimisation. Real support. <br />
             Most businesses run Meta Ads and hope for the best. <br />
-            We do run ads too lah — just with structure and consistency.
+            We do that too lah — just with structure and consistency.
           </p>
           <div className="hero-cta">
             <button className="btn btn-primary" onClick={scrollToContact}>
