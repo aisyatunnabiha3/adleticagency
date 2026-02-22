@@ -1,72 +1,32 @@
 import './Solution.css'
 
 export default function Solution() {
-  const solutions = [
-    {
-      id: 1,
-      letter: 'A',
-      title: 'AUDIENCE CLARITY',
-      description: 'Target people who are more likely to convert, not just more people.'
-    },
-    {
-      id: 2,
-      letter: 'I',
-      title: 'INTENT-BASED MESSAGING',
-      description: 'Ads match what the audience is actually thinking, not hard selling terus.'
-    },
-    {
-      id: 3,
-      letter: 'D',
-      title: 'DATA-DRIVEN CREATIVES',
-      description: 'Every poster and video is tested with purpose, not "try try".'
-    },
-    {
-      id: 4,
-      letter: 'O',
-      title: 'ONGOING OPTIMISATION',
-      description: 'Weekly improvements based on performance, not vibes.'
-    },
-    {
-      id: 5,
-      letter: 'C',
-      title: 'CONVERSION RETARGETING',
-      description: 'People who interact don\'t get wasted. We bring them back properly.'
-    },
-    {
-      id: 6,
-      letter: 'A',
-      title: 'ANALYTICS & REPORTING',
-      description: 'Daily KPI reports. You always know what\'s going on.'
-    },
-    {
-      id: 7,
-      letter: 'C',
-      title: 'CONTROLLED SCALING',
-      description: 'Scale what works, slowly and safely. No gambling budget.'
-    }
+  const differentiators = [
+    { num: '01', title: 'Data-First, Always', desc: 'Every decision — from targeting to creative to budget — is backed by real performance data, not gut feel.' },
+    { num: '02', title: 'Full-Stack Support', desc: 'From AI setup to paid ads management, we handle the execution so you can focus on running your business.' },
+    { num: '03', title: 'Transparent Reporting', desc: 'Daily KPI dashboards and weekly strategy calls. You always know exactly where your money is going and what it\'s returning.' },
+    { num: '04', title: 'Malaysian Market Expertise', desc: 'We understand the local market, customer behaviour, and platform nuances that generic agencies miss.' },
   ]
 
   return (
-    <section className="solution-section" id="solution">
+    <section className="solution-section section-dark" id="why">
       <div className="container">
         <div className="section-header">
-          <h2>THE AIDOCAC FRAMEWORK</h2>
-          <p>How we run Meta Ads the Adletic way</p>
+          <span className="eyebrow">Why Adletic</span>
+          <h2 style={{color:'#fff'}}>We Don't Guess. We Engineer Growth.</h2>
+          <p>A systematic approach to customer acquisition that gets better over time.</p>
         </div>
-        <div className="solutions-grid">
-          {solutions.map((solution) => (
-            <div key={solution.id} className="solution-card">
-              <div className="solution-letter">{solution.letter}</div>
-              <h3>{solution.title}</h3>
-              <p>{solution.description}</p>
+
+        <div className="differentiators-grid">
+          {differentiators.map(d => (
+            <div key={d.num} className="diff-card">
+              <div className="diff-num">{d.num}</div>
+              <h3>{d.title}</h3>
+              <p>{d.desc}</p>
             </div>
           ))}
-        </div>
-        <div className="framework-note">
-          <p><strong>Simple. Logical. Repeatable.</strong></p>
         </div>
       </div>
     </section>
   )
 }
-

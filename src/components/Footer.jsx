@@ -1,60 +1,57 @@
 import './Footer.css'
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear()
+  const year = new Date().getFullYear()
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 
   return (
     <footer className="footer">
       <div className="container">
-        <div className="footer-content">
-          <div className="footer-section">
-            <img src="/images/Adetic.png" alt="Adletic Agency" className="footer-logo-image" />
-            <h3 className="footer-logo">AdleticAgency.MY</h3>
-            <p className="footer-subtitle">Meta Ads Management</p>
-            <p>We build campaigns that work. Simple strategy, smart optimization, real support.</p>
+        <div className="footer-grid">
+          <div className="footer-brand">
+            <img src="/images/Adetic.png" alt="Adletic Agency" className="footer-logo" />
+            <p>AI Solutions & Paid Ads Agency helping Malaysian businesses grow with smart, measurable systems.</p>
+            <div className="footer-socials">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
           </div>
 
-          <div className="footer-section">
-            <h4>Services</h4>
+          <div className="footer-col">
+            <h4>Solutions</h4>
             <ul>
-              <li><a href="#services">Campaign Strategy</a></li>
-              <li><a href="#services">Ad Creation</a></li>
-              <li><a href="#services">Performance Optimization</a></li>
-              <li><a href="#services">Analytics & Reporting</a></li>
+              <li><button onClick={() => scrollTo('solutions')}>Paid Ads Management</button></li>
+              <li><button onClick={() => scrollTo('solutions')}>AI Chatbot Solutions</button></li>
+              <li><button onClick={() => scrollTo('pricing')}>Pricing</button></li>
             </ul>
           </div>
 
-          <div className="footer-section">
+          <div className="footer-col">
             <h4>Company</h4>
             <ul>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#pricing">Pricing</a></li>
-              <li><a href="#faq">FAQ</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><button onClick={() => scrollTo('results')}>Results</button></li>
+              <li><button onClick={() => scrollTo('faq')}>FAQ</button></li>
+              <li><button onClick={() => scrollTo('contact')}>Contact</button></li>
             </ul>
           </div>
 
-          <div className="footer-section">
+          <div className="footer-col">
             <h4>Contact</h4>
             <ul>
               <li><a href="mailto:hello@adleticagency.com">hello@adleticagency.com</a></li>
               <li><a href="tel:+60112167672">+60 112 167 672</a></li>
-              <li><a href="#contact">Get in Touch</a></li>
+              <li><span>Shah Alam, Selangor, MY</span></li>
             </ul>
-          </div>
-
-          <div className="footer-section">
-            <h4>Follow Us</h4>
-            <div className="social-links">
-              <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-              <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener noreferrer">Instagram</a>
-              <a href="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            </div>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {currentYear} Adletic Agency. All rights reserved. | Meta Ads Specialists</p>
+          <p>&copy; {year} Adletic Agency. All rights reserved.</p>
+          <div className="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,262 +1,107 @@
 .proof-section {
-  padding: 80px 20px;
-  background: #fafafa;
-  position: relative;
-  overflow: hidden;
+  background: #fff;
+  padding: 96px 0;
 }
 
-.proof-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 20% 50%, rgba(242, 101, 34, 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(138, 43, 226, 0.06) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-.proof-section .container {
-  position: relative;
-  z-index: 1;
-}
-
-.proof-section .section-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.proof-section .section-header h2 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 900;
-  margin-bottom: 15px;
-  color: var(--heading-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.proof-section .section-header p {
-  font-size: 1.2rem;
-  color: #666666;
-}
-
-.metrics-grid {
+.stats-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 30px;
-  margin-bottom: 80px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 64px;
 }
 
-.metric-card {
-  background: #ffffff;
-  border: 2px solid rgba(242, 101, 34, 0.3);
-  border-radius: 15px;
-  padding: 40px 30px;
+.stat-box {
+  background: #F7F8FA;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  padding: 28px 20px;
   text-align: center;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease;
 }
 
-.metric-value {
-  display: block;
-  font-size: 2.5rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #f26522 0%, #ff8c42 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 15px;
+.stat-box:hover {
+  border-color: #f26522;
+  box-shadow: 0 8px 24px rgba(242,101,34,0.1);
 }
 
-.metric-card p {
-  color: #444444;
-  font-size: 1rem;
-  margin: 0;
+.stat-box-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #f26522;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 8px;
 }
 
-.testimonials-section {
-  margin-top: 80px;
-}
-
-.testimonials-section h3 {
-  font-size: 2rem;
-  font-weight: 900;
-  text-align: center;
-  margin-bottom: 50px;
-  color: var(--heading-primary);
+.stat-box-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #6B7280;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 }
 
 .testimonials-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 .testimonial-card {
-  background: #ffffff;
-  border: 2px solid rgba(242, 101, 34, 0.3);
-  border-radius: 15px;
-  padding: 30px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #F7F8FA;
+  border: 1px solid #E5E7EB;
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.25s ease;
 }
 
 .testimonial-card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(242, 101, 34, 0.5);
-  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+  transform: translateY(-2px);
 }
 
-.stars {
-  font-size: 1.3rem;
-  margin-bottom: 15px;
-  letter-spacing: 3px;
+.t-stars {
+  color: #f59e0b;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
 }
 
-.quote {
-  font-size: 1.05rem;
-  color: #1a1a1a;
+.t-quote {
+  font-size: 0.9rem;
+  color: #374151;
   line-height: 1.7;
+  margin-bottom: 16px;
   font-style: italic;
-  margin: 0 0 25px 0;
 }
 
-.testimonial-author {
+.t-author {
   display: flex;
   flex-direction: column;
+  gap: 2px;
 }
 
-.testimonial-author strong {
-  color: #1a1a1a;
-  font-size: 1.1rem;
-  margin-bottom: 5px;
+.t-author strong {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #0d1117;
 }
 
-.testimonial-author span {
-  color: #666666;
-  font-size: 0.95rem;
+.t-author span {
+  font-size: 0.78rem;
+  color: #6B7280;
+}
+
+@media (max-width: 1024px) {
+  .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
-  .proof-section {
-    padding: 60px 20px;
-  }
-
-  .metrics-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-bottom: 40px;
-  }
-
-  .metric-card {
-    padding: 25px 20px;
-  }
-
-  .metric-value {
-    font-size: 1.8rem;
-  }
-
-  .metric-card p {
-    font-size: 0.9rem;
-  }
-
-  .testimonials-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .testimonial-card {
-    padding: 20px;
-  }
-
-  .quote {
-    font-size: 0.95rem;
-  }
-
-  .testimonial-author strong {
-    font-size: 1rem;
-  }
-
-  .testimonial-author span {
-    font-size: 0.85rem;
-  }
-
-  .proof-section .section-header h2 {
-    font-size: clamp(1.5rem, 5vw, 2.2rem);
-  }
+  .proof-section { padding: 64px 0; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .testimonials-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
-  .proof-section {
-    padding: 40px 16px;
-  }
-
-  .proof-section .section-header {
-    margin-bottom: 40px;
-  }
-
-  .metrics-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  .metric-card {
-    padding: 20px 15px;
-  }
-
-  .metric-value {
-    font-size: 1.5rem;
-  }
-
-  .metric-card p {
-    font-size: 0.85rem;
-  }
-
-  .testimonials-section {
-    margin-top: 40px;
-  }
-
-  .testimonials-section h3 {
-    font-size: clamp(1.2rem, 4vw, 1.8rem);
-    margin-bottom: 30px;
-  }
-
-  .testimonials-grid {
-    gap: 15px;
-  }
-
-  .testimonial-card {
-    padding: 15px;
-  }
-
-  .stars {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-  }
-
-  .quote {
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-  }
-
-  .testimonial-author {
-    gap: 0.2rem;
-  }
-
-  .testimonial-author strong {
-    font-size: 0.95rem;
-    margin-bottom: 3px;
-  }
-
-  .testimonial-author span {
-    font-size: 0.8rem;
-  }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
 }

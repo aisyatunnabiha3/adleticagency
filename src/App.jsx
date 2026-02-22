@@ -1,12 +1,11 @@
 import Navigation from './components/Navigation'
 import Hero from './components/Hero'
 import Problem from './components/Problem'
-import Solution from './components/Solution'
-import Proof from './components/Proof'
 import Services from './components/Services'
-import Objections from './components/Objections'
-import ExclusiveOffer from './components/ExclusiveOffer'
+import Solution from './components/Solution'
 import Pricing from './components/Pricing'
+import Proof from './components/Proof'
+import Objections from './components/Objections'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import './App.css'
@@ -17,12 +16,11 @@ function App() {
       <Navigation />
       <Hero />
       <Problem />
-      <Solution />
-      <Proof />
       <Services />
-      <Objections />
-      <ExclusiveOffer />
+      <Solution />
       <Pricing />
+      <Proof />
+      <Objections />
       <Contact />
       <Footer />
     </div>

@@ -6,10 +6,9 @@
 
 html, body {
   width: 100%;
-  height: 100%;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: #ffffff;
-  color: #0B1E37;
+  color: #374151;
 }
 
 #root {

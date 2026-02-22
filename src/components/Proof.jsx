@@ -1,95 +1,51 @@
 import './Proof.css'
 
+const stats = [
+  { value: '50+', label: 'Campaigns Managed' },
+  { value: '12x', label: 'Average ROAS' },
+  { value: 'RM6.90', label: 'Avg. Cost Per Lead' },
+  { value: '98%', label: 'Client Retention' },
+]
+
+const testimonials = [
+  { name: 'Ahmad Rizal', role: 'E-commerce Store Owner', quote: 'Was losing money on ads every month. They fixed our targeting and creatives. Now we\'re profitable consistently. Best investment we\'ve made.', stars: 5 },
+  { name: 'Sarah Chen', role: 'Digital Marketing Manager', quote: 'The daily reports and weekly check-ins give us total transparency. We finally understand where every ringgit is going.', stars: 5 },
+  { name: 'Puan Anna Rosdijanti', role: 'CEO at BEANA HOME QURAN', quote: 'Juta Teknologi helped us understand customer acquisition better. The AI chatbot handles follow-ups automatically. Very useful.', stars: 5 },
+  { name: 'Abdul Qadir Aros', role: 'Managing Partner at AQ AROS & CO', quote: 'Their system is efficient and still has that personal touch. A good balance of automation and human connection.', stars: 5 },
+  { name: 'Rajah Sivalingam', role: 'CEO at ApplyRadar', quote: 'Their lead nurturing system is excellent. It keeps potential students engaged throughout the entire decision-making process.', stars: 5 },
+  { name: 'Ravi Kumar', role: 'SaaS Company Founder', quote: 'Tripled our leads in 6 weeks. The team knows what they\'re doing and actually cares about our results.', stars: 5 },
+]
+
 export default function Proof() {
-  const results = [
-    {
-      id: 1,
-      metric: '12x ROAS',
-      description: 'Average return on ad spend across all campaigns'
-    },
-    {
-      id: 2,
-      metric: '50+',
-      description: 'Successful campaigns managed and optimized'
-    },
-    {
-      id: 3,
-      metric: '98%',
-      description: 'Client retention rate - businesses keep coming back'
-    },
-    {
-      id: 4,
-      metric: 'RM6.90',
-      description: 'Average cost per lead - industry-leading efficiency'
-    }
-  ]
-
-  const testimonials = [
-    {
-      id: 1,
-      name: 'Ahmad Rizal',
-      business: 'E-commerce Store Owner',
-      quote: 'Was losing money on ads every month. They fixed our targeting and creatives. Now we\'re profitable. Best decision ever.',
-      rating: 5
-    },
-    {
-      id: 2,
-      name: 'Sarah Chen',
-      business: 'Digital Marketing Manager',
-      quote: 'Their weekly check-ins and daily reports give us transparency we never had before. We finally understand our ad spend.',
-      rating: 5
-    },
-    {
-      id: 3,
-      name: 'Ravi Kumar',
-      business: 'SaaS Company Founder',
-      quote: 'Tripled our leads in 6 weeks. The team knows what they\'re doing and actually cares about our results.',
-      rating: 5
-    }
-  ]
-
   return (
-    <section className="proof-section" id="proof">
+    <section className="proof-section" id="results">
       <div className="container">
         <div className="section-header">
-          <h2>SEE WHAT WINS LOOK LIKE</h2>
-          <p>Numbers don't lie. Our clients WIN. You will too.</p>
+          <span className="eyebrow">Results</span>
+          <h2>Numbers That Speak for Themselves</h2>
+          <p>Real results from real Malaysian businesses — across both our AI and Paid Ads solutions.</p>
         </div>
 
-        <div className="metrics-grid">
-          {results.map((result) => (
-            <div 
-              key={result.id} 
-              className="metric-card"
-            >
-              <div className="metric-value">
-                {result.metric}
-              </div>
-              <p>{result.description}</p>
+        <div className="stats-row">
+          {stats.map((s, i) => (
+            <div key={i} className="stat-box">
+              <div className="stat-box-value">{s.value}</div>
+              <div className="stat-box-label">{s.label}</div>
             </div>
           ))}
         </div>
 
-        <div className="testimonials-section">
-          <h3>STORIES OF DOMINANCE</h3>
-          
-          <div className="testimonials-grid">
-            {testimonials.map((testimonial) => (
-              <div 
-                key={testimonial.id} 
-                className="testimonial-card"
-              >
-                <div className="stars">
-                  {'⭐'.repeat(testimonial.rating)}
-                </div>
-                <p className="quote">"{testimonial.quote}"</p>
-                <div className="testimonial-author">
-                  <strong>{testimonial.name}</strong>
-                  <span>{testimonial.business}</span>
-                </div>
+        <div className="testimonials-grid">
+          {testimonials.map((t, i) => (
+            <div key={i} className="testimonial-card">
+              <div className="t-stars">{'★'.repeat(t.stars)}</div>
+              <p className="t-quote">"{t.quote}"</p>
+              <div className="t-author">
+                <strong>{t.name}</strong>
+                <span>{t.role}</span>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

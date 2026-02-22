@@ -1,46 +1,34 @@
 import './Problem.css'
 
 const problems = [
-  {
-    id: 1,
-    title: 'Cost per lead naik turun',
-    description: 'One month cheap, next month expensive.'
-  },
-  {
-    id: 2,
-    title: 'Keep changing creatives, but tak sure which one works',
-    description: 'Test this, test that. Still unsure which poster or video actually converts.'
-  },
-  {
-    id: 3,
-    title: 'Reports ada, but still unsure what to do next',
-    description: 'Numbers exist lah, but what do they mean? What should I change?'
-  },
-  {
-    id: 4,
-    title: 'Every adjustment feels macam try luck',
-    description: 'No system, no logic. Just guessing, hoping something works.'
-  },
+  { id: 1, icon: '📉', title: 'Ad Spend With No Clear ROI', description: "Running campaigns but unsure if they're actually profitable. Cost per lead is inconsistent and unpredictable month to month." },
+  { id: 2, icon: '⏱️', title: 'Team Buried in Manual Follow-Ups', description: "Your team spends hours replying to the same WhatsApp enquiries, leaving no time to actually close deals." },
+  { id: 3, icon: '🚪', title: 'Leads Falling Through the Cracks', description: "Potential customers enquire but never get a timely response — costing you real sales every single day." },
+  { id: 4, icon: '📊', title: 'No Visibility Into What Works', description: "Data exists but it's scattered across platforms. No single source of truth for performance or customer conversations." },
 ]
 
 export default function Problem() {
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   return (
-    <section className="problem-section">
+    <section className="problem-section" id="problem">
       <div className="container">
         <div className="section-header">
-          <h2>Below 5x ROAS?</h2>
-          <p>You're spending money, but here's the problem</p>
+          <span className="eyebrow">The Problem</span>
+          <h2>Sound Familiar?</h2>
+          <p>Most growing businesses hit the same walls. Here's what we help you break through.</p>
         </div>
         <div className="problems-grid">
-          {problems.map((problem) => (
-            <div key={problem.id} className="problem-card">
-              <h3>{problem.title}</h3>
-              <p>{problem.description}</p>
+          {problems.map(p => (
+            <div key={p.id} className="problem-card">
+              <div className="problem-icon">{p.icon}</div>
+              <h3>{p.title}</h3>
+              <p>{p.description}</p>
             </div>
           ))}
         </div>
-        <div className="problem-cta">
-          <p>You're not doing it wrong. This is what happens when Meta Ads are run <strong>without a proper optimisation system.</strong></p>
+        <div className="problem-footer">
+          <p>These aren't isolated issues — they're symptoms of missing the right systems. <strong>That's exactly what we build.</strong></p>
+          <button className="btn btn-primary" onClick={() => scrollTo('solutions')}>See How We Fix This →</button>
         </div>
       </div>
     </section>
