@@ -206,8 +206,8 @@ export default function Pricing() {
                   <div className="cpb-early-badge">🔥 Early Bird — 50 Spots</div>
                   <h4>Community Membership</h4>
                   <div className="cpb-price-row">
-                    <span className="cpb-price-early">$3<span>/mo</span></span>
-                    <span className="cpb-price-original">$9/mo</span>
+                    <span className="cpb-price-early">RM18<span>/mo</span></span>
+                    <span className="cpb-price-original">RM50/mo</span>
                   </div>
                 </div>
 
@@ -223,7 +223,7 @@ export default function Pricing() {
                 <button className="btn btn-primary cpb-waitlist-btn" onClick={() => navigate('/ai-video-creation-community-waitlist')}>
                   🚀 Join the Waitlist
                 </button>
-                <p className="cpb-note">Lock in $3/mo forever — limited to first 50 members.</p>
+                <p className="cpb-note">Lock in RM18/mo forever — limited to first 50 members.</p>
               </div>
             </div>
           </div>

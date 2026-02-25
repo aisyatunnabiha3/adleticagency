@@ -3,20 +3,19 @@ import Navigation from './Navigation'
 import './WaitlistPage.css'
 
 const includedItems = [
-  { emoji: '💡', label: 'AI Campaign Lab', value: '$199' },
-  { emoji: '🎬', label: 'AI Video Creation Course', value: '$249' },
-  { emoji: '🧠', label: 'AI Avatar Course', value: '$199' },
-  { emoji: '🎥', label: 'Creative Breakdown: From Idea to Viral Ad', value: '$99' },
-  { emoji: '📈', label: "The AI Creator's Launch & Earn Blueprint", value: '$149' },
-  { emoji: '📅', label: '7-Day Instagram Launch Plan', value: '$49' },
-  { emoji: '🔥', label: '100 Prompts Pack', value: '$29' },
+  { emoji: '💡', label: 'AI Campaign Lab', value: 'RM 849' },
+  { emoji: '🎬', label: 'AI Video Creation Course', value: 'RM 1,069' },
+  { emoji: '🧠', label: 'AI Hyper-Realistic Avatar Course', value: 'RM 849' },
+  { emoji: '🎥', label: 'Creative Breakdown: From Idea to Viral Ad', value: 'RM 425' },
+  { emoji: '📈', label: "The AI Content Creator's Launch & Earn Framework", value: 'RM 639' },
+  { emoji: '📅', label: '7-Day Instagram Launch Plan', value: 'RM 209' },
+  { emoji: '🔥', label: '100 Prompts Pack', value: 'RM 125' },
   { emoji: '🎁', label: 'Challenges & Giveaways', value: null },
   { emoji: '🌎', label: 'Supportive community', value: null },
 ]
 
 const customTools = [
-  { emoji: '🧩', label: 'ReelEngine', desc: 'create scripts for Reels and ads' },
-  { emoji: '⚙️', label: 'PromptEngine', desc: 'create prompts for photos & videos' },
+  { emoji: '⚙️', label: 'AI Photo/Video Prompt Generator', desc: 'create prompts for photos & videos' },
 ]
 
 const WHATSAPP_NUMBER = '601121677672'
@@ -41,14 +40,14 @@ export default function WaitlistPage() {
       `*Phone:* ${form.phone}`,
       form.instagram ? `*Instagram:* @${form.instagram.replace('@', '')}` : '',
       ``,
-      `I'm interested in the Early Bird plan at $3/month.`,
+      `I'm interested in the Early Bird plan at RM18/month.`,
     ].filter(Boolean).join('\n')
 
     const encoded = encodeURIComponent(message)
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, '_blank')
   }
 
-  const totalValue = 199 + 249 + 199 + 99 + 149 + 49 + 29
+  const totalValue = 849 + 1069 + 849 + 425 + 639 + 209 + 125
 
   return (
     <div className="waitlist-page">
@@ -64,7 +63,7 @@ export default function WaitlistPage() {
               Join creators, freelancers, and studio founders learning how to build, automate, and scale their content with AI.
             </p>
             <div className="waitlist-earn-badge">
-              💵 Community members earn <strong>$500–$15,000</strong> per project!
+              💵 Community members earn <strong>RM 2,000–RM 65,000</strong> per project!
             </div>
           </div>
         </div>
@@ -78,7 +77,7 @@ export default function WaitlistPage() {
             <div className="waitlist-includes">
               <div className="waitlist-card">
                 <h2>🚀 Included in Your Membership</h2>
-                <p className="waitlist-daily-cost">Less than $0.10/day to master the future of AI video creation</p>
+                <p className="waitlist-daily-cost">Less than RM 0.60/day to master the future of AI video creation</p>
 
                 <ul className="waitlist-items">
                   {includedItems.map((item, i) => (
@@ -105,7 +104,7 @@ export default function WaitlistPage() {
 
                 <div className="waitlist-total">
                   <span>Total Value</span>
-                  <span className="waitlist-total-amount">${totalValue}+</span>
+                  <span className="waitlist-total-amount">RM {totalValue.toLocaleString()}+</span>
                 </div>
               </div>
             </div>
@@ -117,8 +116,8 @@ export default function WaitlistPage() {
                 <div className="waitlist-price-card early-bird">
                   <div className="price-card-badge">🔥 Early Bird</div>
                   <div className="price-card-price">
-                    <span className="price-dollar">$</span>
-                    <span className="price-number">3</span>
+                    <span className="price-dollar">RM</span>
+                    <span className="price-number">18</span>
                     <span className="price-period">/month</span>
                   </div>
                   <p className="price-card-note">For the first 50 members only</p>
@@ -128,8 +127,8 @@ export default function WaitlistPage() {
                 <div className="waitlist-price-card original">
                   <div className="price-card-label">Original Price</div>
                   <div className="price-card-price">
-                    <span className="price-dollar">$</span>
-                    <span className="price-number">9</span>
+                    <span className="price-dollar">RM</span>
+                    <span className="price-number">50</span>
                     <span className="price-period">/month</span>
                   </div>
                   <p className="price-card-note">Regular membership price</p>
@@ -199,7 +198,7 @@ export default function WaitlistPage() {
                   </div>
 
                   <button type="submit" className="btn btn-primary btn-large waitlist-submit">
-                    🚀 Join Waitlist — Lock in $3/month
+                    🚀 Join Waitlist — Lock in RM18/month
                   </button>
 
                   <p className="waitlist-form-note">
