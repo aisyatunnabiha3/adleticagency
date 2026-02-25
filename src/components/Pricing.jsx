@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Pricing.css'
 
 const paidAdsPlans = [
@@ -74,6 +75,7 @@ const communityIncludes = [
 
 export default function Pricing() {
   const [activeTab, setActiveTab] = useState('paid-ads')
+  const navigate = useNavigate()
 
   const scrollToContact = () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
 
@@ -201,9 +203,12 @@ export default function Pricing() {
             <div className="cpb-right">
               <div className="cpb-card">
                 <div className="cpb-card-header">
-                  <div className="cpb-dev-badge">🚧 Coming Soon</div>
+                  <div className="cpb-early-badge">🔥 Early Bird — 50 Spots</div>
                   <h4>Community Membership</h4>
-                  <p>Pricing to be announced</p>
+                  <div className="cpb-price-row">
+                    <span className="cpb-price-early">$3<span>/mo</span></span>
+                    <span className="cpb-price-original">$9/mo</span>
+                  </div>
                 </div>
 
                 <ul className="cpb-includes">
@@ -215,13 +220,10 @@ export default function Pricing() {
                   ))}
                 </ul>
 
-                <button className="btn cpb-join-btn" disabled>
-                  🚧
+                <button className="btn btn-primary cpb-waitlist-btn" onClick={() => navigate('/ai-video-creation-community-waitlist')}>
+                  🚀 Join the Waitlist
                 </button>
-                <p className="cpb-note">Drop us a message to be notified when we launch.</p>
-                <button className="btn btn-outline cpb-notify-btn" onClick={scrollToContact}>
-                  Notify Me at Launch
-                </button>
+                <p className="cpb-note">Lock in $3/mo forever — limited to first 50 members.</p>
               </div>
             </div>
           </div>

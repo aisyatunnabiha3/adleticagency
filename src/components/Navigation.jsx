@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import './Navigation.css'
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const isHome = location.pathname === '/'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -12,7 +16,11 @@ export default function Navigation() {
   }, [])
 
   const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    if (isHome) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      navigate('/#' + id)
+    }
     setMenuOpen(false)
   }
 
@@ -37,14 +45,22 @@ export default function Navigation() {
               {link.label}
             </button>
           ))}
+          <button className="nav-waitlist-btn" onClick={() => { navigate('/ai-video-creation-community-waitlist'); setMenuOpen(false) }}>
+            🎬 AI Video Waitlist
+          </button>
           <button className="btn btn-primary nav-cta-mobile" onClick={() => scrollTo('contact')}>
             Get Started
           </button>
         </div>
 
-        <button className="btn btn-primary nav-cta-desktop" onClick={() => scrollTo('contact')}>
-          Get Started
-        </button>
+        <div className="nav-right-btns">
+          <button className="nav-waitlist-btn nav-waitlist-desktop" onClick={() => navigate('/ai-video-creation-community-waitlist')}>
+            🎬 AI Video Waitlist
+          </button>
+          <button className="btn btn-primary nav-cta-desktop" onClick={() => scrollTo('contact')}>
+            Get Started
+          </button>
+        </div>
 
         <button
           className={`hamburger ${menuOpen ? 'open' : ''}`}

@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom'
 import Navigation from './components/Navigation'
 import Hero from './components/Hero'
 import Problem from './components/Problem'
@@ -8,11 +9,12 @@ import Proof from './components/Proof'
 import Objections from './components/Objections'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import WaitlistPage from './components/WaitlistPage'
 import './App.css'
 
-function App() {
+function HomePage() {
   return (
-    <div className="app">
+    <>
       <Navigation />
       <Hero />
       <Problem />
@@ -23,6 +25,17 @@ function App() {
       <Objections />
       <Contact />
       <Footer />
+    </>
+  )
+}
+
+function App() {
+  return (
+    <div className="app">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/ai-video-creation-community-waitlist" element={<WaitlistPage />} />
+      </Routes>
     </div>
   )
 }

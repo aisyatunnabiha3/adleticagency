@@ -1,0 +1,433 @@
+/* ── Waitlist Page ── */
+.waitlist-page {
+  min-height: 100vh;
+  background: #F7F8FA;
+}
+
+/* Hero */
+.waitlist-hero {
+  padding: 140px 0 64px;
+  background: linear-gradient(135deg, #0d1117 0%, #1a1f2e 50%, #0d1117 100%);
+  text-align: center;
+}
+
+.waitlist-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.waitlist-badge {
+  display: inline-block;
+  background: rgba(242, 101, 34, 0.15);
+  color: #f26522;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: 1px solid rgba(242, 101, 34, 0.3);
+  margin-bottom: 28px;
+}
+
+.waitlist-hero h1 {
+  color: #fff;
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+
+.waitlist-subtitle {
+  color: rgba(255, 255, 255, 0.65) !important;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 28px;
+  line-height: 1.7;
+}
+
+.waitlist-earn-badge {
+  display: inline-block;
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.waitlist-earn-badge strong {
+  color: #34d399;
+}
+
+/* Content */
+.waitlist-content {
+  padding: 64px 0;
+}
+
+.waitlist-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+/* Left — Includes card */
+.waitlist-card {
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 20px;
+  padding: 36px 32px;
+}
+
+.waitlist-card h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0d1117;
+  margin-bottom: 8px;
+}
+
+.waitlist-daily-cost {
+  font-size: 0.88rem;
+  color: #6B7280;
+  margin-bottom: 28px;
+  font-style: italic;
+}
+
+.waitlist-items {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.waitlist-items li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.92rem;
+  color: #374151;
+}
+
+.waitlist-item-emoji {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+}
+
+.waitlist-item-label {
+  flex: 1;
+  font-weight: 500;
+}
+
+.waitlist-item-value {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #9CA3AF;
+  text-decoration: line-through;
+  flex-shrink: 0;
+}
+
+/* Custom tools */
+.waitlist-tools {
+  background: #F7F8FA;
+  border: 1px solid #E5E7EB;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.waitlist-tools h3 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9CA3AF;
+  margin-bottom: 14px;
+}
+
+.waitlist-tool {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.waitlist-tool + .waitlist-tool {
+  margin-top: 10px;
+}
+
+.waitlist-tool-emoji {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.waitlist-tool-desc {
+  color: #6B7280;
+}
+
+/* Total value */
+.waitlist-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 2px dashed #E5E7EB;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.waitlist-total-amount {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #f26522;
+}
+
+/* Right — Pricing + Form */
+.waitlist-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Pricing cards */
+.waitlist-pricing-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.waitlist-price-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: center;
+  border: 1px solid #E5E7EB;
+}
+
+.waitlist-price-card.early-bird {
+  border: 2px solid #f26522;
+  box-shadow: 0 8px 24px rgba(242, 101, 34, 0.15);
+  position: relative;
+}
+
+.price-card-badge {
+  display: inline-block;
+  background: #f26522;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 14px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+}
+
+.price-card-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+}
+
+.price-card-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.price-dollar {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #f26522;
+  margin-top: 4px;
+}
+
+.price-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #f26522;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.original .price-dollar,
+.original .price-number {
+  color: #9CA3AF;
+}
+
+.price-period {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #6B7280;
+}
+
+.price-card-note {
+  font-size: 0.78rem;
+  color: #6B7280;
+  margin: 0;
+}
+
+.price-card-lock {
+  font-size: 0.76rem;
+  color: #10b981;
+  font-weight: 600;
+  margin: 6px 0 0;
+}
+
+/* Warning */
+.waitlist-warning {
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #92400e;
+  text-align: center;
+}
+
+/* Form card */
+.waitlist-form-card {
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 20px;
+  padding: 32px 28px;
+}
+
+.waitlist-form-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0d1117;
+  margin-bottom: 6px;
+}
+
+.waitlist-form-card > p {
+  font-size: 0.88rem;
+  color: #6B7280;
+  margin-bottom: 24px;
+}
+
+.waitlist-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-group input {
+  padding: 12px 16px;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #0d1117;
+  background: #F7F8FA;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: #f26522;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(242, 101, 34, 0.1);
+}
+
+.form-group input::placeholder {
+  color: #9CA3AF;
+}
+
+.waitlist-submit {
+  width: 100%;
+  margin-top: 4px;
+  font-size: 1rem !important;
+}
+
+.waitlist-form-note {
+  font-size: 0.78rem;
+  color: #9CA3AF;
+  text-align: center;
+  margin: 0;
+}
+
+/* Footer */
+.waitlist-footer {
+  padding: 28px 0;
+  text-align: center;
+  border-top: 1px solid #E5E7EB;
+}
+
+.waitlist-footer p {
+  font-size: 0.82rem;
+  color: #9CA3AF;
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .waitlist-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .waitlist-hero {
+    padding: 120px 0 48px;
+  }
+
+  .waitlist-hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .waitlist-content {
+    padding: 40px 0;
+  }
+
+  .waitlist-card {
+    padding: 28px 20px;
+  }
+
+  .waitlist-pricing-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .waitlist-form-card {
+    padding: 24px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .waitlist-hero {
+    padding: 100px 0 36px;
+  }
+
+  .waitlist-pricing-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .price-number {
+    font-size: 2.5rem;
+  }
+}

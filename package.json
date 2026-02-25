@@ -21,6 +21,7 @@
     "openai": "^5.20.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-router-dom": "^7.13.1",
     "three": "^0.180.0"
   },
   "devDependencies": {
