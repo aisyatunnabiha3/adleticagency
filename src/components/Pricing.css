@@ -171,6 +171,57 @@
   margin-top: 1px;
 }
 
+/* AI CRM Banner */
+.ai-crm-banner {
+  margin-bottom: 20px;
+}
+
+.ai-crm-banner-inner {
+  background: linear-gradient(135deg, #0d1117 0%, #1a1f2e 100%);
+  border-radius: 14px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.ai-crm-text {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ai-crm-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.ai-crm-text strong {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.ai-crm-text p {
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.ai-crm-btn {
+  flex-shrink: 0;
+  padding: 12px 24px;
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+
 .ai-addons {
   margin-bottom: 28px;
 }

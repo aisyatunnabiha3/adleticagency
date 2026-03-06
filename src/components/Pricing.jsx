@@ -149,13 +149,30 @@ export default function Pricing() {
             </div>
 
             {activeTab === 'ai' && (
-              <div className="ai-addons">
-                <div className="addon-card">
-                  <strong>AI Response Top-up</strong>
-                  <span>RM 10 per 100 responses — top up anytime on any plan</span>
-                  <button className="btn btn-outline addon-btn" onClick={scrollToContact}>Get Top-up</button>
+              <>
+                <div className="ai-crm-banner">
+                  <div className="ai-crm-banner-inner">
+                    <div className="ai-crm-text">
+                      <span className="ai-crm-icon">🤖</span>
+                      <div>
+                        <strong>Access to Our AI-Powered CRM System</strong>
+                        <p>Manage leads, automate follow-ups, and close deals faster with AI.</p>
+                      </div>
+                    </div>
+                    <a href="https://app.adleticagency.com/login" target="_blank" rel="noopener noreferrer" className="btn btn-primary ai-crm-btn">
+                      Access CRM →
+                    </a>
+                  </div>
                 </div>
-              </div>
+
+                <div className="ai-addons">
+                  <div className="addon-card">
+                    <strong>AI Response Top-up</strong>
+                    <span>RM 10 per 100 responses — top up anytime on any plan</span>
+                    <button className="btn btn-outline addon-btn" onClick={scrollToContact}>Get Top-up</button>
+                  </div>
+                </div>
+              </>
             )}
 
             <div className="pricing-note">
