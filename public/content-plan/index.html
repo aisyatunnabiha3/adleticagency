@@ -193,21 +193,73 @@
   @media (max-width: 768px) {
     .nav-inner { height: auto; padding: 12px 16px; flex-wrap: wrap; gap: 10px; }
     .product-tabs { order: 3; width: 100%; justify-content: center; }
-    .hero-header { padding: 32px 0 44px; }
+    .hero-header { padding: 28px 0 40px; }
     .hero-content { padding: 0 16px; }
-    .main-content { padding: 24px 16px 64px; }
-    .card-header { padding: 20px; flex-wrap: wrap; }
-    .card-header-right { margin-left: 0; margin-top: 8px; }
-    .video-timeline { padding: 20px; }
-    .section-header { padding: 12px 16px; flex-wrap: wrap; gap: 8px; }
-    .section-body { padding: 16px; }
+    .hero-title { font-size: 1.6rem; margin-bottom: 8px; }
+    .hero-subtitle { font-size: 0.88rem; }
+    .main-content { padding: 20px 12px 64px; }
+    .day-card { border-radius: 14px; }
+    .card-header { padding: 16px; flex-wrap: wrap; gap: 10px; }
+    .card-icon { width: 40px; height: 40px; font-size: 1rem; border-radius: 10px; }
+    .card-header-text h2 { font-size: 0.95rem; line-height: 1.3; }
+    .card-header-text p { font-size: 0.75rem; }
+    .card-header-right { margin-left: 0; margin-top: 4px; width: 100%; display: flex; gap: 6px; flex-wrap: wrap; }
+    .status-badge { font-size: 0.6rem; padding: 3px 10px; }
+    .content-type-chip { font-size: 0.62rem; padding: 3px 10px; }
+    .video-timeline { padding: 16px; }
+    .timeline-header { flex-wrap: wrap; gap: 8px; }
+    .timeline-header h3 { font-size: 0.92rem; }
+
+    /* Section headers — stack layout on mobile */
+    .section-header { padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; grid-template-rows: auto auto; gap: 4px 10px; align-items: center; }
+    .section-badge { grid-row: 1; grid-column: 1; font-size: 0.58rem; padding: 3px 8px; }
+    .section-info { grid-row: 1 / 3; grid-column: 2; }
+    .section-info h4 { font-size: 0.8rem; line-height: 1.3; }
+    .section-info p { font-size: 0.7rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .section-avatar { grid-row: 2; grid-column: 1; font-size: 0.6rem; }
+    .section-time { grid-row: 1; grid-column: 3; font-size: 0.65rem; }
+    .section-chevron { grid-row: 2; grid-column: 3; justify-self: end; }
+
+    .section-body { padding: 14px; }
+    .section-grid { gap: 14px; }
+    .script-block { padding: 12px; }
+    .script-block p { font-size: 0.78rem; }
+
+    /* Set design & editing blocks */
+    .set-design, .editing-block { padding: 12px; border-radius: 10px; }
+    .set-design h5, .editing-block h5 { font-size: 0.68rem; margin-bottom: 6px; }
+    .set-design li, .editing-block li { font-size: 0.74rem; }
+
+    /* TikTok format block */
+    .section-body [style*="border-radius:12px"][style*="padding:16px"] { padding: 12px !important; }
+    .section-body [style*="border-radius:12px"] h5 { font-size: 0.7rem !important; }
+    .section-body [style*="border-radius:12px"] p { font-size: 0.74rem !important; }
+
+    /* Prompt cards */
+    .section-prompts { padding: 12px 14px; }
+    .transition-card-header { padding: 8px 12px; }
+    .transition-card-body { padding: 10px 12px; }
+    .transition-card-body p { font-size: 0.72rem; }
+    .model-info { padding: 10px 12px; }
+    .model-info strong { font-size: 0.72rem; }
+
     .footer-inner { flex-direction: column; gap: 8px; text-align: center; }
   }
   @media (max-width: 480px) {
-    .week-strip { gap: 2px; padding: 4px; }
+    .week-strip { gap: 2px; padding: 4px; margin: -20px auto 24px; }
     .week-dot { padding: 8px 2px; }
-    .week-dot .dot-num { font-size: 1rem; }
+    .week-dot .dot-day { font-size: 0.55rem; }
+    .week-dot .dot-num { font-size: 0.9rem; }
     .product-tab { padding: 6px 10px; font-size: 0.68rem; }
+    .product-tab .tab-emoji { font-size: 0.75rem; }
+    .main-content { padding: 16px 10px 56px; }
+    .card-header { padding: 14px; }
+    .card-header-text h2 { font-size: 0.88rem; }
+    .video-timeline { padding: 12px; }
+    .section-header { padding: 10px 12px; }
+    .section-info h4 { font-size: 0.75rem; }
+    .section-body { padding: 12px; }
+    .video-section { border-radius: 12px; }
   }
 </style>
 </head>
