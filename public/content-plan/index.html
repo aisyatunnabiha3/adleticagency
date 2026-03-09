@@ -1067,14 +1067,18 @@ const NEON_CONN = 'postgresql://neondb_owner:npg_Y43yGsVocuWi@ep-curly-boat-a1wf
 
 async function dbQuery(sql, params = []) {
   try {
+    const body = JSON.stringify({ query: sql, params });
+    console.log('DB query:', sql.substring(0, 80), 'params:', params.slice(0, 3));
     const res = await fetch(NEON_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Neon-Connection-String': NEON_CONN },
-      body: JSON.stringify({ query: sql, params })
+      body
     });
-    return await res.json();
+    const data = await res.json();
+    console.log('DB response:', data.rows ? data.rows.length + ' rows' : 'no rows', data.error || '');
+    return data;
   } catch (e) {
-    console.error('DB error:', e);
+    console.error('DB fetch error:', e);
     return { rows: [], error: e.message };
   }
 }
@@ -1169,17 +1173,15 @@ async function seedDefaultData() {
   const check = await dbQuery(`SELECT COUNT(*) as cnt FROM content_plans WHERE plan_type = 'ai-video'`);
   if (check.rows && check.rows[0] && parseInt(check.rows[0].cnt) > 0) return; // Already seeded
 
-  // Seed the hardcoded plans for March 16-22, 2026
-  const seedDate = new Date(2026, 2, 16); // March 16, 2026 (Monday)
+  // Seed the hardcoded plans for March 9-15, 2026 (week of March 10)
+  const seedDates = ['2026-03-09','2026-03-10','2026-03-11','2026-03-12','2026-03-13','2026-03-14','2026-03-15'];
   const plans = { 'ai-video': AI_VIDEO_PLAN, 'ai-employee': AI_EMPLOYEE_PLAN, 'paid-ads': PAID_ADS_PLAN };
 
   for (const [planType, plan] of Object.entries(plans)) {
     for (let i = 0; i < plan.length; i++) {
-      const d = new Date(seedDate); d.setDate(seedDate.getDate() + i);
-      const ds = dateToStr(d);
       await dbQuery(
         `INSERT INTO content_plans (plan_type, content_date, content, updated_at) VALUES ($1, $2, $3, NOW()) ON CONFLICT (plan_type, content_date) DO UPDATE SET content = $3, updated_at = NOW()`,
-        [planType, ds, JSON.stringify(plan[i])]
+        [planType, seedDates[i], JSON.stringify(plan[i])]
       );
     }
   }
@@ -1194,8 +1196,9 @@ let dbReady = false;
 function getWeekStartDate() {
   const stored = localStorage.getItem('contentPlanV2StartDate');
   if (stored) return new Date(stored);
+  // Default: Monday of current week (March 9, 2026 for today March 10)
   const today = new Date(); const dow = today.getDay();
-  const diff = dow === 0 ? 1 : (dow === 1 ? 0 : 8 - dow);
+  const diff = dow === 0 ? -6 : 1 - dow; // Get Monday (go back)
   const mon = new Date(today); mon.setDate(today.getDate() + diff); mon.setHours(0,0,0,0);
   localStorage.setItem('contentPlanV2StartDate', mon.toISOString());
   return mon;
@@ -1687,16 +1690,29 @@ function startEdit(btn, field, dayIdx, secIdx, promptIdx) {
 
 // ── App Init ──
 async function initApp() {
+  // Reset stale week start from previous version
+  const oldStart = localStorage.getItem('contentPlanV2StartDate');
+  if (oldStart && oldStart.includes('2026-03-16')) {
+    localStorage.removeItem('contentPlanV2StartDate');
+  }
   activeDay = getTodayIndex();
-  // Show loading state
   const container = document.getElementById('cardsContainer');
-  container.innerHTML = '<div style="text-align:center;padding:60px;color:var(--text-muted)"><p>Loading content from database...</p></div>';
+  container.innerHTML = '<div style="text-align:center;padding:60px;color:var(--text-muted)"><p>Loading content...</p></div>';
+
+  let dbOk = false;
   try {
-    await seedDefaultData();
+    // Try loading from DB first
     await loadWeekContent();
+    const testKey = cacheKey(activeProduct, getActiveDateStr(activeDay));
+    dbOk = !!contentCache[testKey] && typeof contentCache[testKey] === 'object';
+    console.log('DB load result:', dbOk ? 'OK' : 'empty', 'key:', testKey, 'cache keys:', Object.keys(contentCache).length);
   } catch (e) {
-    console.error('DB init failed, using defaults:', e);
+    console.error('DB load failed:', e);
+  }
+
+  if (!dbOk) {
     // Fallback: load hardcoded data into cache for current week
+    console.log('Using hardcoded fallback data');
     const ws = getWeekStartDate();
     const plan = PRODUCTS[activeProduct].plan;
     for (let i = 0; i < plan.length; i++) {
