@@ -181,6 +181,47 @@
   .model-info strong { font-size: 0.78rem; font-weight: 700; color: #fff; display: block; }
   .model-info p { font-size: 0.68rem; color: rgba(255,255,255,0.5); margin: 0; }
 
+  /* ── Edit Buttons ── */
+  .edit-btn { background: none; border: 1px solid var(--border-light); border-radius: 8px; padding: 4px 10px; font-size: 0.68rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; display: inline-flex; align-items: center; gap: 4px; }
+  .edit-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+  .edit-btn svg { width: 12px; height: 12px; }
+  .add-day-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 16px; border: 2px dashed var(--border-light); border-radius: 16px; background: transparent; font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; margin-top: 20px; }
+  .add-day-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+  .add-section-btn { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 12px; border: 1.5px dashed var(--border-light); border-radius: 12px; background: transparent; font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; margin-top: 12px; }
+  .add-section-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+  .delete-btn { background: none; border: 1px solid rgba(239,68,68,0.2); border-radius: 8px; padding: 4px 10px; font-size: 0.68rem; font-weight: 600; color: #ef4444; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; }
+  .delete-btn:hover { background: rgba(239,68,68,0.08); border-color: #ef4444; }
+
+  /* ── Modal ── */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 1000; display: none; align-items: flex-start; justify-content: center; padding: 24px; overflow-y: auto; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--white); border-radius: 20px; width: 100%; max-width: 680px; box-shadow: 0 24px 64px rgba(0,0,0,0.2); margin: 40px auto; animation: modalIn 0.25s ease; }
+  @keyframes modalIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; border-bottom: 1px solid var(--border-light); }
+  .modal-header h3 { font-size: 1.05rem; font-weight: 700; color: var(--heading-dark); }
+  .modal-close { background: none; border: none; font-size: 1.4rem; color: var(--text-muted); cursor: pointer; padding: 4px 8px; border-radius: 8px; line-height: 1; }
+  .modal-close:hover { background: var(--bg-grey); color: var(--heading-dark); }
+  .modal-body { padding: 24px; max-height: 70vh; overflow-y: auto; }
+  .modal-footer { display: flex; justify-content: flex-end; gap: 10px; padding: 16px 24px; border-top: 1px solid var(--border-light); }
+  .modal-footer button { padding: 10px 24px; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; }
+  .btn-cancel { background: var(--bg-grey); color: var(--text-primary); }
+  .btn-cancel:hover { background: var(--border-light); }
+  .btn-save { background: var(--accent); color: #fff; }
+  .btn-save:hover { background: var(--accent-hover); }
+  .btn-danger { background: #ef4444; color: #fff; }
+  .btn-danger:hover { background: #dc2626; }
+
+  /* ── Form Fields ── */
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 6px; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--border-light); border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 0.85rem; color: var(--text-primary); background: var(--white); transition: border-color 0.2s; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(242,101,34,0.1); }
+  .form-group textarea { min-height: 80px; resize: vertical; line-height: 1.6; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-divider { border: none; border-top: 1px solid var(--border-light); margin: 20px 0; }
+  .form-section-title { font-size: 0.78rem; font-weight: 700; color: var(--heading-dark); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .form-section-title span { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 3px 8px; border-radius: 6px; }
+
   /* ── Footer ── */
   .footer { background: var(--heading-dark); padding: 32px 0; }
   .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
@@ -244,6 +285,15 @@
     .model-info strong { font-size: 0.72rem; }
 
     .footer-inner { flex-direction: column; gap: 8px; text-align: center; }
+
+    /* Modal mobile */
+    .modal-overlay { padding: 12px; }
+    .modal { margin: 16px auto; border-radius: 16px; }
+    .modal-header { padding: 16px 18px; }
+    .modal-body { padding: 18px; }
+    .modal-footer { padding: 14px 18px; }
+    .form-row { grid-template-columns: 1fr; }
+    .form-group input, .form-group select, .form-group textarea { font-size: 16px; } /* prevents iOS zoom */
   }
   @media (max-width: 480px) {
     .week-strip { gap: 2px; padding: 4px; margin: -20px auto 24px; }
@@ -285,6 +335,18 @@
 </section>
 
 <div class="main-content" id="cardsContainer"></div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">Edit</h3>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer" id="modalFooter"></div>
+  </div>
+</div>
 
 <footer class="footer"><div class="footer-inner">
   <p>&copy; 2026 Adletic Agency</p>
@@ -1009,6 +1071,32 @@ const PRODUCTS = {
   'paid-ads': { plan: PAID_ADS_PLAN, eyebrow: 'Paid Ads Solutions Content', title: 'Paid Ads <span class="hero-title-accent">Plan</span>', subtitle: 'Content plan for Paid Ads Solutions — coming soon.' }
 };
 
+// ── Data Layer with localStorage ──
+const STORAGE_KEY = 'contentPlanV2_customData';
+
+function loadCustomData() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { return {}; }
+}
+function saveCustomData(data) { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+
+function getPlan(product) {
+  const custom = loadCustomData();
+  const defaults = JSON.parse(JSON.stringify(PRODUCTS[product].plan)); // deep clone
+  const key = `${product}_plan`;
+  if (custom[key]) return custom[key];
+  return defaults;
+}
+function savePlan(product, plan) {
+  const custom = loadCustomData();
+  custom[`${product}_plan`] = plan;
+  saveCustomData(custom);
+}
+function resetPlan(product) {
+  const custom = loadCustomData();
+  delete custom[`${product}_plan`];
+  saveCustomData(custom);
+}
+
 // ── State ──
 let activeProduct = 'ai-video';
 let activeDay = 0;
@@ -1024,8 +1112,8 @@ function getWeekStartDate() {
   return mon;
 }
 function formatDate(d) { const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; const w=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']; return `${w[d.getDay()]}, ${d.getDate()} ${m[d.getMonth()]} ${d.getFullYear()}`; }
-function getDayStatus(i) { const ws=getWeekStartDate(); const dd=new Date(ws); dd.setDate(ws.getDate()+i); const t=new Date(); t.setHours(0,0,0,0); dd.setHours(0,0,0,0); if(dd.getTime()===t.getTime()) return 'today'; return dd<t?'past':'upcoming'; }
-function getTodayIndex() { const ws=getWeekStartDate(); const t=new Date(); t.setHours(0,0,0,0); const s=new Date(ws); s.setHours(0,0,0,0); const d=Math.floor((t-s)/(864e5)); if(d>=0&&d<7) return d; return d<0?0:6; }
+function getDayStatus(i) { const plan = getPlan(activeProduct); if (i >= plan.length) return 'upcoming'; const ws=getWeekStartDate(); const dd=new Date(ws); dd.setDate(ws.getDate()+i); const t=new Date(); t.setHours(0,0,0,0); dd.setHours(0,0,0,0); if(dd.getTime()===t.getTime()) return 'today'; return dd<t?'past':'upcoming'; }
+function getTodayIndex() { const ws=getWeekStartDate(); const t=new Date(); t.setHours(0,0,0,0); const s=new Date(ws); s.setHours(0,0,0,0); const d=Math.floor((t-s)/(864e5)); const plan = getPlan(activeProduct); const max = plan.length - 1; if(d>=0&&d<=max) return d; return d<0?0:max; }
 
 function switchProduct(product) {
   activeProduct = product;
@@ -1046,22 +1134,235 @@ function toggleSection(dayIdx, secIdx) {
   render();
 }
 
+// ── Modal Helpers ──
+function openModal(title, bodyHTML, footerHTML) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML = bodyHTML;
+  document.getElementById('modalFooter').innerHTML = footerHTML;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+const editIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`;
+
+// ── Edit Day (title, contentType, duration) ──
+function editDay(dayIdx) {
+  const plan = getPlan(activeProduct);
+  const c = plan[dayIdx];
+  const types = ['educate','engage','proof','community','pain','demo'];
+  const labels = ['Educate','Engage','Social Proof','Community','Pain Point','Demo'];
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const body = `
+    <div class="form-group"><label>Day</label>
+      <select id="ed_day">${days.map(d=>`<option ${d===c.day?'selected':''}>${d}</option>`).join('')}</select></div>
+    <div class="form-group"><label>Title</label><input id="ed_title" value="${esc(c.title)}"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Content Type</label>
+        <select id="ed_type">${types.map((t,i)=>`<option value="${t}" ${t===c.contentType?'selected':''}>${labels[i]}</option>`).join('')}</select></div>
+      <div class="form-group"><label>Duration</label><input id="ed_dur" value="${esc(c.totalDuration)}"></div>
+    </div>`;
+  const footer = `<button class="btn-cancel" onclick="closeModal()">Cancel</button><button class="btn-save" onclick="saveDay(${dayIdx})">Save</button>`;
+  openModal('Edit Day', body, footer);
+}
+function saveDay(dayIdx) {
+  const plan = getPlan(activeProduct);
+  const labels = {educate:'Educate',engage:'Engage',proof:'Social Proof',community:'Community',pain:'Pain Point',demo:'Demo'};
+  plan[dayIdx].day = document.getElementById('ed_day').value;
+  plan[dayIdx].title = document.getElementById('ed_title').value;
+  plan[dayIdx].contentType = document.getElementById('ed_type').value;
+  plan[dayIdx].contentTypeLabel = labels[plan[dayIdx].contentType] || plan[dayIdx].contentType;
+  plan[dayIdx].totalDuration = document.getElementById('ed_dur').value;
+  savePlan(activeProduct, plan);
+  closeModal(); render();
+}
+
+// ── Edit Section ──
+function editSection(dayIdx, secIdx) {
+  const plan = getPlan(activeProduct);
+  const sec = plan[dayIdx].sections[secIdx];
+  const avatarTypes = ['ugc','firaz','real'];
+  const sectionTypes = ['hook','main','cta'];
+  const sd = sec.setDesign || {};
+  const ed = sec.editing || {};
+  const body = `
+    <div class="form-row">
+      <div class="form-group"><label>Section Type</label>
+        <select id="es_type">${sectionTypes.map(t=>`<option ${t===sec.type?'selected':''}>${t}</option>`).join('')}</select></div>
+      <div class="form-group"><label>Duration</label><input id="es_dur" value="${esc(sec.duration)}"></div>
+    </div>
+    <div class="form-group"><label>Title</label><input id="es_title" value="${esc(sec.title)}"></div>
+    <div class="form-group"><label>Description</label><textarea id="es_desc" rows="2">${esc(sec.description)}</textarea></div>
+    <div class="form-row">
+      <div class="form-group"><label>Avatar Name</label><input id="es_avatar" value="${esc(sec.avatar||'')}"></div>
+      <div class="form-group"><label>Avatar Type</label>
+        <select id="es_avatarType">${avatarTypes.map(t=>`<option ${t===sec.avatarType?'selected':''}>${t}</option>`).join('')}</select></div>
+    </div>
+    <hr class="form-divider">
+    <div class="form-group"><label>Script</label><textarea id="es_script" rows="6">${esc(sec.script)}</textarea></div>
+    <div class="form-row">
+      <div class="form-group"><label>Music</label><input id="es_music" value="${esc(sec.music||'')}"></div>
+      <div class="form-group"><label>Hook Text</label><input id="es_hookText" value="${esc(sec.hookText||'')}"></div>
+    </div>
+    <div class="form-group"><label>TikTok Trend Format</label><textarea id="es_tiktok" rows="3">${esc(sec.tiktokFormat||'')}</textarea></div>
+    <div class="form-group"><label>Key Points (one per line)</label><textarea id="es_kp" rows="3">${esc((sec.keyPoints||[]).join('\\n'))}</textarea></div>
+    <hr class="form-divider">
+    <div class="form-section-title"><span style="background:var(--section-hook-light);color:var(--section-hook)">SET</span> Set Design</div>
+    <div class="form-group"><label>Location</label><input id="es_sd_loc" value="${esc(sd.location||'')}"></div>
+    <div class="form-group"><label>Lighting</label><input id="es_sd_light" value="${esc(sd.lighting||'')}"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Camera</label><input id="es_sd_cam" value="${esc(sd.camera||'')}"></div>
+      <div class="form-group"><label>Framing</label><input id="es_sd_frame" value="${esc(sd.framing||'')}"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Props</label><input id="es_sd_props" value="${esc(sd.props||'')}"></div>
+      <div class="form-group"><label>Wardrobe</label><input id="es_sd_ward" value="${esc(sd.wardrobe||'')}"></div>
+    </div>
+    <hr class="form-divider">
+    <div class="form-section-title"><span style="background:rgba(242,101,34,0.1);color:var(--accent)">EDIT</span> Editing & Transitions</div>
+    <div class="form-group"><label>Cuts</label><input id="es_ed_cuts" value="${esc(ed.cuts||'')}"></div>
+    <div class="form-group"><label>Transitions</label><input id="es_ed_trans" value="${esc(ed.transitions||'')}"></div>
+    <div class="form-group"><label>On-Screen Text</label><input id="es_ed_text" value="${esc(ed.text||'')}"></div>
+    <div class="form-group"><label>Sound Design</label><input id="es_ed_sound" value="${esc(ed.sound||'')}"></div>
+    <div class="form-group"><label>Pacing</label><input id="es_ed_pacing" value="${esc(ed.pacing||'')}"></div>
+  `;
+  const footer = `<button class="btn-danger" onclick="deleteSection(${dayIdx},${secIdx})">Delete Section</button><div style="flex:1"></div><button class="btn-cancel" onclick="closeModal()">Cancel</button><button class="btn-save" onclick="saveSection(${dayIdx},${secIdx})">Save</button>`;
+  openModal(`Edit: ${sec.title}`, body, footer);
+}
+function saveSection(dayIdx, secIdx) {
+  const plan = getPlan(activeProduct);
+  const sec = plan[dayIdx].sections[secIdx];
+  sec.type = document.getElementById('es_type').value;
+  sec.title = document.getElementById('es_title').value;
+  sec.description = document.getElementById('es_desc').value;
+  sec.duration = document.getElementById('es_dur').value;
+  sec.avatar = document.getElementById('es_avatar').value;
+  sec.avatarType = document.getElementById('es_avatarType').value;
+  sec.script = document.getElementById('es_script').value;
+  sec.music = document.getElementById('es_music').value || undefined;
+  sec.hookText = document.getElementById('es_hookText').value || undefined;
+  sec.tiktokFormat = document.getElementById('es_tiktok').value || undefined;
+  const kpVal = document.getElementById('es_kp').value.trim();
+  sec.keyPoints = kpVal ? kpVal.split('\n').filter(l=>l.trim()) : undefined;
+  // Set design
+  const sdFields = { location:'es_sd_loc', lighting:'es_sd_light', camera:'es_sd_cam', framing:'es_sd_frame', props:'es_sd_props', wardrobe:'es_sd_ward' };
+  const sd = {};
+  let hasSD = false;
+  for (const [k,id] of Object.entries(sdFields)) { const v = document.getElementById(id).value.trim(); if(v) { sd[k]=v; hasSD=true; } }
+  sec.setDesign = hasSD ? sd : undefined;
+  // Editing
+  const edFields = { cuts:'es_ed_cuts', transitions:'es_ed_trans', text:'es_ed_text', sound:'es_ed_sound', pacing:'es_ed_pacing' };
+  const ed = {};
+  let hasED = false;
+  for (const [k,id] of Object.entries(edFields)) { const v = document.getElementById(id).value.trim(); if(v) { ed[k]=v; hasED=true; } }
+  sec.editing = hasED ? ed : undefined;
+  savePlan(activeProduct, plan);
+  closeModal(); render();
+}
+function deleteSection(dayIdx, secIdx) {
+  if (!confirm('Delete this section?')) return;
+  const plan = getPlan(activeProduct);
+  plan[dayIdx].sections.splice(secIdx, 1);
+  savePlan(activeProduct, plan);
+  closeModal(); render();
+}
+
+// ── Add Section ──
+function addSection(dayIdx) {
+  const plan = getPlan(activeProduct);
+  plan[dayIdx].sections.push({
+    type: 'hook', title: 'New Section', avatar: 'Firaz (You)', avatarType: 'real', duration: '0-5s',
+    description: 'Click edit to fill in details', script: 'Write your script here...', music: ''
+  });
+  savePlan(activeProduct, plan);
+  const newIdx = plan[dayIdx].sections.length - 1;
+  openSections[`${activeProduct}-${activeDay}-${newIdx}`] = true;
+  render();
+  editSection(dayIdx, newIdx);
+}
+
+// ── Create New Day ──
+function createDay() {
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const types = ['educate','engage','proof','community','pain','demo'];
+  const labels = ['Educate','Engage','Social Proof','Community','Pain Point','Demo'];
+  const body = `
+    <div class="form-group"><label>Day</label>
+      <select id="cd_day">${days.map(d=>`<option>${d}</option>`).join('')}</select></div>
+    <div class="form-group"><label>Title</label><input id="cd_title" placeholder="e.g. MY MORNING ROUTINE"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Content Type</label>
+        <select id="cd_type">${types.map((t,i)=>`<option value="${t}">${labels[i]}</option>`).join('')}</select></div>
+      <div class="form-group"><label>Duration</label><input id="cd_dur" value="~45-60s"></div>
+    </div>
+    <hr class="form-divider">
+    <p style="font-size:0.82rem;color:var(--text-muted)">A default Hook, Main, and CTA section will be created. You can edit them after.</p>`;
+  const footer = `<button class="btn-cancel" onclick="closeModal()">Cancel</button><button class="btn-save" onclick="saveNewDay()">Create Day</button>`;
+  openModal('Create New Day Content', body, footer);
+}
+function saveNewDay() {
+  const plan = getPlan(activeProduct);
+  const labels = {educate:'Educate',engage:'Engage',proof:'Social Proof',community:'Community',pain:'Pain Point',demo:'Demo'};
+  const ct = document.getElementById('cd_type').value;
+  const newDay = {
+    day: document.getElementById('cd_day').value,
+    title: document.getElementById('cd_title').value || 'UNTITLED',
+    contentType: ct,
+    contentTypeLabel: labels[ct] || ct,
+    totalDuration: document.getElementById('cd_dur').value || '~45-60s',
+    sections: [
+      { type:'hook', title:'Hook — New', avatar:'Firaz (You)', avatarType:'real', duration:'0-5s', description:'Click edit to set up your hook', script:'Write your hook script...', music:'' },
+      { type:'main', title:'Main Content', avatar:'Firaz (You)', avatarType:'real', duration:'5-40s', description:'Click edit to set up main content', script:'Write your main script...', music:'' },
+      { type:'cta', title:'CTA', avatar:'Firaz (You)', avatarType:'real', duration:'40-50s', description:'Click edit to set up your CTA', script:'Write your CTA script...', music:'' }
+    ]
+  };
+  plan.push(newDay);
+  savePlan(activeProduct, plan);
+  activeDay = plan.length - 1;
+  closeModal(); render();
+}
+
+// ── Delete Day ──
+function deleteDay(dayIdx) {
+  if (!confirm('Delete this entire day and all its sections?')) return;
+  const plan = getPlan(activeProduct);
+  plan.splice(dayIdx, 1);
+  savePlan(activeProduct, plan);
+  if (activeDay >= plan.length) activeDay = Math.max(0, plan.length - 1);
+  render();
+}
+
+// ── Reset to defaults ──
+function resetToDefaults() {
+  if (!confirm('Reset ALL content for this product to defaults? This will erase all your custom edits.')) return;
+  resetPlan(activeProduct);
+  render();
+}
+
+// ── Utility ──
+function esc(s) { if (!s) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
 function render() {
-  const plan = PRODUCTS[activeProduct].plan;
+  const plan = getPlan(activeProduct);
   document.getElementById('topDate').innerHTML = `<strong>${formatDate(new Date())}</strong>`;
 
-  // Week strip
+  // Week strip — dynamic based on plan length
   const weekEl = document.getElementById('weekOverview');
   const ws = getWeekStartDate();
   const dn = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
   weekEl.innerHTML = '';
-  for(let i=0;i<7;i++){
+  const count = Math.max(plan.length, 7);
+  for(let i=0;i<count;i++){
     const d=new Date(ws); d.setDate(ws.getDate()+i);
     const st=getDayStatus(i);
+    const hasContent = i < plan.length;
     const dot=document.createElement('div');
-    dot.className=`week-dot ${st} ${i===activeDay?'active':''}`;
-    dot.onclick=()=>{activeDay=i;openSections={};render();};
-    dot.innerHTML=`<div class="dot-day">${dn[i]}</div><div class="dot-num">${d.getDate()}</div><div class="dot-status"></div>`;
+    dot.className=`week-dot ${st} ${i===activeDay?'active':''} ${!hasContent?'empty':''}`;
+    dot.style.opacity = hasContent ? '1' : '0.35';
+    if(hasContent) dot.onclick=()=>{activeDay=i;openSections={};render();};
+    dot.innerHTML=`<div class="dot-day">${dn[i%7]||'D'+(i+1)}</div><div class="dot-num">${d.getDate()}</div><div class="dot-status"></div>`;
     weekEl.appendChild(dot);
   }
 
@@ -1169,6 +1470,7 @@ function render() {
           <div class="section-info"><h4>${sec.title}</h4><p>${sec.description}</p></div>
           <div class="section-avatar"><span class="avatar-dot ${avatarDotClass}"></span>${sec.avatar || ''}</div>
           <div class="section-time">${sec.duration}</div>
+          <button class="edit-btn" onclick="event.stopPropagation();editSection(${activeDay},${si})" title="Edit section">${editIcon} Edit</button>
           <span class="section-chevron">&#9660;</span>
         </div>
         <div class="section-body ${isOpen?'open':''}">${bodyContent}</div>
@@ -1181,6 +1483,8 @@ function render() {
         <div class="card-icon">${icons[c.contentType]||icons.educate}</div>
         <div class="card-header-text"><h2>${c.day} — ${c.title}</h2><p>Full video plan &middot; ${c.totalDuration}</p></div>
         <div class="card-header-right">
+          <button class="edit-btn" onclick="editDay(${activeDay})">${editIcon} Edit Day</button>
+          <button class="delete-btn" onclick="deleteDay(${activeDay})">Delete</button>
           <span class="content-type-chip ${c.contentType}">${c.contentTypeLabel}</span>
           <span class="status-badge ${st}">${sl}</span>
         </div>
@@ -1188,8 +1492,11 @@ function render() {
       <div class="video-timeline">
         <div class="timeline-header"><h3>Video Sections</h3><span class="timeline-total">${c.sections.length} sections &middot; ${c.totalDuration}</span></div>
         ${sectionsHTML}
+        <button class="add-section-btn" onclick="addSection(${activeDay})">+ Add Section</button>
       </div>
-    </div>`;
+    </div>
+    <button class="add-day-btn" onclick="createDay()">+ Create New Day Content</button>
+    <button class="add-day-btn" onclick="resetToDefaults()" style="border-color:rgba(239,68,68,0.2);color:#ef4444;font-size:0.75rem;margin-top:8px;padding:12px">Reset to Defaults</button>`;
 }
 
 function copyPrompt(el, dayIdx, secIdx, type, promptIdx) {
