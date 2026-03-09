@@ -1060,30 +1060,9 @@ const PRODUCTS = {
 };
 
 // ═══════════════════════════════════════════════
-//  NEON DATABASE LAYER
+//  DATA LAYER — localStorage persistence
 // ═══════════════════════════════════════════════
-const NEON_ENDPOINT = 'https://ep-curly-boat-a1wfjnpy-pooler.ap-southeast-1.aws.neon.tech/sql';
-const NEON_CONN = 'postgresql://neondb_owner:npg_Y43yGsVocuWi@ep-curly-boat-a1wfjnpy-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require';
-
-async function dbQuery(sql, params = []) {
-  try {
-    const body = JSON.stringify({ query: sql, params });
-    console.log('DB query:', sql.substring(0, 80), 'params:', params.slice(0, 3));
-    const res = await fetch(NEON_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Neon-Connection-String': NEON_CONN },
-      body
-    });
-    const data = await res.json();
-    console.log('DB response:', data.rows ? data.rows.length + ' rows' : 'no rows', data.error || '');
-    return data;
-  } catch (e) {
-    console.error('DB fetch error:', e);
-    return { rows: [], error: e.message };
-  }
-}
-
-// Content cache: { "ai-video:2026-03-16": { day content object } }
+const LS_PREFIX = 'cp2_';
 const contentCache = {};
 
 function dateToStr(d) {
@@ -1124,66 +1103,46 @@ function getActiveContent() {
   const dateStr = getActiveDateStr(activeDay);
   const key = cacheKey(activeProduct, dateStr);
   const val = contentCache[key];
-  // Filter out placeholder 'true' values from calendar preload
   return (val && typeof val === 'object') ? val : null;
 }
 
-async function loadWeekContent() {
+// Load week content: check localStorage for edits, fallback to hardcoded defaults
+function loadWeekContent() {
   const ws = getWeekStartDate();
-  const dates = [];
+  // Default seed dates: March 9-15 maps to hardcoded plan indices 0-6
+  const defaultDates = ['2026-03-09','2026-03-10','2026-03-11','2026-03-12','2026-03-13','2026-03-14','2026-03-15'];
+  const defaultPlans = { 'ai-video': AI_VIDEO_PLAN, 'ai-employee': AI_EMPLOYEE_PLAN, 'paid-ads': PAID_ADS_PLAN };
+
   for (let i = 0; i < 7; i++) {
     const d = new Date(ws); d.setDate(ws.getDate() + i);
-    dates.push(dateToStr(d));
-  }
-  const result = await dbQuery(
-    `SELECT content_date, content FROM content_plans WHERE plan_type = $1 AND content_date >= $2 AND content_date <= $3 ORDER BY content_date`,
-    [activeProduct, dates[0], dates[6]]
-  );
-  if (result.rows) {
-    result.rows.forEach(row => {
-      const ds = row.content_date; // e.g. "2026-03-16"
-      const content = typeof row.content === 'string' ? JSON.parse(row.content) : row.content;
-      contentCache[cacheKey(activeProduct, ds)] = content;
-    });
+    const ds = dateToStr(d);
+    const key = cacheKey(activeProduct, ds);
+
+    // 1. Check localStorage for saved edits
+    const stored = localStorage.getItem(LS_PREFIX + key);
+    if (stored) {
+      try { contentCache[key] = JSON.parse(stored); continue; } catch(e) {}
+    }
+
+    // 2. Check if this date matches default seed data
+    const seedIdx = defaultDates.indexOf(ds);
+    const plan = defaultPlans[activeProduct];
+    if (seedIdx >= 0 && plan && plan[seedIdx]) {
+      contentCache[key] = plan[seedIdx];
+    }
+    // 3. Otherwise, no content for this date (empty state)
   }
 }
 
-async function saveDayContent(dateStr, planType, content) {
-  contentCache[cacheKey(planType, dateStr)] = content;
+function saveDayContent(dateStr, planType, content) {
+  const key = cacheKey(planType, dateStr);
+  contentCache[key] = content;
+  localStorage.setItem(LS_PREFIX + key, JSON.stringify(content));
   // Show save indicator
   const indicator = document.getElementById('saveIndicator');
-  if (indicator) { indicator.classList.add('saving'); indicator.textContent = 'Saving...'; }
-  try {
-    await dbQuery(
-      `INSERT INTO content_plans (plan_type, content_date, content, updated_at)
-       VALUES ($1, $2, $3, NOW())
-       ON CONFLICT (plan_type, content_date)
-       DO UPDATE SET content = $3, updated_at = NOW()`,
-      [planType, dateStr, JSON.stringify(content)]
-    );
-    if (indicator) { indicator.textContent = 'Saved'; indicator.classList.remove('saving'); indicator.classList.add('saved'); setTimeout(() => indicator.classList.remove('saved'), 2000); }
-  } catch (e) {
-    console.error('Save failed:', e);
-    if (indicator) { indicator.textContent = 'Save failed'; indicator.classList.remove('saving'); }
-  }
-}
-
-async function seedDefaultData() {
-  // Check if data already seeded
-  const check = await dbQuery(`SELECT COUNT(*) as cnt FROM content_plans WHERE plan_type = 'ai-video'`);
-  if (check.rows && check.rows[0] && parseInt(check.rows[0].cnt) > 0) return; // Already seeded
-
-  // Seed the hardcoded plans for March 9-15, 2026 (week of March 10)
-  const seedDates = ['2026-03-09','2026-03-10','2026-03-11','2026-03-12','2026-03-13','2026-03-14','2026-03-15'];
-  const plans = { 'ai-video': AI_VIDEO_PLAN, 'ai-employee': AI_EMPLOYEE_PLAN, 'paid-ads': PAID_ADS_PLAN };
-
-  for (const [planType, plan] of Object.entries(plans)) {
-    for (let i = 0; i < plan.length; i++) {
-      await dbQuery(
-        `INSERT INTO content_plans (plan_type, content_date, content, updated_at) VALUES ($1, $2, $3, NOW()) ON CONFLICT (plan_type, content_date) DO UPDATE SET content = $3, updated_at = NOW()`,
-        [planType, seedDates[i], JSON.stringify(plan[i])]
-      );
-    }
+  if (indicator) {
+    indicator.classList.add('saved'); indicator.textContent = 'Saved';
+    setTimeout(() => indicator.classList.remove('saved'), 2000);
   }
 }
 
@@ -1191,7 +1150,6 @@ async function seedDefaultData() {
 let activeProduct = 'ai-video';
 let activeDay = 0;
 let openSections = {};
-let dbReady = false;
 
 function getWeekStartDate() {
   const stored = localStorage.getItem('contentPlanV2StartDate');
@@ -1207,7 +1165,7 @@ function formatDate(d) { const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug
 function getDayStatus(i) { const ws=getWeekStartDate(); const dd=new Date(ws); dd.setDate(ws.getDate()+i); const t=new Date(); t.setHours(0,0,0,0); dd.setHours(0,0,0,0); if(dd.getTime()===t.getTime()) return 'today'; return dd<t?'past':'upcoming'; }
 function getTodayIndex() { const ws=getWeekStartDate(); const t=new Date(); t.setHours(0,0,0,0); const s=new Date(ws); s.setHours(0,0,0,0); const d=Math.floor((t-s)/(864e5)); if(d>=0&&d<7) return d; return d<0?0:6; }
 
-async function switchProduct(product) {
+function switchProduct(product) {
   activeProduct = product;
   activeDay = getTodayIndex();
   openSections = {};
@@ -1217,7 +1175,7 @@ async function switchProduct(product) {
   document.getElementById('heroEyebrow').innerHTML = `<span class="eyebrow-dot"></span>${p.eyebrow}`;
   document.getElementById('heroTitle').innerHTML = p.title;
   document.getElementById('heroSubtitle').textContent = p.subtitle;
-  await loadWeekContent();
+  loadWeekContent();
   render();
 }
 
@@ -1425,28 +1383,10 @@ function toggleCalendar() {
   renderCalendar();
 }
 
-async function renderCalendar() {
+function renderCalendar() {
   const el = document.getElementById('calOverlay');
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const today = new Date(); today.setHours(0,0,0,0);
-
-  // Preload month data for calendar dots
-  if (calMode === 'days') {
-    const monthStart = `${calViewYear}-${String(calViewMonth+1).padStart(2,'0')}-01`;
-    const monthEnd = `${calViewYear}-${String(calViewMonth+1).padStart(2,'0')}-${new Date(calViewYear, calViewMonth+1, 0).getDate()}`;
-    const result = await dbQuery(
-      `SELECT content_date FROM content_plans WHERE plan_type = $1 AND content_date >= $2 AND content_date <= $3`,
-      [activeProduct, monthStart, monthEnd]
-    );
-    if (result.rows) {
-      result.rows.forEach(row => {
-        const ds = row.content_date;
-        if (!contentCache[cacheKey(activeProduct, ds)]) {
-          contentCache[cacheKey(activeProduct, ds)] = true; // placeholder to show dot
-        }
-      });
-    }
-  }
 
   if (calMode === 'years') {
     const startDecade = Math.floor(calViewYear / 10) * 10 - 1;
@@ -1524,22 +1464,21 @@ async function renderCalendar() {
   el.innerHTML = html;
 }
 
-async function selectCalDate(year, month, day) {
+function selectCalDate(year, month, day) {
   const selected = new Date(year, month, day);
   const dow = selected.getDay();
-  const diff = dow === 0 ? -6 : 1 - dow; // Get Monday of that week
+  const diff = dow === 0 ? -6 : 1 - dow;
   const monday = new Date(selected);
   monday.setDate(selected.getDate() + diff);
   monday.setHours(0,0,0,0);
   localStorage.setItem('contentPlanV2StartDate', monday.toISOString());
 
-  // Calculate which day of the week was selected (0=Mon, 6=Sun)
   const dayIndex = ((selected.getDay() + 6) % 7);
   activeDay = dayIndex;
   openSections = {};
 
   document.getElementById('calOverlay').classList.remove('open');
-  await loadWeekContent();
+  loadWeekContent();
   render();
 }
 
@@ -1567,18 +1506,17 @@ function editDayTitle(dayIdx) {
   input.focus();
 }
 
-async function addDayContent(dayIdx) {
+function addDayContent(dayIdx) {
   const dateStr = getActiveDateStr(dayIdx);
   const content = makeEmptyDay(dayIdx);
   contentCache[cacheKey(activeProduct, dateStr)] = content;
   activeDay = dayIdx;
   openSections = {};
-  // Auto-open all sections so empty fields are visible
   content.sections.forEach((_, si) => {
     openSections[`${activeProduct}-${dayIdx}-${si}`] = true;
   });
+  saveDayContent(dateStr, activeProduct, content);
   render();
-  await saveDayContent(dateStr, activeProduct, content);
 }
 
 function copyPrompt(el, dayIdx, secIdx, type, promptIdx) {
@@ -1689,37 +1627,14 @@ function startEdit(btn, field, dayIdx, secIdx, promptIdx) {
 }
 
 // ── App Init ──
-async function initApp() {
+function initApp() {
   // Reset stale week start from previous version
   const oldStart = localStorage.getItem('contentPlanV2StartDate');
   if (oldStart && oldStart.includes('2026-03-16')) {
     localStorage.removeItem('contentPlanV2StartDate');
   }
   activeDay = getTodayIndex();
-  const container = document.getElementById('cardsContainer');
-  container.innerHTML = '<div style="text-align:center;padding:60px;color:var(--text-muted)"><p>Loading content...</p></div>';
-
-  let dbOk = false;
-  try {
-    // Try loading from DB first
-    await loadWeekContent();
-    const testKey = cacheKey(activeProduct, getActiveDateStr(activeDay));
-    dbOk = !!contentCache[testKey] && typeof contentCache[testKey] === 'object';
-    console.log('DB load result:', dbOk ? 'OK' : 'empty', 'key:', testKey, 'cache keys:', Object.keys(contentCache).length);
-  } catch (e) {
-    console.error('DB load failed:', e);
-  }
-
-  if (!dbOk) {
-    // Fallback: load hardcoded data into cache for current week
-    console.log('Using hardcoded fallback data');
-    const ws = getWeekStartDate();
-    const plan = PRODUCTS[activeProduct].plan;
-    for (let i = 0; i < plan.length; i++) {
-      const d = new Date(ws); d.setDate(ws.getDate() + i);
-      contentCache[cacheKey(activeProduct, dateToStr(d))] = plan[i];
-    }
-  }
+  loadWeekContent();
   render();
 }
 initApp();
