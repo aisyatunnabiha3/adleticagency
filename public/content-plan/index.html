@@ -200,6 +200,17 @@
   .edit-actions .cancel-btn:hover { color: var(--heading-dark); }
   .prompt-full-text { white-space: pre-wrap; word-break: break-word; }
 
+  /* ── Add Day Button ── */
+  .week-dot-wrapper { position: relative; display: flex; flex-direction: column; }
+  .add-day-btn { position: absolute; top: -6px; right: -2px; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); color: #fff; border: 2px solid rgba(255,255,255,0.2); font-size: 0.7rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; z-index: 5; transition: all 0.2s; padding: 0; font-family: 'Inter', sans-serif; }
+  .add-day-btn:hover { transform: scale(1.15); box-shadow: 0 2px 8px rgba(242,101,34,0.4); }
+
+  /* ── Empty Field States ── */
+  .empty-field { border: 2px dashed rgba(239,68,68,0.4) !important; background: rgba(239,68,68,0.03) !important; position: relative; }
+  .empty-field::after { content: 'EMPTY — Click Edit to fill'; display: block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #ef4444; margin-top: 6px; }
+  .empty-field p, .empty-field li { color: #ef4444 !important; font-style: italic; }
+  .empty-tag { display: inline-block; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #ef4444; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 4px; padding: 2px 6px; margin-left: 6px; }
+
   /* ── Footer ── */
   .footer { background: var(--heading-dark); padding: 32px 0; }
   .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
@@ -1025,11 +1036,22 @@ function render() {
   for(let i=0;i<7;i++){
     const d=new Date(ws); d.setDate(ws.getDate()+i);
     const st=getDayStatus(i);
+    const isEmpty = plan[i] && (plan[i].title === 'COMING SOON' || plan[i]._isEmpty);
+    const wrapper=document.createElement('div');
+    wrapper.className='week-dot-wrapper';
     const dot=document.createElement('div');
     dot.className=`week-dot ${st} ${i===activeDay?'active':''}`;
     dot.onclick=()=>{activeDay=i;openSections={};render();};
     dot.innerHTML=`<div class="dot-day">${dn[i]}</div><div class="dot-num">${d.getDate()}</div><div class="dot-status"></div>`;
-    weekEl.appendChild(dot);
+    wrapper.appendChild(dot);
+    if(isEmpty){
+      const addBtn=document.createElement('button');
+      addBtn.className='add-day-btn';
+      addBtn.textContent='+';
+      addBtn.onclick=(e)=>{e.stopPropagation();addDayContent(i);};
+      wrapper.appendChild(addBtn);
+    }
+    weekEl.appendChild(wrapper);
   }
 
   const container = document.getElementById('cardsContainer');
@@ -1054,10 +1076,11 @@ function render() {
     let bodyContent = '<div class="section-grid"><div>';
 
     // Script
-    bodyContent += `<div class="section-label">Script</div>
-      <div class="script-block editable-block" data-field="script" data-day="${activeDay}" data-sec="${si}">
+    const scriptEmpty = !sec.script || sec.script === 'Coming soon.';
+    bodyContent += `<div class="section-label">Script${scriptEmpty ? '<span class="empty-tag">Empty</span>' : ''}</div>
+      <div class="script-block editable-block ${scriptEmpty ? 'empty-field' : ''}" data-field="script" data-day="${activeDay}" data-sec="${si}">
         <button class="edit-btn" onclick="event.stopPropagation();startEdit(this,'script',${activeDay},${si})">Edit</button>
-        <div class="display-content"><p>${sec.script.replace(/\n/g,'<br>')}</p></div>
+        <div class="display-content"><p>${scriptEmpty ? 'No script written yet.' : sec.script.replace(/\n/g,'<br>')}</p></div>
       </div>`;
 
     // Key points
@@ -1078,28 +1101,30 @@ function render() {
 
     // Set Design (for AIOS/real shoots)
     if (sec.setDesign) {
-      bodyContent += `<div class="set-design editable-block">
+      const sdEmpty = !sec.setDesign.location && !sec.setDesign.lighting && !sec.setDesign.props;
+      bodyContent += `<div class="set-design editable-block ${sdEmpty ? 'empty-field' : ''}">
         <button class="edit-btn" onclick="event.stopPropagation();startEdit(this,'setDesign',${activeDay},${si})">Edit</button>
-        <h5>Set Design</h5><div class="display-content"><ul>`;
-      if (sec.setDesign.location) bodyContent += `<li><strong>Location:</strong> ${sec.setDesign.location}</li>`;
-      if (sec.setDesign.lighting) bodyContent += `<li><strong>Lighting:</strong> ${sec.setDesign.lighting}</li>`;
-      if (sec.setDesign.props) bodyContent += `<li><strong>Props:</strong> ${sec.setDesign.props}</li>`;
-      if (sec.setDesign.wardrobe) bodyContent += `<li><strong>Wardrobe:</strong> ${sec.setDesign.wardrobe}</li>`;
-      if (sec.setDesign.camera) bodyContent += `<li><strong>Camera:</strong> ${sec.setDesign.camera}</li>`;
-      if (sec.setDesign.framing) bodyContent += `<li><strong>Framing:</strong> ${sec.setDesign.framing}</li>`;
+        <h5>Set Design${sdEmpty ? '<span class="empty-tag">Empty</span>' : ''}</h5><div class="display-content"><ul>`;
+      bodyContent += `<li><strong>Location:</strong> ${sec.setDesign.location || '<em style="color:#ef4444">Not set</em>'}</li>`;
+      bodyContent += `<li><strong>Lighting:</strong> ${sec.setDesign.lighting || '<em style="color:#ef4444">Not set</em>'}</li>`;
+      bodyContent += `<li><strong>Props:</strong> ${sec.setDesign.props || '<em style="color:#ef4444">Not set</em>'}</li>`;
+      bodyContent += `<li><strong>Wardrobe:</strong> ${sec.setDesign.wardrobe || '<em style="color:#ef4444">Not set</em>'}</li>`;
+      bodyContent += `<li><strong>Camera:</strong> ${sec.setDesign.camera || '<em style="color:#ef4444">Not set</em>'}</li>`;
+      bodyContent += `<li><strong>Framing:</strong> ${sec.setDesign.framing || '<em style="color:#ef4444">Not set</em>'}</li>`;
       bodyContent += `</ul></div></div>`;
     }
 
     // Editing & Transitions (for AIOS/real shoots)
     if (sec.editing) {
-      bodyContent += `<div class="editing-block editable-block">
+      const edEmpty = !sec.editing.cuts && !sec.editing.transitions && !sec.editing.text;
+      bodyContent += `<div class="editing-block editable-block ${edEmpty ? 'empty-field' : ''}">
         <button class="edit-btn" onclick="event.stopPropagation();startEdit(this,'editing',${activeDay},${si})">Edit</button>
-        <h5>Editing & Transitions</h5><div class="display-content"><ul>`;
-      if (sec.editing.cuts) bodyContent += `<li><strong>Cuts:</strong> ${sec.editing.cuts}</li>`;
-      if (sec.editing.transitions) bodyContent += `<li><strong>Transitions:</strong> ${sec.editing.transitions}</li>`;
-      if (sec.editing.text) bodyContent += `<li><strong>On-Screen Text:</strong> ${sec.editing.text}</li>`;
-      if (sec.editing.sound) bodyContent += `<li><strong>Sound Design:</strong> ${sec.editing.sound}</li>`;
-      if (sec.editing.pacing) bodyContent += `<li><strong>Pacing:</strong> ${sec.editing.pacing}</li>`;
+        <h5>Editing & Transitions${edEmpty ? '<span class="empty-tag" style="color:#ef4444;background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.3)">Empty</span>' : ''}</h5><div class="display-content"><ul>`;
+      bodyContent += `<li><strong>Cuts:</strong> ${sec.editing.cuts || '<em style="color:#ef4444">Not set</em>'}</li>`;
+      bodyContent += `<li><strong>Transitions:</strong> ${sec.editing.transitions || '<em style="color:#ef4444">Not set</em>'}</li>`;
+      bodyContent += `<li><strong>On-Screen Text:</strong> ${sec.editing.text || '<em style="color:#ef4444">Not set</em>'}</li>`;
+      bodyContent += `<li><strong>Sound Design:</strong> ${sec.editing.sound || '<em style="color:#ef4444">Not set</em>'}</li>`;
+      bodyContent += `<li><strong>Pacing:</strong> ${sec.editing.pacing || '<em style="color:#ef4444">Not set</em>'}</li>`;
       bodyContent += `</ul></div></div>`;
     }
 
@@ -1156,7 +1181,7 @@ function render() {
     <div class="day-card">
       <div class="card-header">
         <div class="card-icon">${icons[c.contentType]||icons.educate}</div>
-        <div class="card-header-text"><h2>${c.day} — ${c.title}</h2><p>Full video plan &middot; ${c.totalDuration}</p></div>
+        <div class="card-header-text"><h2>${c.day} — <span class="editable-inline" onclick="event.stopPropagation();editDayTitle(${activeDay})" style="cursor:pointer;border-bottom:${c._isEmpty?'2px dashed #ef4444':'none'}">${c.title}${c._isEmpty?'<span class="empty-tag">Click to edit</span>':''}</span></h2><p>Full video plan &middot; ${c.totalDuration}</p></div>
         <div class="card-header-right">
           <span class="content-type-chip ${c.contentType}">${c.contentTypeLabel}</span>
           <span class="status-badge ${st}">${sl}</span>
@@ -1167,6 +1192,55 @@ function render() {
         ${sectionsHTML}
       </div>
     </div>`;
+}
+
+function editDayTitle(dayIdx) {
+  const plan = PRODUCTS[activeProduct].plan;
+  const c = plan[dayIdx];
+  const el = document.querySelector('.editable-inline');
+  const current = c.title;
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.value = current === 'UNTITLED' ? '' : current;
+  input.placeholder = 'Enter video title...';
+  input.style.cssText = 'font-size:1.15rem;font-weight:700;color:var(--heading-dark);border:2px solid var(--accent);border-radius:8px;padding:4px 8px;width:300px;font-family:Inter,sans-serif;outline:none;text-transform:uppercase;';
+  input.onclick = (e) => e.stopPropagation();
+  input.onkeydown = (e) => {
+    if(e.key==='Enter'){ c.title = input.value.toUpperCase() || 'UNTITLED'; render(); }
+    if(e.key==='Escape'){ render(); }
+  };
+  input.onblur = () => { c.title = input.value.toUpperCase() || 'UNTITLED'; render(); };
+  el.innerHTML = '';
+  el.appendChild(input);
+  input.focus();
+}
+
+function addDayContent(dayIdx) {
+  const plan = PRODUCTS[activeProduct].plan;
+  const dayNames = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const emptySection = (type, title) => ({
+    type, title, avatar:'', avatarType:'real', duration:'',
+    description:'', script:'', music:'', hookText:'',
+    setDesign:{ location:'', lighting:'', props:'', wardrobe:'', camera:'', framing:'' },
+    editing:{ cuts:'', transitions:'', text:'', sound:'', pacing:'' },
+    _isEmpty: true
+  });
+  plan[dayIdx] = {
+    day: dayNames[dayIdx], title: 'UNTITLED', contentType: 'educate', contentTypeLabel: 'Educate',
+    totalDuration: '~45-60s', _isEmpty: true,
+    sections: [
+      emptySection('hook', 'Hook — [Edit Title]'),
+      emptySection('main', 'Main — [Edit Title]'),
+      emptySection('cta', 'CTA — [Edit Title]')
+    ]
+  };
+  activeDay = dayIdx;
+  openSections = {};
+  // Auto-open all sections so empty fields are visible
+  plan[dayIdx].sections.forEach((_, si) => {
+    openSections[`${activeProduct}-${dayIdx}-${si}`] = true;
+  });
+  render();
 }
 
 function copyPrompt(el, dayIdx, secIdx, type, promptIdx) {
