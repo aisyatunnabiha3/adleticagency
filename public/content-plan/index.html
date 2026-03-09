@@ -395,7 +395,19 @@ const AI_VIDEO_PLAN = [
         description:'Strong close with CTA',
         script:`If you want to learn how to build content like this —\nlink in bio.\nOr just follow. I drop this every week.\nPeace.`,
         music:'Beat fade out',
-        i2vClips:[{ label:'CTA', panels:'4', inputPanel:4, duration:8, lipSync:'Yes', motion:`[PANEL 4 — CONFIDENT LEAN BACK] Continuing from the high angle, camera slowly moves down to eye level. The young man (backwards cap, sunglasses, big chain, puffer vest) is reclined in his chair, close-up framing. Navy cap, puffer vest, silver chain glinting under warm key light. He holds the relaxed posture for a beat, then shifts — leans forward toward camera with quick, punchy energy and points directly at lens on "link in bio." Fast-paced delivery, each word hits hard. HAND COUNT: Right hand points index finger steady at lens. Left hand grips chair arm. No extra hands. The lean-forward is deliberate, closing the distance. Warm amber desk lamp light from the right, cool monitor glow from behind creating backlight on shoulder edge. Camera pulls back to reveal the full workspace behind him. Energy drops from intense to casual. Peace sign with right hand on the final beat, left hand resting on knee. Slight head nod. The pull-out ends on a wider MS showing him centered in his creative space. Focus shifts from sharp on face to everything in focus as frame widens. Vertical 9:16. No CGI look.\nAUDIO: "If you want to learn how to build content like this — link in bio. Or just follow. I drop this every week. Peace."` }]
+        nanoPrompts:[
+          { label:'CTA PANEL', step:1, prompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Creative workspace — reclined in chair, close-up framing. Silver chain glinting under warm key light. Relaxed posture, leaning forward toward camera with confident energy. Right hand points index finger at lens. Left hand grips chair arm. Warm amber desk lamp light from right, cool monitor glow from behind creating backlight on shoulder edge. Workspace visible behind — monitors, creative chaos. Sharp focus on face, background softening. Hyper-realistic. No CGI look.` }
+        ],
+        i2vClips:[{ label:'CTA', panels:'4', inputPanel:4, duration:8, lipSync:'Yes', motion:`[PANEL 4 — CONFIDENT LEAN BACK] Continuing from the high angle, camera slowly moves down to eye level. The young man (backwards cap, sunglasses, big chain, puffer vest) is reclined in his chair, close-up framing. Navy cap, puffer vest, silver chain glinting under warm key light. He holds the relaxed posture for a beat, then shifts — leans forward toward camera with quick, punchy energy and points directly at lens on "link in bio." Fast-paced delivery, each word hits hard. HAND COUNT: Right hand points index finger steady at lens. Left hand grips chair arm. No extra hands. The lean-forward is deliberate, closing the distance. Warm amber desk lamp light from the right, cool monitor glow from behind creating backlight on shoulder edge. Camera pulls back to reveal the full workspace behind him. Energy drops from intense to casual. Peace sign with right hand on the final beat, left hand resting on knee. Slight head nod. The pull-out ends on a wider MS showing him centered in his creative space. Focus shifts from sharp on face to everything in focus as frame widens. Vertical 9:16. No CGI look.\nAUDIO: "If you want to learn how to build content like this — link in bio. Or just follow. I drop this every week. Peace."` }],
+        f2vClips:[
+          { label:'CTA Panel', startPanel:1, endPanel:1,
+            startPrompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Creative workspace — reclined in chair, high angle looking down. Silver chain glinting under warm key light. Relaxed confident posture, arms slightly spread on armrests. Warm amber desk lamp from right, cool monitor glow from behind. Workspace chaos visible — monitors, equipment. Sharp focus on face and hands, background softening. Hyper-realistic. No CGI look.`,
+            endPrompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Same workspace. Medium close-up, leaning forward toward camera. Right hand peace sign held up. Left hand resting on knee. Slight head nod, relaxed half-smile. Warm amber light from right on cheek, cool monitor backlight on shoulder edge. Workspace softly blurred behind. Sharp focus on face and peace sign hand. Hyper-realistic. No CGI look.`,
+            audio:`If you want to learn how to build content like this — link in bio. Or just follow. I drop this every week. Peace.`,
+            duration:8,
+            motion:`Camera moves from high-angle reclined posture down to eye-level lean-forward. Energy shifts from relaxed to direct — pointing at camera, then settling into casual peace sign close.`
+          }
+        ]
       }
     ]
   },
@@ -473,7 +485,20 @@ const AI_VIDEO_PLAN = [
       },
       { type:'cta', title:'CTA', avatar:'Faeez (You)', avatarType:'firaz', duration:'40-50s', description:'Drive follows',
         script:`Follow. I break down content formats daily.\nLink in bio to build this for your brand.`,
-        music:'Fade', i2vClips:[{ label:'CTA', panels:'4', inputPanel:4, duration:8, lipSync:'Yes', motion:`[PANEL 4 — CASUAL CLOSE FROM WIDE FRAME] Continuing from high angle, camera slowly moves down to eye level as The young man (backwards cap, sunglasses, big chain, puffer vest) settles back. Close-up. Navy cap, puffer vest. Relaxed half-smile, quick punchy delivery — each word hits hard with no dead air. HAND COUNT: Right hand gestures loosely toward camera on "follow." Left hand rests on thigh. Both hands accounted for. Warm amber workspace lighting from the left, cool monitor glow dimming behind from the right. Camera pulls back widening the frame further. Casual head nod on the final beat, chin-on-hand contemplation for a breath then drops it. The wide-to-wider pull creates a closing-out feeling. Focus shifts from sharp on face to everything in focus as frame widens. Natural lighting, handheld feel. Vertical 9:16. No CGI look.\nAUDIO: "Follow. I break down content formats daily. Link in bio to build this for your brand."` }]
+        music:'Fade',
+        nanoPrompts:[
+          { label:'CTA PANEL', step:1, prompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Creative workspace — settled back in chair, close-up. Relaxed half-smile, quick punchy energy. Right hand gestures loosely toward camera. Left hand rests on thigh. Warm amber workspace lighting from left, cool monitor glow dimming from right. Casual head nod energy. Natural lighting, handheld feel. Sharp focus on face. Hyper-realistic. No CGI look.` }
+        ],
+        i2vClips:[{ label:'CTA', panels:'4', inputPanel:4, duration:8, lipSync:'Yes', motion:`[PANEL 4 — CASUAL CLOSE FROM WIDE FRAME] Continuing from high angle, camera slowly moves down to eye level as The young man (backwards cap, sunglasses, big chain, puffer vest) settles back. Close-up. Navy cap, puffer vest. Relaxed half-smile, quick punchy delivery — each word hits hard with no dead air. HAND COUNT: Right hand gestures loosely toward camera on "follow." Left hand rests on thigh. Both hands accounted for. Warm amber workspace lighting from the left, cool monitor glow dimming behind from the right. Camera pulls back widening the frame further. Casual head nod on the final beat, chin-on-hand contemplation for a breath then drops it. The wide-to-wider pull creates a closing-out feeling. Focus shifts from sharp on face to everything in focus as frame widens. Natural lighting, handheld feel. Vertical 9:16. No CGI look.\nAUDIO: "Follow. I break down content formats daily. Link in bio to build this for your brand."` }],
+        f2vClips:[
+          { label:'CTA Panel', startPanel:1, endPanel:1,
+            startPrompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Creative workspace — high angle looking down, settled back in chair. Arms resting on armrests, casual confident posture. Warm amber workspace lighting from left, cool monitor glow from right. Workspace visible — monitors, desk. Sharp focus on face. Hyper-realistic. No CGI look.`,
+            endPrompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Same workspace, wider frame. Medium shot centered in creative space, chin resting on hand in contemplation then dropping it. Relaxed half-smile. Warm amber from left, cool blue from right. Everything in focus — face and workspace behind. Hyper-realistic. No CGI look.`,
+            audio:`Follow. I break down content formats daily. Link in bio to build this for your brand.`,
+            duration:8,
+            motion:`Camera widens from close-up to medium shot as energy winds down. Casual head nod, brief chin-on-hand beat, then drops into relaxed close-out energy.`
+          }
+        ]
       }
     ]
   },
@@ -544,7 +569,20 @@ const AI_VIDEO_PLAN = [
       },
       { type:'cta', title:'CTA', avatar:'Faeez (You)', avatarType:'firaz', duration:'40-50s', description:'Save + follow',
         script:`Save this. One hook formula every week.\nLink in bio for hooks written for YOUR brand. Peace.`,
-        music:'Fade', i2vClips:[{ label:'CTA', panels:'4', inputPanel:4, duration:8, lipSync:'Yes', motion:`Camera slowly moves sideways past The young man (backwards cap, sunglasses, big chain, puffer vest). Close-up, relaxed lean against whiteboard, one hip cocked out asymmetrically. Navy cap, chain. HAND COUNT: Right hand points marker at camera on "save this." Left hand hooked in pocket. Both hands accounted for. Speaking fast with confident energy, quick punchy delivery. Warm workspace light from left, cool monitor glow from right. Whiteboard formula still visible behind him. Casual nod, slight smile, chin-on-hand beat of contemplation before dropping it. Camera pulls back widening frame. Peace sign with right hand, left hand stays in pocket. Focus shifts from sharp on face to everything in focus as frame widens. Vertical 9:16. No CGI look.\nAUDIO: "Save this. One hook formula every week. Link in bio for hooks written for YOUR brand. Peace."` }]
+        music:'Fade',
+        nanoPrompts:[
+          { label:'CTA PANEL', step:1, prompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Workspace — relaxed lean against whiteboard, one hip cocked out asymmetrically. Right hand holds marker pointing at camera. Left hand hooked in pocket. Whiteboard formula still visible behind. Warm workspace light from left, cool monitor glow from right. Confident slight smile energy. Sharp focus on face. Hyper-realistic. No CGI look.` }
+        ],
+        i2vClips:[{ label:'CTA', panels:'4', inputPanel:4, duration:8, lipSync:'Yes', motion:`Camera slowly moves sideways past The young man (backwards cap, sunglasses, big chain, puffer vest). Close-up, relaxed lean against whiteboard, one hip cocked out asymmetrically. Navy cap, chain. HAND COUNT: Right hand points marker at camera on "save this." Left hand hooked in pocket. Both hands accounted for. Speaking fast with confident energy, quick punchy delivery. Warm workspace light from left, cool monitor glow from right. Whiteboard formula still visible behind him. Casual nod, slight smile, chin-on-hand beat of contemplation before dropping it. Camera pulls back widening frame. Peace sign with right hand, left hand stays in pocket. Focus shifts from sharp on face to everything in focus as frame widens. Vertical 9:16. No CGI look.\nAUDIO: "Save this. One hook formula every week. Link in bio for hooks written for YOUR brand. Peace."` }],
+        f2vClips:[
+          { label:'CTA Panel', startPanel:1, endPanel:1,
+            startPrompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Workspace — close-up, relaxed lean against whiteboard, one hip cocked out. Right hand holds marker pointing at camera on "save this." Left hand hooked in pocket. Whiteboard formula visible behind. Warm workspace light from left, cool monitor glow from right. Confident energy. Hyper-realistic. No CGI look.`,
+            endPrompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Same workspace, wider frame. Peace sign with right hand, left hand in pocket. Slight head nod, relaxed smile. Whiteboard and full workspace visible behind. Warm light from left. Everything in focus. Hyper-realistic. No CGI look.`,
+            audio:`Save this. One hook formula every week. Link in bio for hooks written for YOUR brand. Peace.`,
+            duration:8,
+            motion:`Camera slides sideways past him then pulls back to wider frame. Marker pointing transitions to peace sign close-out. Relaxed lean-against-whiteboard energy throughout.`
+          }
+        ]
       }
     ]
   },
@@ -615,7 +653,20 @@ const AI_VIDEO_PLAN = [
       },
       { type:'cta', title:'CTA', avatar:'Faeez (You)', avatarType:'firaz', duration:'40-50s', description:'Engagement CTA',
         script:`Comment "RELATABLE" if you felt that.\nFollow for content strategy daily. Peace.`,
-        music:'Fade', i2vClips:[{ label:'CTA', panels:'4', inputPanel:4, duration:8, lipSync:'Yes', motion:`Medium close-up The young man (backwards cap, sunglasses, big chain, puffer vest), same outdoor golden hour setting. Camera slides slowly to the right as he winds down. Relaxed smile, fast-paced delivery with confident energy — no dead air. HAND COUNT: Right hand points loosely at camera on "comment." Left hand rests on knee. No extra hands. Head nod on "follow." Then both hands come together for peace sign — right hand forms the V, left hand drops to lap. Warm blurred background fading, backlight from setting sun creating glow on his cap brim. Golden hour light softening on his face. Vertical 9:16. No CGI look.\nAUDIO: "Comment 'RELATABLE' if you felt that. Follow for content strategy daily. Peace."` }]
+        music:'Fade',
+        nanoPrompts:[
+          { label:'CTA PANEL', step:1, prompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Outdoor golden hour setting — medium close-up. Relaxed smile, pointing loosely at camera. Warm blurred background, backlight from setting sun creating glow on cap brim. Golden hour light softening on face. KL urban elements blurred behind. Sharp focus on face. Hyper-realistic. No CGI look.` }
+        ],
+        i2vClips:[{ label:'CTA', panels:'4', inputPanel:4, duration:8, lipSync:'Yes', motion:`Medium close-up The young man (backwards cap, sunglasses, big chain, puffer vest), same outdoor golden hour setting. Camera slides slowly to the right as he winds down. Relaxed smile, fast-paced delivery with confident energy — no dead air. HAND COUNT: Right hand points loosely at camera on "comment." Left hand rests on knee. No extra hands. Head nod on "follow." Then both hands come together for peace sign — right hand forms the V, left hand drops to lap. Warm blurred background fading, backlight from setting sun creating glow on his cap brim. Golden hour light softening on his face. Vertical 9:16. No CGI look.\nAUDIO: "Comment 'RELATABLE' if you felt that. Follow for content strategy daily. Peace."` }],
+        f2vClips:[
+          { label:'CTA Panel', startPanel:1, endPanel:1,
+            startPrompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Outdoor golden hour — medium close-up at coffee shop. Right hand points loosely at camera on "comment." Left hand rests on knee. Relaxed smile. Warm golden hour backlight on cap brim. KL urban blurred behind. Sharp focus on face. Hyper-realistic. No CGI look.`,
+            endPrompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Same outdoor golden hour setting. Medium close-up — peace sign with right hand held up, left hand in lap. Head nod, relaxed smile. Backlight from setting sun creating golden glow along jawline. Warm blurred background fading to amber. Sharp focus on face and peace sign. Hyper-realistic. No CGI look.`,
+            audio:`Comment "RELATABLE" if you felt that. Follow for content strategy daily. Peace.`,
+            duration:8,
+            motion:`Camera slides slowly right as he winds down. Pointing at camera transitions to peace sign. Golden hour fading, warm relaxed close-out energy.`
+          }
+        ]
       }
     ]
   },
@@ -686,7 +737,20 @@ const AI_VIDEO_PLAN = [
       },
       { type:'cta', title:'CTA', avatar:'Faeez (You)', avatarType:'firaz', duration:'40-50s', description:'Framework CTA',
         script:`Screenshot this. Use it for your next product video.\nLink in bio for the full playbook. Peace.`,
-        music:'Fade', i2vClips:[{ label:'CTA', panels:'4', inputPanel:4, duration:8, lipSync:'Yes', motion:`Medium close-up The young man (backwards cap, sunglasses, big chain, puffer vest) back in seated position, leaning forward. Camera settles from a slight tilt into a straight frame. Relaxed but direct energy — speaking fast with confident punch, no dead air. HAND COUNT: Right hand points at camera on "screenshot." Left hand rests on his knee. Then right hand rises to tap own temple on "use it" while left hand stays still. No extra hands. Warm light from workspace window on his cheek. Peace sign with right hand, left hand drops to lap. Warm workspace softly blurred behind. Vertical 9:16. No CGI look.\nAUDIO: "Screenshot this. Use it for your next product video. Link in bio for the full playbook. Peace."` }]
+        music:'Fade',
+        nanoPrompts:[
+          { label:'CTA PANEL', step:1, prompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Workspace — seated, leaning forward. Right hand points at camera on "screenshot." Left hand rests on knee. Relaxed but direct energy. Warm light from workspace window on cheek. Workspace softly blurred behind. Sharp focus on face. Hyper-realistic. No CGI look.` }
+        ],
+        i2vClips:[{ label:'CTA', panels:'4', inputPanel:4, duration:8, lipSync:'Yes', motion:`Medium close-up The young man (backwards cap, sunglasses, big chain, puffer vest) back in seated position, leaning forward. Camera settles from a slight tilt into a straight frame. Relaxed but direct energy — speaking fast with confident punch, no dead air. HAND COUNT: Right hand points at camera on "screenshot." Left hand rests on his knee. Then right hand rises to tap own temple on "use it" while left hand stays still. No extra hands. Warm light from workspace window on his cheek. Peace sign with right hand, left hand drops to lap. Warm workspace softly blurred behind. Vertical 9:16. No CGI look.\nAUDIO: "Screenshot this. Use it for your next product video. Link in bio for the full playbook. Peace."` }],
+        f2vClips:[
+          { label:'CTA Panel', startPanel:1, endPanel:1,
+            startPrompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Workspace — seated, leaning forward toward camera. Right hand points at camera. Left hand rests on knee. Relaxed but direct energy. Slightly tilted frame. Warm workspace window light on cheek. Workspace softly blurred behind. Hyper-realistic. No CGI look.`,
+            endPrompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Same workspace. Straight frame — right hand tapping own temple on "use it." Left hand still on knee. Then peace sign with right hand. Warm workspace light, relaxed confidence. Workspace visible behind. Sharp focus on face and gesture. Hyper-realistic. No CGI look.`,
+            audio:`Screenshot this. Use it for your next product video. Link in bio for the full playbook. Peace.`,
+            duration:8,
+            motion:`Camera settles from tilted to straight frame. Pointing at camera transitions to temple tap then peace sign. Direct confident energy winding into relaxed close.`
+          }
+        ]
       }
     ]
   },
@@ -756,7 +820,20 @@ const AI_VIDEO_PLAN = [
       },
       { type:'cta', title:'CTA', avatar:'Faeez (You)', avatarType:'firaz', duration:'40-50s', description:'DM CTA',
         script:`DM me "CONTENT" or link in bio.\nAdletic Agency. We build content systems.\nSee you tomorrow for the big reveal. Peace.`,
-        music:'Fade', i2vClips:[{ label:'CTA', panels:'4', inputPanel:4, duration:8, lipSync:'Yes', motion:`Medium close-up The young man (backwards cap, sunglasses, big chain, puffer vest), golden hour still warm on his face. Quick snap to a steady medium close-up. Confident but warm energy — speaking fast with punchy delivery, no dead air. The week is building to something. HAND COUNT: Right hand points at camera on "DM me." Left hand rests on the railing beside him. No extra hands. Slight conspiratorial lean-in on "See you tomorrow for the big reveal" — like he's teasing a secret, twisted torso turning back toward camera. Eyes glint with anticipation. Backlight from the fading sunset creating golden glow along his jawline. KL skyline fading to silhouette behind him. HAND COUNT: Right hand forms peace sign against the sunset. Left hand stays on railing. No extra hands. Vertical 9:16. No CGI look.\nAUDIO: "DM me 'CONTENT' or link in bio. Adletic Agency. We build content systems. See you tomorrow for the big reveal. Peace."` }]
+        music:'Fade',
+        nanoPrompts:[
+          { label:'CTA PANEL', step:1, prompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. KL rooftop golden hour — medium close-up. Right hand points at camera on "DM me." Left hand rests on railing. Confident but warm energy. Backlight from fading sunset creating golden glow along jawline. KL skyline fading to silhouette behind. Eyes glinting with anticipation. Sharp focus on face. Hyper-realistic. No CGI look.` }
+        ],
+        i2vClips:[{ label:'CTA', panels:'4', inputPanel:4, duration:8, lipSync:'Yes', motion:`Medium close-up The young man (backwards cap, sunglasses, big chain, puffer vest), golden hour still warm on his face. Quick snap to a steady medium close-up. Confident but warm energy — speaking fast with punchy delivery, no dead air. The week is building to something. HAND COUNT: Right hand points at camera on "DM me." Left hand rests on the railing beside him. No extra hands. Slight conspiratorial lean-in on "See you tomorrow for the big reveal" — like he's teasing a secret, twisted torso turning back toward camera. Eyes glint with anticipation. Backlight from the fading sunset creating golden glow along his jawline. KL skyline fading to silhouette behind him. HAND COUNT: Right hand forms peace sign against the sunset. Left hand stays on railing. No extra hands. Vertical 9:16. No CGI look.\nAUDIO: "DM me 'CONTENT' or link in bio. Adletic Agency. We build content systems. See you tomorrow for the big reveal. Peace."` }],
+        f2vClips:[
+          { label:'CTA Panel', startPanel:1, endPanel:1,
+            startPrompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. KL rooftop golden hour — medium close-up. Right hand points at camera. Left hand rests on railing beside him. Confident warm energy, slight conspiratorial lean-in. Backlight from fading sunset creating golden glow along jawline. KL skyline fading to silhouette behind. Hyper-realistic. No CGI look.`,
+            endPrompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Same KL rooftop. Peace sign with right hand held against the sunset. Left hand on railing. Eyes glinting. KL skyline silhouette behind, fading golden light. The week's anticipation building in his expression. Sharp focus on face and peace sign. Hyper-realistic. No CGI look.`,
+            audio:`DM me "CONTENT" or link in bio. Adletic Agency. We build content systems. See you tomorrow for the big reveal. Peace.`,
+            duration:8,
+            motion:`Camera holds steady medium close-up. Pointing at camera transitions to conspiratorial lean-in then peace sign against the sunset. Teasing tomorrow's reveal energy.`
+          }
+        ]
       }
     ]
   },
@@ -805,7 +882,20 @@ const AI_VIDEO_PLAN = [
       },
       { type:'cta', title:'CTA — Big Close', avatar:'Faeez (You)', avatarType:'firaz', duration:'50-70s', description:'Biggest CTA of the week',
         script:`I'm Faeez. Adletic Agency.\nFull breakdown — link in bio.\nDM me "AI" and I'll send it.\nFollow for next week. It gets crazier. Peace.`,
-        music:'Piano fade', i2vClips:[{ label:'Big CTA', panels:'4', inputPanel:4, duration:8, lipSync:'Yes', motion:`[PANEL 4 — WALKING FORWARD, PERSONAL CLOSE] Continuing from the planted stance. Camera slides slowly to the right, the darkness shifting with subtle depth. Medium close-up The young man (backwards cap, sunglasses, big chain, puffer vest) in dark studio, single spotlight — but now the lighting softens to a warmer glow, warm light from the side on his cheek feeling intimate rather than dramatic. Piano enters the soundscape. HAND COUNT: Right hand at his side initially, then rises to point at camera on "DM me" — inviting, not commanding. Left hand rests at his side, fingers relaxed. No extra hands. He speaks directly with fast-paced confident energy — rapid delivery, each word punching through, no dead air. "I'm Faeez" — the most personal, vulnerable moment of the series. He nods slowly on "Adletic Agency" — pride without arrogance. Twisted torso leaning subtly forward on "it gets crazier" — conspiracy energy. HAND COUNT: Right hand forms peace sign — his signature close, carrying the weight of the entire week. Left hand stays at his side. No extra hands. The spotlight holds him. Backlight creating soft glow on his cap edge. Darkness breathes behind. Piano fades. Vertical 9:16. No CGI look.\nAUDIO: "I'm Faeez. Adletic Agency. Full breakdown — link in bio. DM me 'AI' and I'll send it. Follow for next week. It gets crazier. Peace."` }]
+        music:'Piano fade',
+        nanoPrompts:[
+          { label:'CTA PANEL', step:1, prompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Dark studio, single spotlight — but warmer glow now, intimate rather than dramatic. Medium close-up. Right hand rises to point at camera, inviting not commanding. Left hand at side, fingers relaxed. Piano mood energy. Backlight creating soft glow on cap edge. Darkness breathes behind. Sharp focus on face. Hyper-realistic. No CGI look.` }
+        ],
+        i2vClips:[{ label:'Big CTA', panels:'4', inputPanel:4, duration:8, lipSync:'Yes', motion:`[PANEL 4 — WALKING FORWARD, PERSONAL CLOSE] Continuing from the planted stance. Camera slides slowly to the right, the darkness shifting with subtle depth. Medium close-up The young man (backwards cap, sunglasses, big chain, puffer vest) in dark studio, single spotlight — but now the lighting softens to a warmer glow, warm light from the side on his cheek feeling intimate rather than dramatic. Piano enters the soundscape. HAND COUNT: Right hand at his side initially, then rises to point at camera on "DM me" — inviting, not commanding. Left hand rests at his side, fingers relaxed. No extra hands. He speaks directly with fast-paced confident energy — rapid delivery, each word punching through, no dead air. "I'm Faeez" — the most personal, vulnerable moment of the series. He nods slowly on "Adletic Agency" — pride without arrogance. Twisted torso leaning subtly forward on "it gets crazier" — conspiracy energy. HAND COUNT: Right hand forms peace sign — his signature close, carrying the weight of the entire week. Left hand stays at his side. No extra hands. The spotlight holds him. Backlight creating soft glow on his cap edge. Darkness breathes behind. Piano fades. Vertical 9:16. No CGI look.\nAUDIO: "I'm Faeez. Adletic Agency. Full breakdown — link in bio. DM me 'AI' and I'll send it. Follow for next week. It gets crazier. Peace."` }],
+        f2vClips:[
+          { label:'CTA Panel', startPanel:1, endPanel:1,
+            startPrompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Dark studio, single spotlight — warm intimate glow. Medium close-up from planted stance. Right hand at side. Left hand at side, fingers relaxed. Spotlight holding him in warm cone of light. Darkness behind. Vulnerable, personal energy. Hyper-realistic. No CGI look.`,
+            endPrompt:`Hyper-realistic single frame. 9:16 vertical. ${FAEEZ_SHORT}. Same dark studio, warm spotlight. Medium close-up — peace sign with right hand, his signature close. Left hand at side. Slight nod, carrying the weight of the entire week. Soft glow on cap edge from backlight. Darkness breathes behind. Piano mood. The most personal frame of the series. Hyper-realistic. No CGI look.`,
+            audio:`I'm Faeez. Adletic Agency. Full breakdown — link in bio. DM me "AI" and I'll send it. Follow for next week. It gets crazier. Peace.`,
+            duration:8,
+            motion:`Camera slides slowly right. From planted vulnerable stance to pointing at camera, then peace sign — his signature close carrying the weight of the entire week. Spotlight softens from dramatic to intimate. Piano fades.`
+          }
+        ]
       }
     ]
   }
