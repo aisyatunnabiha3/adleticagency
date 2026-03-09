@@ -232,6 +232,16 @@
   .cal-year-grid .cal-year-item:hover { background: rgba(255,255,255,0.1); color: #fff; }
   .cal-year-grid .cal-year-item.current { color: var(--accent); font-weight: 800; }
 
+  /* ── Save Indicator ── */
+  #saveIndicator { position: fixed; bottom: 24px; right: 24px; padding: 8px 16px; border-radius: 8px; font-size: 0.72rem; font-weight: 600; z-index: 200; transition: all 0.3s; opacity: 0; pointer-events: none; }
+  #saveIndicator.saving { opacity: 1; background: rgba(59,130,246,0.15); color: #1e3a8a; border: 1px solid rgba(59,130,246,0.3); }
+  #saveIndicator.saved { opacity: 1; background: rgba(16,185,129,0.15); color: #065f46; border: 1px solid rgba(16,185,129,0.3); }
+
+  /* ── Calendar Content Dots ── */
+  .cal-day { position: relative; }
+  .cal-day .cal-dot { position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
+  .cal-day.has-content { font-weight: 700; }
+
   /* ── Empty Field States ── */
   .empty-field { border: 2px dashed rgba(239,68,68,0.4) !important; background: rgba(239,68,68,0.03) !important; position: relative; }
   .empty-field::after { content: 'EMPTY — Click Edit to fill'; display: block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #ef4444; margin-top: 6px; }
@@ -289,6 +299,7 @@
   <div class="week-section">
     <div class="week-strip" id="weekOverview"></div>
     <div class="cal-overlay" id="calOverlay"></div>
+    <div id="saveIndicator"></div>
   </div>
 </section>
 
@@ -323,7 +334,8 @@ const AI_VIDEO_PLAN = [
         editing:{ cuts:'Quick zoom-in on "RM12" (punch zoom), jump cut between talking and showing product', transitions:'None — raw cuts only. Polished transitions kill the UGC energy.', text:'Big bold "STOP SCROLLING" at top first 0.5s, then "RM12 🤯" pop-up when price mentioned, "AI GENERATED" red flash on reveal', sound:'Vinyl scratch or record stop on reveal moment. Subtle "ding" on price reveal.', pacing:'Fast first 3 seconds (hook), slightly slower middle (build trust), abrupt energy shift on reveal' },
         nanoPrompts:[
           { label:'UGC AVATAR', step:1, prompt:`Hyper-realistic portrait. iPhone 15 Pro, 9:16. Young woman, 21, mixed Malay-Chinese. Claw clip bun, grey band tee, gold studs. CU portrait, 85mm lens. No CGI.` },
-          { label:'HOOK PANELS', step:2, prompt:`4-panel UGC storyboard. iPhone 15 Pro, 9:16. Bathroom — CeraVe, ring light. Panel 1: Selfie talking. Panel 2: Holding CeraVe. Panel 3: Squeezing cleanser. Panel 4: AI reveal expression shift.` }
+          { label:'PANELS 1-2', step:2, prompt:`2-panel UGC storyboard. iPhone 15 Pro, 9:16. Bathroom with ring light and CeraVe products on messy counter. Panel 1: CU selfie — girl talking to camera, bubbly energy, eyebrows raised, head tilting. Ring light reflecting in eyes, harsh fluorescent overhead. Bare face, claw clip bun, grey band tee. Panel 2: Same framing — she holds CeraVe cleanser bottle at chest level, tilting label toward camera. Eyes wide, mouth open on the price reveal. Free hand pointing at bottle. Product packaging catches ring light. Hyper-realistic skin texture, pores visible. No CGI.` },
+          { label:'PANELS 3-4', step:3, prompt:`2-panel UGC storyboard. iPhone 15 Pro, 9:16. Same bathroom setting. Panel 3: CU hands — girl squeezing CeraVe cleanser onto fingertips, gel texture visible catching ring light. She rubs it between fingers, showing camera. Towel on shoulder. Excited energy. Panel 4: ECU face — expression shift. Eyes widen with mischievous smirk, one eyebrow raised. Shy smile breaking through, "caught in the act" energy. Head tilted playfully. Ring light in eyes. Skin texture sharp — pores, natural oil sheen. No CGI.` }
         ],
         i2vClips:[
           { label:'Skincare Selfie', panels:'1-2', inputPanel:1, duration:8, lipSync:'Yes', motion:`[PANEL 1 — SELFIE TALKING] Starting frame: CU front-facing selfie, iPhone 15 Pro front camera at arm's length, slight high angle. Young woman talking directly to camera in a real bathroom. Ring light reflecting in her eyes, harsh overhead fluorescent for raw iPhone selfie aesthetic. Grey oversized band tee, claw clip bun, bare face no makeup. She speaks with bubbly energy — eyebrows raised, head tilting side to side. Messy bathroom counter behind her. Skin texture visible — pores, natural oil sheen.\n\n[TRANSITION — Panel 1 to Panel 2] Jump cut with slight punch zoom — her hand reaches down and lifts the CeraVe bottle into frame. The camera stays in selfie position but her body shifts to hold the product. Quick, snappy UGC energy — no smooth transition, raw cut.\n\n[PANEL 2 — HOLDING CERAVE] She holds the CeraVe cleanser bottle at chest level, tilting it toward camera to show the label. Eyes widen on "RM12" — eyebrows shoot up, mouth drops open slightly. Free hand points at the bottle. Ring light catches the product packaging. Same bathroom, same harsh lighting. Handheld micro-shake throughout. Vertical 9:16. No CGI look.\nAUDIO: "Stop scrolling if your skin is mid right now. No like actually, listen. This cleanser? RM12. From Shopee. RM12. My friend said try, aku macam yeah right lah."` },
@@ -336,7 +348,8 @@ const AI_VIDEO_PLAN = [
         music:'Switch to confident beat', keyPoints:['Specific numbers stop scrolls','AI avatar is the hook, you are the authority','Hook psychology: problem + specific solution'],
         nanoPrompts:[
           { label:'MAIN AVATAR', step:1, prompt:MAIN_AVATAR_PROMPT },
-          { label:'MAIN PANELS', step:2, prompt:`4-panel storyboard. Faeez in workspace. Panel 1: Talking to camera, MacBook behind. Panel 2: Over-shoulder showing AI tools. Panel 3: Close-up teaching. Panel 4: Confident lean back.` }
+          { label:'PANELS 1-2', step:2, prompt:`2-panel storyboard. 9:16. Faeez in creative workspace. Panel 1: MS waist up — talking to camera, confident forward lean. MacBook Pro open behind him, screen faintly glowing. Navy cap, puffer vest, silver chain. Natural window key light camera-left, monitor glow as fill. Panel 2: Over-shoulder angle — Faeez's shoulder and cap in foreground left, MacBook screen fills right showing AI avatar tools and workflows. Monitor blue light on side of face. Warm workspace bokeh behind. No CGI.` },
+          { label:'PANELS 3-4', step:3, prompt:`2-panel storyboard. 9:16. Faeez in workspace. Panel 3: MCU close-up teaching — counting points on fingers. Rembrandt lighting triangle on right cheek. Silver chain catching highlights. Eyes locked on camera, intense. Cap shadow on forehead. Warm bokeh background. Panel 4: MS wider frame — leaned back in chair, arms slightly spread, chin lifted. Quiet confidence energy. Workspace visible: monitors, desk, creative chaos. Warm desk lamp light. No CGI.` }
         ],
         i2vClips:[
           { label:'The Real Talk', panels:'1-2', inputPanel:1, duration:8, lipSync:'Yes', motion:`[PANEL 1 — TALKING TO CAMERA, MACBOOK BEHIND] Starting frame: MS (medium shot) waist up, 35mm lens. Faeez sitting in creative workspace. MacBook Pro open behind him, screen faintly glowing. Navy cap, puffer vest, silver chain pendant. Confident posture, leaning slightly forward. He speaks directly to lens with authority — slight head nods for emphasis, one hand gesturing palm-up. Motivated lighting: natural window key light camera-left, monitor glow as practical fill.\n\n[TRANSITION — Panel 1 to Panel 2] Smooth whip-pan camera-right — the frame swings past Faeez and lands over his shoulder. The movement is quick but controlled, motivated by him gesturing toward his screen.\n\n[PANEL 2 — OVER-SHOULDER SHOWING AI TOOLS] Over-shoulder shot — Faeez's shoulder and cap edge visible in foreground left, MacBook screen fills the right side showing AI avatar creation tools and workflows. His hand points at the screen. The monitor light illuminates the side of his face with cool blue. Background workspace in warm bokeh. He turns back toward camera as the shot slowly pushes in. Skin texture, fabric texture on puffer vest. Vertical 9:16. No CGI look.\nAUDIO: "Yo, that wasn't real. But what I'm about to tell you — this is. I'm Faeez, and that AI avatar? I made her. In about 10 minutes. Most brands still paying RM5K for one video. We just showed you what AI can do."` },
@@ -361,8 +374,9 @@ const AI_VIDEO_PLAN = [
         setDesign:{ location:'Bedroom — messy but aesthetic. Fairy lights, sneakers on floor, bed unmade. Real guy energy.', lighting:'Warm tungsten bedroom lamp + phone screen glow. Golden hour through window if possible.', camera:'Phone propped on dresser (POV from phone perspective), then handheld mirror selfie', framing:'Wide room shot first (establishing), then CU mirror selfie for cologne moment', props:'Cologne bottle (Dior Sauvage), 3 shirts on bed (the ones he rejected), phone showing Bumble chat', wardrobe:'White tee + dark jeans, belt undone, barefoot — mid-getting-ready state' },
         editing:{ cuts:'Match cuts between shirt changes (snap transitions), slow-mo on cologne spray', transitions:'Snap/click transitions for outfit changes. Slow-mo mist on cologne. Hard cut on reveal.', text:'"POV:" pinned at top, timer counting down "10:00... 9:58..." in corner, "💀" when hands shaking', sound:'Heartbeat bass underneath building anxiety. Record scratch on reveal.', pacing:'Building anxiety energy — starts chill, gets more frantic. Sudden stop on reveal.' },
         nanoPrompts:[
-          { label:'UGC AVATAR', step:1, prompt:`Young man, 22, Malay-Indian. Sharp jaw, caramel skin, wavy hair, white tee, silver hoop earring. CU portrait. 9:16.` },
-          { label:'HOOK PANELS', step:2, prompt:`4-panel. Bedroom mirror GRWM. Panel 1: Adjusting hair. Panel 2: Talking to camera. Panel 3: Spraying cologne close-up. Panel 4: AI reveal expression.` }
+          { label:'UGC AVATAR', step:1, prompt:`Hyper-realistic portrait. 9:16. Young man, 22, Malay-Indian heritage. Sharp jaw, caramel skin, wavy damp post-shower hair. White tee, silver hoop earring catching light. CU portrait, 85mm lens. No CGI.` },
+          { label:'PANELS 1-3', step:2, prompt:`3-panel UGC storyboard. 9:16. Bedroom mirror GRWM — fairy lights on headboard, sneakers on floor, unmade bed with 3 rejected shirts. Warm tungsten lamp + golden hour window. Panel 1: Mirror selfie — adjusting wet hair with fingers, nervous energy. Phone propped on dresser. Panel 2: Facing mirror/camera directly, talking with anxious hand gestures. Fairy light bokeh behind. Panel 3: CU wrist and Dior Sauvage cologne bottle — spraying, mist visible in warm backlight. Silver earring at frame edge. No CGI.` },
+          { label:'PANEL 4', step:3, prompt:`1-panel UGC storyboard. 9:16. Same bedroom mirror setting. Panel 4: CU face in mirror — expression frozen mid-sentence, then knowing smirk breaking through. One eyebrow raised, playful grin. Warm tungsten light catches silver hoop earring. Sweat beads near hairline. Belt undone, barefoot on carpet — mid-preparation state. Fairy light bokeh warm behind. The "oh wait" realization face. No CGI.` }
         ],
         i2vClips:[
           { label:'GRWM', panels:'1-3', inputPanel:1, duration:8, lipSync:'Yes', motion:`[PANEL 1 — ADJUSTING HAIR] Starting frame: Mirror selfie shot, phone propped on dresser. Young man, 22, Malay-Indian, sharp jaw, caramel skin, wavy damp post-shower hair. White tee, silver hoop earring. He runs fingers through wet hair, adjusting it nervously. Bedroom behind: fairy lights on headboard creating warm bokeh, sneakers on floor, unmade bed with 3 rejected shirts. Warm tungsten lamp as key light mixing with golden hour window light.\n\n[TRANSITION — Panel 1 to Panel 2] Quick snap cut — his hand drops from his hair and he turns to face the mirror/camera directly. The movement is jittery, nervous energy. Jump cut feel like real GRWM content.\n\n[PANEL 2 — TALKING TO CAMERA] He speaks directly into the mirror, close to the phone. Anxious energy — hands gesturing, eyes darting. Talks fast. The fairy lights glow behind him. His reflection shows the messy room. Razor bump visible on neck, natural under-eye shadows.\n\n[TRANSITION — Panel 2 to Panel 3] Whip pan down to his hands — quick snap to the cologne close-up. The camera stays phone-propped but his body shifts to reach for the Dior Sauvage bottle.\n\n[PANEL 3 — SPRAYING COLOGNE CLOSE-UP] CU on wrist and cologne bottle. He sprays Dior Sauvage — slow-mo mist visible in warm backlight from the bedroom lamp. The spray catches golden light, creating a tiny constellation of droplets. His wrist turns to smell it. Silver earring visible at frame edge. Handheld micro-shake throughout. Vertical 9:16. No CGI look.\nAUDIO: "POV: 10 minutes before your first Bumble date. Okay GRWM. Nervous gila bro, hands literally shaking. Dah tukar baju three times. White tee. Classic. Can't go wrong."` },
@@ -372,7 +386,11 @@ const AI_VIDEO_PLAN = [
       { type:'main', title:'Main — Content Psychology', avatar:'Faeez (You)', avatarType:'firaz', duration:'8-40s', description:'Why GRWM content works',
         script:`That guy doesn't exist.\nBut you watched the whole thing.\nGRWM is the most intimate format on TikTok.\nYou feel like you're in someone's room.\nThat's parasocial connection.\nBrands pay millions for it.\nNow imagine creating it on demand.\nAny face, any demographic, any product.`,
         music:'Confident beat', keyPoints:['GRWM = highest watch time format','Parasocial connection = trust','AI creates any demographic on demand'],
-        nanoPrompts:[{ label:'MAIN AVATAR', step:1, prompt:MAIN_AVATAR_PROMPT }, { label:'MAIN PANELS', step:2, prompt:`Faeez at workspace. Teaching why GRWM works. MacBook showing analytics.` }],
+        nanoPrompts:[
+          { label:'MAIN AVATAR', step:1, prompt:MAIN_AVATAR_PROMPT },
+          { label:'PANELS 1-2', step:2, prompt:`2-panel storyboard. 9:16. Faeez in workspace. Panel 1: MS teaching — navy cap, puffer vest, chain. Calm authority, slight forward lean. Natural window key light, warm desk lamp fill. Panel 2: MCU with MacBook visible over shoulder showing TikTok analytics dashboard. Cool blue screen light mixing with warm key. Open-palm gesture on key point. No CGI.` },
+          { label:'PANELS 3-4', step:3, prompt:`2-panel storyboard. 9:16. Faeez in workspace. Panel 3: CU face — 85mm compression. Rembrandt lighting triangle on cheek. Counting on fingers, intense eyes locked on lens. Silver chain catches light. Panel 4: MCU to MWS — arms open wide, "imagine the possibilities" gesture. Confident half-smile. Workspace visible in wider frame. Warm lens flare from desk lamp edge. No CGI.` }
+        ],
         i2vClips:[
           { label:'Why GRWM', panels:'1-2', inputPanel:1, duration:8, lipSync:'Yes', motion:`[PANEL 1 — FAEEZ TEACHING AT WORKSPACE] Starting frame: MS Faeez in workspace, 35mm lens. Navy cap, puffer vest, silver chain. He speaks with calm authority — steady eye contact, slight forward lean toward camera. Motivated lighting: natural window key light camera-left, warm desk lamp fill camera-right. He gestures with one hand, building his argument.\n\n[TRANSITION — Panel 1 to Panel 2] Subtle dolly-in push — the camera slowly tightens the frame while Faeez gestures toward the MacBook behind him. His body shifts slightly to reveal the screen.\n\n[PANEL 2 — MACBOOK SHOWING ANALYTICS] MCU with MacBook screen now visible over his shoulder, showing TikTok analytics dashboard with GRWM engagement metrics glowing. Cool blue screen light mixing with warm key light on his face. He points back at camera on "parasocial connection" — one hand open-palm gesture. Background bokeh from workspace items. Documentary handheld micro-movements. Skin texture visible, cap shadow adding depth. Vertical 9:16. No CGI look.\nAUDIO: "That guy doesn't exist. But you watched the whole thing. GRWM is the most intimate format on TikTok. You feel like you're in someone's room. That's parasocial connection. Brands pay millions for it."` },
           { label:'The Play', panels:'3-4', inputPanel:3, duration:8, lipSync:'Yes', motion:`[PANEL 3 — CLOSE-UP TEACHING] Starting frame: CU on Faeez's face, 85mm portrait compression. Background workspace dissolved into warm bokeh. Rembrandt lighting triangle on cheek. Eyes intense, locked on lens. He counts on fingers: "any face" tap, "any demographic" tap, "any product" tap — each deliberate. Silver chain pendant catches key light.\n\n[TRANSITION — Panel 3 to Panel 4] Slow pull-back dolly-out — the tight CU gradually widens as his energy opens up. His shoulders drop back, arms spread wider.\n\n[PANEL 4 — ARMS WIDE, POSSIBILITIES] MCU to MWS as he opens his arms — the "imagine the possibilities" gesture. Confident half-smile. Workspace visible in the wider frame now. Warm motivated lighting, slight lens flare from desk lamp edge at frame edge. The wider frame says "the world is bigger than you think." Natural skin detail — stubble shadow, pore texture. Vertical 9:16. No CGI look.\nAUDIO: "Now imagine creating it on demand. Any face, any demographic, any product."` }
@@ -394,8 +412,9 @@ const AI_VIDEO_PLAN = [
         setDesign:{ location:'Mamak stall at night — fluorescent lighting, red/green plastic chairs, stainless steel tables. THE vibe.', lighting:'Harsh overhead fluorescent (don\'t fight it, embrace the mamak aesthetic). Phone flashlight for food close-up.', camera:'iPhone front cam for selfie talking, then flip to back cam for food shots (classic food review switch)', framing:'Selfie CU first (talking), then overhead flat-lay of food, then back to selfie for reveal', props:'Roti canai on banana leaf, steel bowl of dal, teh tarik in glass, stainless condiment holder', wardrobe:'Dusty rose hijab, black graphic tee, gold hoops — casual mamak visit fit' },
         editing:{ cuts:'Quick flip from front to back camera (classic food TikTok move), zoom punch on "RM2"', transitions:'Camera flip transition (front→back) for food reveal. Swipe transition between dishes.', text:'"I BET YOU DIDN\'T KNOW 👀" at top, price tag pop-up "RM2 💀", Google Maps pin drop animation', sound:'Sizzle sound effect on food reveal. "Ding" on price. Cash register sound optional.', pacing:'Slow mysterious start (curiosity), speed up on food reveal (excitement), sudden stop on AI reveal' },
         nanoPrompts:[
-          { label:'UGC AVATAR', step:1, prompt:`Young woman, 20, Malay. Round face, dusty rose hijab, gold hoops, black graphic tee. CU portrait. 9:16.` },
-          { label:'HOOK PANELS', step:2, prompt:`4-panel mamak stall at night. Panel 1: Selfie excited. Panel 2: Overhead food flat-lay. Panel 3: Talking about food. Panel 4: Playful AI reveal.` }
+          { label:'UGC AVATAR', step:1, prompt:`Hyper-realistic portrait. 9:16. Young woman, 20, Malay. Round face, dusty rose hijab framing it, gold hoop earrings, black graphic tee. CU portrait, 85mm lens. No CGI.` },
+          { label:'PANELS 1-2', step:2, prompt:`2-panel UGC storyboard. 9:16. Mamak stall at night — fluorescent tube lights, red/green plastic chairs, stainless steel tables. Panel 1: CU selfie — girl excited, wide eyes, big smile. Harsh fluorescent overhead, gold hoops catching light. Leaning in conspiratorially. Panel 2: Overhead flat-lay — roti canai on banana leaf (golden, crispy, flaky layers), steel bowl of dal, teh tarik in glass with perfect foam. Phone flashlight illuminating food. Stainless condiment holder, tissue box at edge. Real food textures — oil sheen, condensation. No CGI.` },
+          { label:'PANEL 4', step:3, prompt:`1-panel UGC storyboard. 9:16. Same mamak stall at night. Panel 4: CU front-cam selfie — hijabi girl with playful smirk, one eyebrow raised. "Got you" mischievous energy. Gold hoops swinging slightly. Harsh fluorescent overhead unchanged. Mamak bustling behind — diners blurred. Pointing loosely at camera. Real skin under fluorescent, no filter. No CGI.` }
         ],
         i2vClips:[
           { label:'Mamak', panels:'1-2', inputPanel:1, duration:8, lipSync:'Yes', motion:`[PANEL 1 — SELFIE EXCITED AT MAMAK] Starting frame: CU selfie shot, iPhone front cam. Young woman, 20, Malay, round face, dusty rose hijab, gold hoop earrings catching harsh fluorescent light, black graphic tee. She's at a mamak stall at night — red and green plastic chairs behind her, stainless steel tables, fluorescent tube lights casting that harsh Malaysian white glow. She talks to camera with excited energy — wide eyes, big smile, leaning in conspiratorially on "I bet you didn't know."\n\n[TRANSITION — Panel 1 to Panel 2] Classic food TikTok camera flip — she physically flips the phone from front cam to back cam. Quick snap rotation, momentary blur during the flip, then lands on the food. The flip is the transition — raw, authentic, no effects.\n\n[PANEL 2 — OVERHEAD FOOD FLAT-LAY] Top-down overhead shot of the mamak spread: roti canai on banana leaf, golden and crispy with flaky layers visible. Steel bowl of dal beside it. Teh tarik in a glass with perfect foam layer catching the fluorescent light. Phone flashlight illuminating food textures. Stainless condiment holder, tissue box at frame edge. The camera slowly pans across the spread. Real food textures — oil sheen on roti, condensation on glass, dal sauce pooling. Other diners' hands blurred at edges. Vertical 9:16. No CGI look.\nAUDIO: "I bet you didn't know about this mamak. Hidden in Bangsar, no signboard. Roti canai — look at this. RM2. CRISPY gila. Teh tarik foam? Perfect pull every time."` },
@@ -405,7 +424,11 @@ const AI_VIDEO_PLAN = [
       { type:'main', title:'Main — Hook Engineering', avatar:'Faeez (You)', avatarType:'firaz', duration:'8-40s', description:'The hook formula breakdown',
         script:`Your brain thought it was real for 3 seconds.\nThat's all you need.\nFormula: Familiar setting + specific detail + emotional trigger.\nMamak? Everyone knows mamak.\nRM2? Specific. Brain locks in.\n"Ended every cafe in Bangsar"? Emotional trigger.\nThis is hook engineering.\nThe AI face is delivery. The hook is the weapon.`,
         music:'Confident analytical', keyPoints:['3 seconds to stop the scroll','Familiar + specific + emotion = hook','Hook is the weapon, AI is delivery'],
-        nanoPrompts:[{ label:'MAIN AVATAR', step:1, prompt:MAIN_AVATAR_PROMPT }, { label:'MAIN PANELS', step:2, prompt:`Faeez at whiteboard showing hook formula. Teaching energy. Close-up for key point.` }],
+        nanoPrompts:[
+          { label:'MAIN AVATAR', step:1, prompt:MAIN_AVATAR_PROMPT },
+          { label:'PANELS 1-2', step:2, prompt:`2-panel storyboard. 9:16. Faeez at whiteboard in workspace. Panel 1: MS standing — writing "FAMILIAR + SPECIFIC + EMOTION" on whiteboard with marker. Navy cap, puffer vest, chain. Overhead LED key, warm window fill. Confident stance. Panel 2: Facing camera — pointing back at whiteboard with marker. Dynamic teaching energy, weight shifting between feet. Workspace equipment in background bokeh. No CGI.` },
+          { label:'PANELS 3-4', step:3, prompt:`2-panel storyboard. 9:16. Faeez in workspace. Panel 3: ECU face — 85mm compression. Split lighting, half lit half shadow. Maximum intensity, eyes dead-center on lens. Silver chain pendant catches highlight at bottom of frame. Jaw set, conviction. Panel 4: Same ECU easing to MCU — expression shifts from intense to knowing. Slight confident nod. Split lighting softens. Faintest half-smile. No CGI.` }
+        ],
         i2vClips:[
           { label:'Formula', panels:'1-2', inputPanel:1, duration:8, lipSync:'Yes', motion:`[PANEL 1 — WHITEBOARD, WRITING FORMULA] Starting frame: MS Faeez standing at whiteboard, 35mm lens, slight low angle for authority. Navy cap, puffer vest, chain. He writes on the whiteboard with a marker — "FAMILIAR + SPECIFIC + EMOTION" appearing in his handwriting. Motivated lighting: overhead LED panel as key, warm window fill. Confident stance, marker in hand.\n\n[TRANSITION — Panel 1 to Panel 2] He turns from the whiteboard to face camera — the rotation is dynamic, marker still in hand. Quick whip of his body pivoting. The energy shifts from writing to teaching.\n\n[PANEL 2 — TEACHING ENERGY, POINTING AT BOARD] He faces camera, gesturing back at the whiteboard with the marker. Finger-pointing at the board then back at camera — "Mamak" tap on board, "RM2" tap, then finger to temple on "brain locks in." Weight shifts between feet, dynamic standing energy. The whiteboard formula is visible behind him, cleanly lit. Workspace equipment and monitors in background bokeh. Documentary handheld energy. Vertical 9:16. No CGI look.\nAUDIO: "Your brain thought it was real for 3 seconds. That's all you need. Formula: Familiar setting + specific detail + emotional trigger. Mamak? Everyone knows mamak. RM2? Specific. Brain locks in."` },
           { label:'Weapon', panels:'3-4', inputPanel:3, duration:8, lipSync:'Yes', motion:`[PANEL 3 — INTENSE CLOSE-UP] Starting frame: ECU on Faeez's face, 85mm portrait compression. Background completely dissolved into warm abstract bokeh — whiteboard gone, just him. Split lighting: half face lit by key, half in shadow. Maximum intensity. Eyes locked dead-center on lens, unwavering. He speaks with deliberate pauses — each word a punch. Silver chain pendant catches a highlight at bottom of frame. Jaw set, conviction.\n\n[TRANSITION — Panel 3 to Panel 4] Subtle push-in — the already tight ECU gets even tighter on the key line. His whole body leans forward, committing to "the hook is the weapon." Then a beat of stillness before he settles back.\n\n[PANEL 4 — SETTLED CONVICTION] The ECU holds, then slowly eases back to MCU. His expression shifts from intense to knowing — he's made his point. Slight nod. The split lighting softens slightly as the energy resolves. Micro-expressions: brow unfurrows, the faintest confident half-smile. Natural skin detail — pores, stubble shadow, cap texture. The intimacy of the close-up lingers. Vertical 9:16. No CGI look.\nAUDIO: "'Ended every cafe in Bangsar'? Emotional trigger. This is hook engineering. The AI face is delivery. The hook is the weapon."` }
@@ -427,8 +450,9 @@ const AI_VIDEO_PLAN = [
         setDesign:{ location:'Small student room — single bed, study desk with lamp, clothes on chair. Then LRT station.', lighting:'Dark room lit only by phone alarm screen (blue-white glow). Then harsh LRT station fluorescent.', camera:'Phone on desk filming alarm (POV), then walking selfie to LRT, then platform shot', framing:'Low angle from pillow level (alarm shot), walking selfie (shaky = authentic), wide platform shot', props:'Phone showing 5:45 alarm, Herschel backpack, earbuds, reusable coffee tumbler (empty)', wardrobe:'Black tee, joggers, slides → changes to proper shoes. Messy hair under cap' },
         editing:{ cuts:'Time-lapse getting ready (3x speed with timer), normal speed for LRT wait, hard cut reveal', transitions:'Clock wipe transitions between routine steps. Swipe up for location change (room→station).', text:'"nobody asked but 🤷" at start, alarm time "5:45 AM" large, "💀" floating when showing packed LRT', sound:'iPhone alarm sound opening (instant recognition), lo-fi beat kicks in after alarm, muffled on reveal', pacing:'Slow drag energy (tired, reluctant) building to resigned acceptance. Deadpan delivery throughout.' },
         nanoPrompts:[
-          { label:'UGC AVATAR', step:1, prompt:`Young man, 21, Chinese-Malay. Gold-frame glasses, black tee, Herschel backpack. CU portrait. 9:16.` },
-          { label:'HOOK PANELS', step:2, prompt:`4-panel. Panel 1: Dark room, alarm 5:45. Panel 2: LRT platform. Panel 3: On LRT. Panel 4: Quiet reveal.` }
+          { label:'UGC AVATAR', step:1, prompt:`Hyper-realistic portrait. 9:16. Young man, 21, Chinese-Malay. Gold-frame glasses, black tee, Herschel backpack on one shoulder. Tired eyes, dark circles. CU portrait, 85mm lens. No CGI.` },
+          { label:'PANELS 1-2', step:2, prompt:`2-panel UGC storyboard. 9:16. Panel 1: Pitch dark student room — phone alarm screen glowing blue-white, "5:45 AM" visible. Hand reaching to dismiss. Single bed, study desk with lamp, clothes on chair all dimly visible in screen glow. Panel 2: LRT station platform — harsh fluorescent overhead. Guy standing in packed crowd, sardine-tin energy. Gold-frame glasses slightly foggy, Herschel backpack, earbuds dangling. Tired eyes, cap, empty coffee tumbler. Malaysian commuter station aesthetic. No CGI.` },
+          { label:'PANEL 4', step:3, prompt:`1-panel UGC storyboard. 9:16. Inside LRT or on platform. Panel 4: CU same guy — gold-frame glasses, tired eyes, cap. Pushing glasses up nose with one finger. Expression cracking from deadpan tiredness into quiet apologetic half-smile. Understated reveal energy. Fluorescent station light harsh overhead. Commuters blurred behind. Earbuds still in one ear. Natural bags under eyes, real skin texture. No CGI.` }
         ],
         i2vClips:[
           { label:'Morning', panels:'1-2', inputPanel:1, duration:8, lipSync:'Yes', motion:`[PANEL 1 — DARK ROOM, ALARM 5:45] Starting frame: Low angle POV from pillow level. Pitch dark student room — only the phone alarm screen glowing blue-white. "5:45 AM" visible on screen. A hand slowly reaches to dismiss it. The darkness is almost total except the screen glow illuminating part of a messy single bed, study desk with lamp, clothes on chair. The exhaustion is palpable.\n\n[TRANSITION — Panel 1 to Panel 2] Clock wipe / swipe-up transition — the dark room swipes upward to reveal the bright harsh fluorescent of the LRT station. Massive lighting contrast: pitch black to blinding white. Time-lapse getting ready implied in the transition gap.\n\n[PANEL 2 — LRT PLATFORM] Harsh fluorescent overhead — the distinctively Malaysian commuter station aesthetic. Walking selfie, handheld shaky. Young man, 21, Chinese-Malay, gold-frame glasses slightly foggy from the morning humidity, black tee, Herschel backpack on one shoulder, earbuds dangling. He stands among a packed crowd, sardine-tin energy. Tired eyes, dark circles, reusable coffee tumbler in hand (empty). Messy hair under a cap. The harsh lighting exposes every detail of his fatigue. Commuters blur past. Real skin texture, real exhaustion. Vertical 9:16. No CGI look.\nAUDIO: "Nobody asked but here's my 5am routine as a uni student. 5:45 alarm. Again. Semester literally killing me. Shower, grab bag, macam zombie. LRT packed gila — sardine tin vibes."` },
@@ -438,7 +462,11 @@ const AI_VIDEO_PLAN = [
       { type:'main', title:'Main — Relatability Marketing', avatar:'Faeez (You)', avatarType:'firaz', duration:'8-40s', description:'Why relatable > polished',
         script:`That student doesn't exist.\nBut you related to him.\nRelatability is the most underrated weapon in marketing.\nPolished gets likes. Relatable gets saved and shared.\nWhen someone sees their life in your content, they trust you.\nThat's how you build audience. With truth.`,
         music:'Thoughtful beat', keyPoints:['Relatable > polished for engagement','Feeling seen = trust','Build with truth, not production value'],
-        nanoPrompts:[{ label:'MAIN AVATAR', step:1, prompt:MAIN_AVATAR_PROMPT }, { label:'MAIN PANELS', step:2, prompt:`Faeez in casual setting. Teaching relatability. Coffee shop or outdoor KL.` }],
+        nanoPrompts:[
+          { label:'MAIN AVATAR', step:1, prompt:MAIN_AVATAR_PROMPT },
+          { label:'PANELS 1-2', step:2, prompt:`2-panel storyboard. 9:16. Faeez at coffee shop or KL street, golden hour. Panel 1: MS relaxed — sitting with coffee in hand, thoughtful energy. Navy cap, puffer vest, chain. Golden hour light camera-right, KL urban elements blurred behind. Panel 2: MCU tighter — coffee set down, leaning forward, both hands gesturing. Golden light wrapping warmly. Conversational, reflective mood. No CGI.` },
+          { label:'PANELS 3-4', step:3, prompt:`2-panel storyboard. 9:16. Faeez outdoor golden hour. Panel 3: CU face — 85mm compression. Background pure warm golden bokeh. Butterfly lighting from sun. Expression shifting from analytical to sincere. Eyes softening. Silver chain catching golden light. Panel 4: ECU tight on face — held eye contact, golden light. Slight jaw clench of conviction, faintest nod. Highlight on cheekbone. Warm undertones. The stillness is the power. No CGI.` }
+        ],
         i2vClips:[
           { label:'Relatability', panels:'1-2', inputPanel:1, duration:8, lipSync:'Yes', motion:`[PANEL 1 — FAEEZ OUTDOOR, CASUAL SETTING] Starting frame: MS Faeez at a coffee shop or KL street, 35mm lens. Navy cap, puffer vest, chain. He sits relaxed, coffee in hand, speaking with genuine thoughtful energy. Golden hour warm light from camera-right, natural shadows. KL urban elements blurred behind — shop signs, pedestrians.\n\n[TRANSITION — Panel 1 to Panel 2] Steadicam float — smooth organic push-in. The frame gradually tightens from MS to MCU as his point builds. His free hand rises in a palm-up gesture on "relatability."\n\n[PANEL 2 — ENGAGED TEACHING, MCU] Tighter framing now, coffee set down. He leans forward slightly, both hands gesturing. The golden hour light wraps around him warmly. KL background becomes softer bokeh as the frame tightens. The mood is reflective, conversational — not performing, just talking. Warm color palette: amber highlights, soft shadows. Skin texture natural in golden light. Vertical 9:16. No CGI look.\nAUDIO: "That student doesn't exist. But you related to him. Relatability is the most underrated weapon in marketing. Polished gets likes. Relatable gets saved and shared."` },
           { label:'Truth', panels:'3-4', inputPanel:3, duration:8, lipSync:'Yes', motion:`[PANEL 3 — CLOSE-UP, SINCERE] Starting frame: CU on Faeez's face, 85mm compression. Same outdoor setting but tight — background is pure warm golden bokeh. Butterfly lighting from golden hour sun. His expression shifts from analytical to sincere. Eyes soften on "they trust you." Silver chain pendant catches golden light on his chest.\n\n[TRANSITION — Panel 3 to Panel 4] Subtle push-in — the CU gets even tighter. His voice drops in pitch, creating intimacy. Slight forward lean toward camera.\n\n[PANEL 4 — ECU, THE FINAL WORD] ECU holding on his face. He delivers "With truth" like a period — not a question. Then stillness. The power is in what comes after the words: held eye contact, the golden light, the silence. Micro-expression: slight jaw clench of conviction, then the faintest nod. Natural skin in golden light — warm undertones, highlight on cheekbone. The stillness lingers. Vertical 9:16. No CGI look.\nAUDIO: "When someone sees their life in your content, they trust you. That's how you build audience. With truth."` }
@@ -1017,10 +1045,137 @@ const PRODUCTS = {
   'paid-ads': { plan: PAID_ADS_PLAN, eyebrow: 'Paid Ads Solutions Content', title: 'Paid Ads <span class="hero-title-accent">Plan</span>', subtitle: 'Content plan for Paid Ads Solutions — coming soon.' }
 };
 
+// ═══════════════════════════════════════════════
+//  NEON DATABASE LAYER
+// ═══════════════════════════════════════════════
+const NEON_ENDPOINT = 'https://ep-curly-boat-a1wfjnpy-pooler.ap-southeast-1.aws.neon.tech/sql';
+const NEON_CONN = 'postgresql://neondb_owner:npg_Y43yGsVocuWi@ep-curly-boat-a1wfjnpy-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require';
+
+async function dbQuery(sql, params = []) {
+  try {
+    const res = await fetch(NEON_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Neon-Connection-String': NEON_CONN },
+      body: JSON.stringify({ query: sql, params })
+    });
+    return await res.json();
+  } catch (e) {
+    console.error('DB error:', e);
+    return { rows: [], error: e.message };
+  }
+}
+
+// Content cache: { "ai-video:2026-03-16": { day content object } }
+const contentCache = {};
+
+function dateToStr(d) {
+  const y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,'0'), dd = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${dd}`;
+}
+
+function getActiveDateStr(dayIndex) {
+  const ws = getWeekStartDate();
+  const d = new Date(ws);
+  d.setDate(ws.getDate() + dayIndex);
+  return dateToStr(d);
+}
+
+function cacheKey(planType, dateStr) { return `${planType}:${dateStr}`; }
+
+function makeEmptyDay(dayIndex) {
+  const dayNames = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const emptySection = (type, title) => ({
+    type, title, avatar:'', avatarType:'real', duration:'',
+    description:'', script:'', music:'', hookText:'',
+    setDesign:{ location:'', lighting:'', props:'', wardrobe:'', camera:'', framing:'' },
+    editing:{ cuts:'', transitions:'', text:'', sound:'', pacing:'' },
+    _isEmpty: true
+  });
+  return {
+    day: dayNames[dayIndex % 7], title: 'UNTITLED', contentType: 'educate', contentTypeLabel: 'Educate',
+    totalDuration: '~45-60s', _isEmpty: true,
+    sections: [
+      emptySection('hook', 'Hook — [Edit Title]'),
+      emptySection('main', 'Main — [Edit Title]'),
+      emptySection('cta', 'CTA — [Edit Title]')
+    ]
+  };
+}
+
+function getActiveContent() {
+  const dateStr = getActiveDateStr(activeDay);
+  const key = cacheKey(activeProduct, dateStr);
+  const val = contentCache[key];
+  // Filter out placeholder 'true' values from calendar preload
+  return (val && typeof val === 'object') ? val : null;
+}
+
+async function loadWeekContent() {
+  const ws = getWeekStartDate();
+  const dates = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(ws); d.setDate(ws.getDate() + i);
+    dates.push(dateToStr(d));
+  }
+  const result = await dbQuery(
+    `SELECT content_date, content FROM content_plans WHERE plan_type = $1 AND content_date >= $2 AND content_date <= $3 ORDER BY content_date`,
+    [activeProduct, dates[0], dates[6]]
+  );
+  if (result.rows) {
+    result.rows.forEach(row => {
+      const ds = row.content_date; // e.g. "2026-03-16"
+      const content = typeof row.content === 'string' ? JSON.parse(row.content) : row.content;
+      contentCache[cacheKey(activeProduct, ds)] = content;
+    });
+  }
+}
+
+async function saveDayContent(dateStr, planType, content) {
+  contentCache[cacheKey(planType, dateStr)] = content;
+  // Show save indicator
+  const indicator = document.getElementById('saveIndicator');
+  if (indicator) { indicator.classList.add('saving'); indicator.textContent = 'Saving...'; }
+  try {
+    await dbQuery(
+      `INSERT INTO content_plans (plan_type, content_date, content, updated_at)
+       VALUES ($1, $2, $3, NOW())
+       ON CONFLICT (plan_type, content_date)
+       DO UPDATE SET content = $3, updated_at = NOW()`,
+      [planType, dateStr, JSON.stringify(content)]
+    );
+    if (indicator) { indicator.textContent = 'Saved'; indicator.classList.remove('saving'); indicator.classList.add('saved'); setTimeout(() => indicator.classList.remove('saved'), 2000); }
+  } catch (e) {
+    console.error('Save failed:', e);
+    if (indicator) { indicator.textContent = 'Save failed'; indicator.classList.remove('saving'); }
+  }
+}
+
+async function seedDefaultData() {
+  // Check if data already seeded
+  const check = await dbQuery(`SELECT COUNT(*) as cnt FROM content_plans WHERE plan_type = 'ai-video'`);
+  if (check.rows && check.rows[0] && parseInt(check.rows[0].cnt) > 0) return; // Already seeded
+
+  // Seed the hardcoded plans for March 16-22, 2026
+  const seedDate = new Date(2026, 2, 16); // March 16, 2026 (Monday)
+  const plans = { 'ai-video': AI_VIDEO_PLAN, 'ai-employee': AI_EMPLOYEE_PLAN, 'paid-ads': PAID_ADS_PLAN };
+
+  for (const [planType, plan] of Object.entries(plans)) {
+    for (let i = 0; i < plan.length; i++) {
+      const d = new Date(seedDate); d.setDate(seedDate.getDate() + i);
+      const ds = dateToStr(d);
+      await dbQuery(
+        `INSERT INTO content_plans (plan_type, content_date, content) VALUES ($1, $2, $3) ON CONFLICT DO NOTHING`,
+        [planType, ds, JSON.stringify(plan[i])]
+      );
+    }
+  }
+}
+
 // ── State ──
 let activeProduct = 'ai-video';
 let activeDay = 0;
 let openSections = {};
+let dbReady = false;
 
 function getWeekStartDate() {
   const stored = localStorage.getItem('contentPlanV2StartDate');
@@ -1035,7 +1190,7 @@ function formatDate(d) { const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug
 function getDayStatus(i) { const ws=getWeekStartDate(); const dd=new Date(ws); dd.setDate(ws.getDate()+i); const t=new Date(); t.setHours(0,0,0,0); dd.setHours(0,0,0,0); if(dd.getTime()===t.getTime()) return 'today'; return dd<t?'past':'upcoming'; }
 function getTodayIndex() { const ws=getWeekStartDate(); const t=new Date(); t.setHours(0,0,0,0); const s=new Date(ws); s.setHours(0,0,0,0); const d=Math.floor((t-s)/(864e5)); if(d>=0&&d<7) return d; return d<0?0:6; }
 
-function switchProduct(product) {
+async function switchProduct(product) {
   activeProduct = product;
   activeDay = getTodayIndex();
   openSections = {};
@@ -1045,6 +1200,7 @@ function switchProduct(product) {
   document.getElementById('heroEyebrow').innerHTML = `<span class="eyebrow-dot"></span>${p.eyebrow}`;
   document.getElementById('heroTitle').innerHTML = p.title;
   document.getElementById('heroSubtitle').textContent = p.subtitle;
+  await loadWeekContent();
   render();
 }
 
@@ -1055,7 +1211,6 @@ function toggleSection(dayIdx, secIdx) {
 }
 
 function render() {
-  const plan = PRODUCTS[activeProduct].plan;
   document.getElementById('topDate').innerHTML = `<strong>${formatDate(new Date())}</strong>`;
 
   // Week strip
@@ -1065,11 +1220,13 @@ function render() {
   weekEl.innerHTML = '';
   for(let i=0;i<7;i++){
     const d=new Date(ws); d.setDate(ws.getDate()+i);
+    const ds = dateToStr(d);
+    const hasContent = !!contentCache[cacheKey(activeProduct, ds)];
     const st=getDayStatus(i);
     const dot=document.createElement('div');
     dot.className=`week-dot ${st} ${i===activeDay?'active':''}`;
     dot.onclick=()=>{activeDay=i;openSections={};render();};
-    dot.innerHTML=`<div class="dot-day">${dn[i]}</div><div class="dot-num">${d.getDate()}</div><div class="dot-status"></div>`;
+    dot.innerHTML=`<div class="dot-day">${dn[i]}</div><div class="dot-num">${d.getDate()}</div><div class="dot-status" style="${hasContent?'background:var(--accent)':''}"></div>`;
     weekEl.appendChild(dot);
   }
   // Calendar picker button
@@ -1081,9 +1238,25 @@ function render() {
   weekEl.appendChild(calBtn);
 
   const container = document.getElementById('cardsContainer');
-  const c = plan[activeDay];
+  const dateStr = getActiveDateStr(activeDay);
+  const rawCacheVal = contentCache[cacheKey(activeProduct, dateStr)];
+  const hasDBContent = !!rawCacheVal; // true even for placeholder
+  const c = getActiveContent() || makeEmptyDay(activeDay);
   const st = getDayStatus(activeDay);
   const sl = st==='today'?'Today':st==='past'?'Done':'Upcoming';
+
+  // If no content exists for this date, show empty state with add button
+  if (!hasDBContent) {
+    const dateObj = new Date(ws); dateObj.setDate(ws.getDate() + activeDay);
+    container.innerHTML = `
+      <div class="day-card" style="text-align:center;padding:80px 24px">
+        <div style="font-size:2.5rem;margin-bottom:16px;opacity:0.3">📝</div>
+        <h3 style="color:var(--heading-dark);margin-bottom:8px">${formatDate(dateObj)}</h3>
+        <p style="color:var(--text-muted);margin-bottom:24px;font-size:0.85rem">No content planned for this date yet.</p>
+        <button onclick="addDayContent(${activeDay})" style="background:var(--accent);color:#fff;border:none;padding:12px 28px;border-radius:10px;font-family:Inter,sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s">+ Create Content</button>
+      </div>`;
+    return;
+  }
 
   const icons = {
     educate:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>',
@@ -1235,10 +1408,28 @@ function toggleCalendar() {
   renderCalendar();
 }
 
-function renderCalendar() {
+async function renderCalendar() {
   const el = document.getElementById('calOverlay');
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const today = new Date(); today.setHours(0,0,0,0);
+
+  // Preload month data for calendar dots
+  if (calMode === 'days') {
+    const monthStart = `${calViewYear}-${String(calViewMonth+1).padStart(2,'0')}-01`;
+    const monthEnd = `${calViewYear}-${String(calViewMonth+1).padStart(2,'0')}-${new Date(calViewYear, calViewMonth+1, 0).getDate()}`;
+    const result = await dbQuery(
+      `SELECT content_date FROM content_plans WHERE plan_type = $1 AND content_date >= $2 AND content_date <= $3`,
+      [activeProduct, monthStart, monthEnd]
+    );
+    if (result.rows) {
+      result.rows.forEach(row => {
+        const ds = row.content_date;
+        if (!contentCache[cacheKey(activeProduct, ds)]) {
+          contentCache[cacheKey(activeProduct, ds)] = true; // placeholder to show dot
+        }
+      });
+    }
+  }
 
   if (calMode === 'years') {
     const startDecade = Math.floor(calViewYear / 10) * 10 - 1;
@@ -1300,7 +1491,9 @@ function renderCalendar() {
     const date = new Date(calViewYear, calViewMonth, d);
     const isToday = date.getTime() === today.getTime();
     const isSelected = date.getTime() >= ws.getTime() && date.getTime() < new Date(ws.getTime() + 7*864e5).getTime();
-    html += `<div class="cal-day ${isToday?'today':''} ${isSelected?'selected':''}" onclick="selectCalDate(${calViewYear},${calViewMonth},${d})">${d}</div>`;
+    const ds = dateToStr(date);
+    const hasContent = !!contentCache[cacheKey(activeProduct, ds)];
+    html += `<div class="cal-day ${isToday?'today':''} ${isSelected?'selected':''} ${hasContent?'has-content':''}" onclick="selectCalDate(${calViewYear},${calViewMonth},${d})">${d}${hasContent?'<span class="cal-dot"></span>':''}</div>`;
   }
 
   // Next month days
@@ -1314,7 +1507,7 @@ function renderCalendar() {
   el.innerHTML = html;
 }
 
-function selectCalDate(year, month, day) {
+async function selectCalDate(year, month, day) {
   const selected = new Date(year, month, day);
   const dow = selected.getDay();
   const diff = dow === 0 ? -6 : 1 - dow; // Get Monday of that week
@@ -1328,20 +1521,16 @@ function selectCalDate(year, month, day) {
   activeDay = dayIndex;
   openSections = {};
 
-  // Ensure the plan has 7 days — extend if needed
-  const plan = PRODUCTS[activeProduct].plan;
-  while (plan.length < 7) {
-    const dayNames = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-    plan.push({ day: dayNames[plan.length], title:'COMING SOON', contentType:'educate', contentTypeLabel:'Educate', totalDuration:'—', sections:[{ type:'main', title:'Coming Soon', avatar:'—', avatarType:'real', duration:'—', description:'—', script:'Coming soon.', music:'—' }]});
-  }
-
   document.getElementById('calOverlay').classList.remove('open');
+  await loadWeekContent();
   render();
 }
 
 function editDayTitle(dayIdx) {
-  const plan = PRODUCTS[activeProduct].plan;
-  const c = plan[dayIdx];
+  const dateStr = getActiveDateStr(dayIdx);
+  const key = cacheKey(activeProduct, dateStr);
+  if (!contentCache[key]) contentCache[key] = makeEmptyDay(dayIdx);
+  const c = contentCache[key];
   const el = document.querySelector('.editable-inline');
   const current = c.title;
   const input = document.createElement('input');
@@ -1350,47 +1539,36 @@ function editDayTitle(dayIdx) {
   input.placeholder = 'Enter video title...';
   input.style.cssText = 'font-size:1.15rem;font-weight:700;color:var(--heading-dark);border:2px solid var(--accent);border-radius:8px;padding:4px 8px;width:300px;font-family:Inter,sans-serif;outline:none;text-transform:uppercase;';
   input.onclick = (e) => e.stopPropagation();
+  const saveTitle = () => { c.title = input.value.toUpperCase() || 'UNTITLED'; render(); saveDayContent(dateStr, activeProduct, c); };
   input.onkeydown = (e) => {
-    if(e.key==='Enter'){ c.title = input.value.toUpperCase() || 'UNTITLED'; render(); }
-    if(e.key==='Escape'){ render(); }
+    if(e.key==='Enter') saveTitle();
+    if(e.key==='Escape') render();
   };
-  input.onblur = () => { c.title = input.value.toUpperCase() || 'UNTITLED'; render(); };
+  input.onblur = saveTitle;
   el.innerHTML = '';
   el.appendChild(input);
   input.focus();
 }
 
-function addDayContent(dayIdx) {
-  const plan = PRODUCTS[activeProduct].plan;
-  const dayNames = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-  const emptySection = (type, title) => ({
-    type, title, avatar:'', avatarType:'real', duration:'',
-    description:'', script:'', music:'', hookText:'',
-    setDesign:{ location:'', lighting:'', props:'', wardrobe:'', camera:'', framing:'' },
-    editing:{ cuts:'', transitions:'', text:'', sound:'', pacing:'' },
-    _isEmpty: true
-  });
-  plan[dayIdx] = {
-    day: dayNames[dayIdx], title: 'UNTITLED', contentType: 'educate', contentTypeLabel: 'Educate',
-    totalDuration: '~45-60s', _isEmpty: true,
-    sections: [
-      emptySection('hook', 'Hook — [Edit Title]'),
-      emptySection('main', 'Main — [Edit Title]'),
-      emptySection('cta', 'CTA — [Edit Title]')
-    ]
-  };
+async function addDayContent(dayIdx) {
+  const dateStr = getActiveDateStr(dayIdx);
+  const content = makeEmptyDay(dayIdx);
+  contentCache[cacheKey(activeProduct, dateStr)] = content;
   activeDay = dayIdx;
   openSections = {};
   // Auto-open all sections so empty fields are visible
-  plan[dayIdx].sections.forEach((_, si) => {
+  content.sections.forEach((_, si) => {
     openSections[`${activeProduct}-${dayIdx}-${si}`] = true;
   });
   render();
+  await saveDayContent(dateStr, activeProduct, content);
 }
 
 function copyPrompt(el, dayIdx, secIdx, type, promptIdx) {
-  const plan = PRODUCTS[activeProduct].plan;
-  const sec = plan[dayIdx].sections[secIdx];
+  const dateStr = getActiveDateStr(dayIdx);
+  const c = contentCache[cacheKey(activeProduct, dateStr)];
+  if (!c) return;
+  const sec = c.sections[secIdx];
   let text = '';
   if (type === 'nano') text = sec.nanoPrompts[promptIdx].prompt;
   else if (type === 'i2v') text = sec.i2vClips[promptIdx].motion;
@@ -1403,8 +1581,11 @@ function copyPrompt(el, dayIdx, secIdx, type, promptIdx) {
 }
 
 function startEdit(btn, field, dayIdx, secIdx, promptIdx) {
-  const plan = PRODUCTS[activeProduct].plan;
-  const sec = plan[dayIdx].sections[secIdx];
+  const dateStr = getActiveDateStr(dayIdx);
+  const key = cacheKey(activeProduct, dateStr);
+  if (!contentCache[key]) contentCache[key] = makeEmptyDay(dayIdx);
+  const contentObj = contentCache[key];
+  const sec = contentObj.sections[secIdx];
   const block = btn.closest('.editable-block');
   const display = block.querySelector('.display-content');
   const isDark = block.classList.contains('editing-block');
@@ -1470,6 +1651,7 @@ function startEdit(btn, field, dayIdx, secIdx, promptIdx) {
     else if (field === 'nanoPrompt') sec.nanoPrompts[promptIdx].prompt = val;
     else if (field === 'i2vClip') sec.i2vClips[promptIdx].motion = val;
     render();
+    saveDayContent(dateStr, activeProduct, contentObj);
   };
   const cancelBtn = document.createElement('button');
   cancelBtn.className = 'cancel-btn';
@@ -1489,8 +1671,28 @@ function startEdit(btn, field, dayIdx, secIdx, promptIdx) {
   ta.focus();
 }
 
-activeDay = getTodayIndex();
-render();
+// ── App Init ──
+async function initApp() {
+  activeDay = getTodayIndex();
+  // Show loading state
+  const container = document.getElementById('cardsContainer');
+  container.innerHTML = '<div style="text-align:center;padding:60px;color:var(--text-muted)"><p>Loading content from database...</p></div>';
+  try {
+    await seedDefaultData();
+    await loadWeekContent();
+  } catch (e) {
+    console.error('DB init failed, using defaults:', e);
+    // Fallback: load hardcoded data into cache for current week
+    const ws = getWeekStartDate();
+    const plan = PRODUCTS[activeProduct].plan;
+    for (let i = 0; i < plan.length; i++) {
+      const d = new Date(ws); d.setDate(ws.getDate() + i);
+      contentCache[cacheKey(activeProduct, dateToStr(d))] = plan[i];
+    }
+  }
+  render();
+}
+initApp();
 </script>
 </body>
 </html>
