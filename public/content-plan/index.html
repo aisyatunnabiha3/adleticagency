@@ -1607,8 +1607,13 @@ function getActiveContent() {
 // Load week content: check localStorage for edits, fallback to hardcoded defaults
 function loadWeekContent() {
   const ws = getWeekStartDate();
-  // Default seed dates: March 9-15 maps to hardcoded plan indices 0-6
-  const defaultDates = ['2026-03-09','2026-03-10','2026-03-11','2026-03-12','2026-03-13','2026-03-14','2026-03-15'];
+  // Default seed dates mapped to plan array indices
+  // Week 1: March 9-15 → indices 0-6, Week 2+: March 16+ → indices 7+
+  const defaultDateMap = {
+    'ai-video':    { '2026-03-09':0,'2026-03-10':1,'2026-03-11':2,'2026-03-12':3,'2026-03-13':4,'2026-03-14':5,'2026-03-15':6 },
+    'ai-employee': { '2026-03-09':0,'2026-03-10':1,'2026-03-11':2,'2026-03-12':3,'2026-03-13':4,'2026-03-14':5,'2026-03-15':6,'2026-03-16':7,'2026-03-17':8 },
+    'paid-ads':    { '2026-03-09':0,'2026-03-10':1,'2026-03-11':2,'2026-03-12':3,'2026-03-13':4,'2026-03-14':5,'2026-03-15':6 }
+  };
   const defaultPlans = { 'ai-video': AI_VIDEO_PLAN, 'ai-employee': AI_EMPLOYEE_PLAN, 'paid-ads': PAID_ADS_PLAN };
 
   for (let i = 0; i < 7; i++) {
@@ -1623,7 +1628,8 @@ function loadWeekContent() {
     }
 
     // 2. Check if this date matches default seed data
-    const seedIdx = defaultDates.indexOf(ds);
+    const dateMap = defaultDateMap[activeProduct] || {};
+    const seedIdx = dateMap[ds] !== undefined ? dateMap[ds] : -1;
     const plan = defaultPlans[activeProduct];
     if (seedIdx >= 0 && plan && plan[seedIdx]) {
       contentCache[key] = plan[seedIdx];
