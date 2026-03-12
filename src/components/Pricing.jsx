@@ -5,7 +5,7 @@ import './Pricing.css'
 const paidAdsPlans = [
   {
     name: '3-Week Trial',
-    price: 'RM 350',
+    price: 'RM 450',
     period: '3 weeks',
     tagline: 'Low commitment, proper testing.',
     features: ['Full campaign setup', 'Retargeting strategy', 'Daily KPI reports', 'Dedicated support'],
@@ -14,19 +14,19 @@ const paidAdsPlans = [
   },
   {
     name: 'Poster Package',
-    price: 'RM 550',
+    price: 'RM 1,050',
     period: 'month',
     tagline: 'Most popular for SMEs.',
-    features: ['Full campaign management', 'Ad poster creation', 'Retargeting strategy', 'Daily KPI reports', 'Weekly discussions', 'Dedicated support'],
+    features: ['2 Poster Campaigns Management', 'Ad poster creation', 'Retargeting strategy', 'Daily KPI reports', 'Weekly discussions', 'Dedicated support'],
     cta: 'Get Started',
     highlighted: true,
   },
   {
     name: 'Video Package',
-    price: 'RM 1,050',
+    price: 'RM 2,250',
     period: 'month',
     tagline: 'Best for higher conversions and scaling.',
-    features: ['Full campaign management', 'Ad video & poster creation', 'Video editing & optimisation', 'Retargeting strategy', 'Daily KPI reports', 'Weekly discussions', 'Priority support'],
+    features: ['2 Video Campaigns Management', 'Ad video & poster creation', 'Video editing & optimisation', 'Retargeting strategy', 'Daily KPI reports', 'Weekly discussions', 'Priority support'],
     cta: 'Schedule Consultation',
     highlighted: false,
   },
