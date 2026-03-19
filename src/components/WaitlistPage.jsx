@@ -19,8 +19,8 @@ const courses = [
   },
   {
     emoji: '🧠',
-    title: 'AI Hyper-Realistic Avatar Course',
-    desc: 'Create lifelike AI avatars for ads, UGC, and brand content.',
+    title: 'AI Visual Effects Course',
+    desc: 'Create scroll-stopping AI effects — morphs, glitches, style shifts, and more.',
     lessons: 10,
     value: 'RM 849',
   },
@@ -252,7 +252,7 @@ export default function WaitlistPage() {
                         </div>
                       </div>
                       <div className="feed-body">
-                        <p>Just finished the AI Avatar course — created my first hyper-realistic avatar for a client's ad. They loved it! 🔥</p>
+                        <p>Just finished the AI Effects course — made a product morph video for a client's ad. They loved it! 🔥</p>
                       </div>
                       <div className="feed-actions">
                         <span className="feed-action">❤️ 18</span>
