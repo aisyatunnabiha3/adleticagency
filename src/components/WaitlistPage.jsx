@@ -234,7 +234,7 @@ export default function WaitlistPage() {
           <FeatureBlock
             title="EDIT WITH PRECISION"
             desc="Edit images and video while preserving characters, composition, style. Refine, adjust, and perfect your work without starting over."
-            video="/videos/kl-fall.mp4"
+            video="/videos/desert-portrait.mp4"
             label="EDITING"
             labelColor="#22c55e"
             reverse={false}
@@ -268,7 +268,7 @@ export default function WaitlistPage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.6 }}
               >
-                <video src={v.src} autoPlay muted loop playsInline />
+                <video src={v.src} autoPlay muted loop playsInline preload="auto" webkit-playsinline="true" />
                 <span className="mb-showcase-label">{v.label}</span>
               </motion.div>
             ))}
@@ -586,7 +586,7 @@ function FeatureBlock({ title, desc, img, video, label, labelColor, reverse }) {
       </div>
       <motion.div className="mb-feature-visual" style={{ y: mediaY }}>
         {video ? (
-          <video src={video} autoPlay muted loop playsInline />
+          <video src={video} autoPlay muted loop playsInline preload="auto" webkit-playsinline="true" />
         ) : (
           <img src={img} alt={title} loading="lazy" />
         )}

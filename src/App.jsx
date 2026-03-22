@@ -34,8 +34,7 @@ function App() {
     <div className="app">
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/ai-video-creation-community-waitlist" element={<WaitlistPage />} />
-        <Route path="/motionboards" element={<WaitlistPage />} />
+        <Route path="/motionboards-ai-video-software" element={<WaitlistPage />} />
       </Routes>
     </div>
   )
