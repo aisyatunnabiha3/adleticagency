@@ -100,7 +100,7 @@ export default function WaitlistPage() {
   const handleSubmit = (e) => {
     e.preventDefault()
     const plan = pricingPlans.find(p => p.name === form.plan)
-    const msg = `🎬 *MotionBoards*\n\nHi! I'd like to join.\n\n*Name:* ${form.name}\n*Email:* ${form.email}\n*Phone:* ${form.phone}\n*Plan:* ${form.plan} (RM${plan?.price}/mo)`
+    const msg = `🎬 *MotionBoards Waitlist*\n\nHi! I'd like to join the waitlist.\n\n*Name:* ${form.name}\n*Email:* ${form.email}\n*Phone:* ${form.phone}\n*Interested Plan:* ${form.plan} (RM${plan?.price}/mo)`
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank')
   }
 
@@ -160,7 +160,7 @@ export default function WaitlistPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
           >
-            <button className="btn btn-primary btn-xl" onClick={scrollToForm}>Start now</button>
+            <button className="btn btn-primary btn-xl" onClick={scrollToForm}>Join the Waitlist</button>
             <button className="btn btn-ghost btn-xl" onClick={() => document.getElementById('models-section')?.scrollIntoView({ behavior: 'smooth' })}>See models</button>
           </motion.div>
         </motion.div>
@@ -392,7 +392,7 @@ export default function WaitlistPage() {
                       setForm({ ...form, plan: plan.name })
                       setTimeout(() => document.getElementById('signup-form')?.scrollIntoView({ behavior: 'smooth' }), 100)
                     }}
-                  >Get {plan.name}</button>
+                  >Join Waitlist — {plan.name}</button>
                 </div>
               </ScrollReveal>
             ))}
@@ -406,8 +406,8 @@ export default function WaitlistPage() {
           <div className="mb-signup-wrap">
             <ScrollReveal>
               <div className="mb-signup-left">
-                <h2>READY TO<br /><span className="text-accent">CREATE?</span></h2>
-                <p>Join MotionBoards and start generating cinematic AI videos today. We'll set you up via WhatsApp.</p>
+                <h2>JOIN THE<br /><span className="text-accent">WAITLIST</span></h2>
+                <p>MotionBoards is launching soon. Join the waitlist via WhatsApp to lock in early access pricing and be first in line.</p>
                 <div className="mb-signup-stats">
                   <div><strong>7+</strong><span>AI Models</span></div>
                   <div><strong>16+</strong><span>Workflows</span></div>
@@ -437,9 +437,9 @@ export default function WaitlistPage() {
                     </select>
                   </div>
                   <button type="submit" className="btn btn-primary btn-xl mb-form-submit">
-                    ⚡ Join MotionBoards — RM{pricingPlans.find(p => p.name === form.plan)?.price}/mo
+                    ⚡ Join Waitlist via WhatsApp
                   </button>
-                  <p className="mb-form-note">You'll be redirected to WhatsApp.</p>
+                  <p className="mb-form-note">You'll be redirected to WhatsApp to confirm your spot.</p>
                 </form>
               </div>
             </ScrollReveal>
@@ -581,7 +581,7 @@ function FeatureBlock({ title, desc, img, video, label, labelColor, reverse }) {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          <button className="btn btn-ghost-sm" onClick={() => document.getElementById('signup-form')?.scrollIntoView({ behavior: 'smooth' })}>Start now</button>
+          <button className="btn btn-ghost-sm" onClick={() => document.getElementById('signup-form')?.scrollIntoView({ behavior: 'smooth' })}>Join Waitlist</button>
         </motion.div>
       </div>
       <motion.div className="mb-feature-visual" style={{ y: mediaY }}>
