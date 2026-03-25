@@ -66,6 +66,7 @@
 .mb-hero-content { position: relative; z-index: 2; text-align: center; padding: 80px 24px; }
 .mb-hero-badge-wrap { margin-bottom: 28px; }
 .mb-hero-badge { font-size: 0.82rem; font-weight: 700; color: #f26522; background: rgba(242,101,34,0.1); border: 1px solid rgba(242,101,34,0.25); padding: 10px 24px; border-radius: 100px; }
+.mb-hero-logo { height: 80px; border-radius: 12px; }
 
 .mb-hero h1 {
   font-size: clamp(2.5rem, 7vw, 5.5rem);

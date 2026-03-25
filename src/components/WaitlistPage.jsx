@@ -133,7 +133,7 @@ export default function WaitlistPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <span className="mb-hero-badge">⚡ MotionBoards</span>
+            <img src="/images/motionboards-logo.jpg" alt="MotionBoards" className="mb-hero-logo" />
           </motion.div>
 
           <motion.h1
@@ -450,7 +450,7 @@ export default function WaitlistPage() {
       {/* ══════ FOOTER ══════ */}
       <footer className="mb-footer">
         <div className="mb-footer-big">
-          <span>MOTION</span><span className="accent">BOARDS</span>
+          <img src="/images/motionboards-logo.jpg" alt="MotionBoards" style={{ height: '60px', borderRadius: '8px' }} />
         </div>
         <div className="container">
           <p>AI Video Creation Platform by Adletic Agency</p>
