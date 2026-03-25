@@ -237,7 +237,7 @@ export default function Pricing() {
                   ))}
                 </ul>
 
-                <button className="btn btn-primary cpb-waitlist-btn" onClick={() => navigate('/ai-video-creation-community-waitlist')}>
+                <button className="btn btn-primary cpb-waitlist-btn" onClick={() => navigate('/motionboards-ai-video-software')}>
                   🚀 Join the Waitlist
                 </button>
                 <p className="cpb-note">Lock in RM18/mo forever — limited to first 50 members.</p>
