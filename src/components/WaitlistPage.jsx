@@ -96,7 +96,7 @@ export default function WaitlistPage() {
   const smoothBigTextX2 = useSpring(bigTextX2, { stiffness: 50, damping: 20 })
 
   const goToApp = () => {
-    window.open(MOTIONBOARDS_URL + '/signup', '_blank')
+    window.open(MOTIONBOARDS_URL, '_blank')
   }
 
   return (
