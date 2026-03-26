@@ -3,6 +3,8 @@ import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-mo
 import Navigation from './Navigation'
 import './WaitlistPage.css'
 
+const MOTIONBOARDS_URL = 'https://motionboards.vercel.app'
+
 const aiModels = [
   { name: 'Sora 2 Pro', badge: '9x Cheaper', desc: 'High-end cinematic output with rich composition and dynamic shots.', img: '/images/models/sora2pro.png' },
   { name: 'Veo 3.1', badge: '6x Cheaper', desc: 'Cinematic realism with smooth motion and strong scene coherence.', img: '/images/models/veo31.png' },
@@ -47,13 +49,16 @@ const courses = [
   { emoji: '👄', title: 'AI Lip Sync', lessons: 6, value: 'RM399' },
 ]
 
-const pricingPlans = [
-  { name: 'Starter', price: 10, concurrent: 4, desc: 'Try it out.', badge: null, popular: false, features: ['4 simultaneous generations', 'All AI models', 'Basic workflows', 'Community access', 'Sample prompts', 'Top up credits from RM10'] },
-  { name: 'Creator', price: 250, concurrent: 20, desc: 'For serious creators.', badge: 'Most Popular', popular: true, features: ['20 simultaneous generations', 'All AI models', 'All 17+ workflows', 'All courses (RM4,564+)', 'Full prompts library', 'Priority queue', 'Top up credits from RM10'] },
-  { name: 'Studio', price: 500, concurrent: null, desc: 'For teams & agencies.', badge: 'Best Value', popular: false, features: ['Unlimited simultaneous generations', 'All models + early access', 'All workflows + custom', 'All courses + first access', 'Exclusive prompts', 'Priority queue', '1-on-1 support'] },
+const payPerUseFeatures = [
+  'All 7+ AI models included',
+  'All 16+ workflows',
+  'Top up any amount from RM10',
+  'No monthly subscription',
+  'No commitments — use when you need',
+  'Creator community access (free)',
+  'Full prompt library',
+  'Pay only for what you generate',
 ]
-
-const WHATSAPP_NUMBER = '601121677672'
 
 function ScrollReveal({ children, className, delay = 0 }) {
   const ref = useRef(null)
@@ -72,7 +77,6 @@ function ScrollReveal({ children, className, delay = 0 }) {
 }
 
 export default function WaitlistPage() {
-  const [form, setForm] = useState({ name: '', email: '', phone: '', plan: 'Creator' })
   const heroRef = useRef(null)
   const marqueeRef = useRef(null)
   const bigTextRef = useRef(null)
@@ -91,17 +95,8 @@ export default function WaitlistPage() {
   const smoothBigTextX1 = useSpring(bigTextX1, { stiffness: 50, damping: 20 })
   const smoothBigTextX2 = useSpring(bigTextX2, { stiffness: 50, damping: 20 })
 
-  const scrollToForm = () => {
-    document.getElementById('signup-form')?.scrollIntoView({ behavior: 'smooth' })
-  }
-
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const plan = pricingPlans.find(p => p.name === form.plan)
-    const msg = `🎬 *MotionBoards Waitlist*\n\nHi! I'd like to join the waitlist.\n\n*Name:* ${form.name}\n*Email:* ${form.email}\n*Phone:* ${form.phone}\n*Interested Plan:* ${form.plan} (RM${plan?.price}/mo)`
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank')
+  const goToApp = () => {
+    window.open(MOTIONBOARDS_URL + '/signup', '_blank')
   }
 
   return (
@@ -110,7 +105,6 @@ export default function WaitlistPage() {
 
       {/* ══════ HERO ══════ */}
       <section className="mb-hero" ref={heroRef}>
-        {/* Floating images behind text */}
         <div className="mb-hero-images">
           {heroImages.map((src, i) => (
             <motion.div
@@ -160,7 +154,7 @@ export default function WaitlistPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
           >
-            <button className="btn btn-primary btn-xl" onClick={scrollToForm}>Join the Waitlist</button>
+            <button className="btn btn-primary btn-xl" onClick={goToApp}>Start Creating</button>
             <button className="btn btn-ghost btn-xl" onClick={() => document.getElementById('models-section')?.scrollIntoView({ behavior: 'smooth' })}>See models</button>
           </motion.div>
         </motion.div>
@@ -212,7 +206,7 @@ export default function WaitlistPage() {
         </div>
       </section>
 
-      {/* ══════ FEATURE BLOCKS (Leonardo-style) with videos ══════ */}
+      {/* ══════ FEATURE BLOCKS ══════ */}
       <section className="mb-section mb-features-section">
         <div className="container">
           <FeatureBlock
@@ -222,6 +216,7 @@ export default function WaitlistPage() {
             label="VIDEO"
             labelColor="#f26522"
             reverse={false}
+            goToApp={goToApp}
           />
           <FeatureBlock
             title="CREATE WITHOUT LIMITS"
@@ -230,6 +225,7 @@ export default function WaitlistPage() {
             label="IMAGE"
             labelColor="#ec4899"
             reverse={true}
+            goToApp={goToApp}
           />
           <FeatureBlock
             title="EDIT WITH PRECISION"
@@ -238,6 +234,7 @@ export default function WaitlistPage() {
             label="EDITING"
             labelColor="#22c55e"
             reverse={false}
+            goToApp={goToApp}
           />
         </div>
       </section>
@@ -302,10 +299,10 @@ export default function WaitlistPage() {
         </div>
       </section>
 
-      {/* ══════ PROMPTS — Big text + cards ══════ */}
-      <PromptsBigSection prompts={samplePrompts} scrollToForm={scrollToForm} />
+      {/* ══════ PROMPTS ══════ */}
+      <PromptsBigSection prompts={samplePrompts} goToApp={goToApp} />
 
-      {/* ══════ BUILT FOR CREATORS (Leonardo "Built for Makers" style) ══════ */}
+      {/* ══════ BUILT FOR CREATORS ══════ */}
       <section className="mb-section mb-builtfor-section">
         <div className="container">
           <ScrollReveal>
@@ -318,7 +315,7 @@ export default function WaitlistPage() {
               <div className="mb-builtfor-card">
                 <span className="mb-builtfor-icon">💬</span>
                 <h3>Creator Community</h3>
-                <p>Free with every plan. Connect, share work, join weekly lives, and grow together.</p>
+                <p>Connect, share work, join weekly lives, and grow together.</p>
                 <div className="mb-builtfor-pills">
                   <span>Feed</span><span>Weekly Lives</span><span>Challenges</span><span>Network</span>
                 </div>
@@ -329,7 +326,7 @@ export default function WaitlistPage() {
               <div className="mb-builtfor-card">
                 <span className="mb-builtfor-icon">📚</span>
                 <h3>8 Courses — RM4,564+</h3>
-                <p>Unlock on Creator & Studio plans. Learn AI video creation from zero to pro.</p>
+                <p>Learn AI video creation from zero to pro with our course library.</p>
                 <div className="mb-courses-compact">
                   {courses.map((c, i) => (
                     <div key={i} className="mb-course-chip">
@@ -338,7 +335,7 @@ export default function WaitlistPage() {
                     </div>
                   ))}
                 </div>
-                <span className="mb-builtfor-tag">Creator+</span>
+                <span className="mb-builtfor-tag">Included</span>
               </div>
             </ScrollReveal>
             <ScrollReveal delay={0.2}>
@@ -349,98 +346,71 @@ export default function WaitlistPage() {
                 <div className="mb-builtfor-pills">
                   <span>Cinematic</span><span>Cool Effects</span><span>Product Ads</span><span>Viral Hooks</span>
                 </div>
-                <span className="mb-builtfor-tag">All Plans</span>
+                <span className="mb-builtfor-tag">Included</span>
               </div>
             </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* ══════ HOW IT WORKS — Big numbers ══════ */}
-      <HowItWorksSection />
+      {/* ══════ HOW IT WORKS ══════ */}
+      <HowItWorksSection goToApp={goToApp} />
 
-      {/* ══════ PRICING ══════ */}
-      <section className="mb-section mb-pricing-section" id="waitlist-form">
+      {/* ══════ PRICING — Pay Per Use ══════ */}
+      <section className="mb-section mb-pricing-section" id="pricing">
         <div className="container">
           <ScrollReveal>
             <div className="mb-section-header">
               <h2>PRICING</h2>
-              <p>More simultaneous generations = faster output. Credits on top-up basis.</p>
+              <p>No subscriptions. No packages. Just pay for what you use.</p>
             </div>
           </ScrollReveal>
 
-          <div className="mb-pricing-grid">
-            {pricingPlans.map((plan, i) => (
-              <ScrollReveal key={i} delay={i * 0.1}>
-                <div className={`mb-pricing-card ${plan.popular ? 'popular' : ''}`}>
-                  {plan.badge && <span className="mb-pricing-badge">{plan.badge}</span>}
-                  <h3>{plan.name}</h3>
-                  <p className="mb-pricing-desc">{plan.desc}</p>
-                  <div className="mb-pricing-price">
-                    <span className="rm">RM</span>
-                    <span className="num">{plan.price}</span>
-                    <span className="period">/mo</span>
-                  </div>
-                  <div className="mb-pricing-gens"><span className="gen-num">{plan.concurrent ?? '∞'}</span> {plan.concurrent ? 'simultaneous' : 'unlimited'}</div>
-                  <div className="mb-pricing-concurrent">{plan.concurrent ? `${plan.concurrent} videos generating at once` : 'No limits on parallel generations'}</div>
-                  <ul className="mb-pricing-features">
-                    {plan.features.map((f, fi) => <li key={fi}>{f}</li>)}
-                  </ul>
-                  <button
-                    className={`btn ${plan.popular ? 'btn-primary' : 'btn-outline'} btn-lg mb-pricing-cta`}
-                    onClick={() => {
-                      setForm({ ...form, plan: plan.name })
-                      setTimeout(() => document.getElementById('signup-form')?.scrollIntoView({ behavior: 'smooth' }), 100)
-                    }}
-                  >Join Waitlist — {plan.name}</button>
+          <ScrollReveal>
+            <div className="mb-pricing-grid" style={{ justifyContent: 'center' }}>
+              <div className="mb-pricing-card popular" style={{ maxWidth: 420 }}>
+                <span className="mb-pricing-badge">Pay Per Use</span>
+                <h3>Top Up & Generate</h3>
+                <p className="mb-pricing-desc">No commitments. No monthly fees. Just add credits and create.</p>
+                <div className="mb-pricing-price">
+                  <span className="rm">RM</span>
+                  <span className="num">10</span>
+                  <span className="period">min</span>
                 </div>
-              </ScrollReveal>
-            ))}
-          </div>
+                <div className="mb-pricing-gens">Top up any amount you want</div>
+                <div className="mb-pricing-concurrent">RM10, RM25, RM50, RM100 — your choice</div>
+                <ul className="mb-pricing-features">
+                  {payPerUseFeatures.map((f, i) => <li key={i}>{f}</li>)}
+                </ul>
+                <button
+                  className="btn btn-primary btn-lg mb-pricing-cta"
+                  onClick={goToApp}
+                >Start Creating Now</button>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* ══════ SIGNUP FORM ══════ */}
+      {/* ══════ CTA SECTION ══════ */}
       <section className="mb-section mb-signup-section" id="signup-form">
         <div className="container">
-          <div className="mb-signup-wrap">
+          <div className="mb-signup-wrap" style={{ justifyContent: 'center', textAlign: 'center' }}>
             <ScrollReveal>
-              <div className="mb-signup-left">
-                <h2>JOIN THE<br /><span className="text-accent">WAITLIST</span></h2>
-                <p>MotionBoards is launching soon. Join the waitlist via WhatsApp to lock in early access pricing and be first in line.</p>
+              <div className="mb-signup-left" style={{ maxWidth: 600 }}>
+                <h2>START CREATING<br /><span className="text-accent">TODAY</span></h2>
+                <p>MotionBoards is live. Register for free, top up from RM10, and start generating AI videos with 7+ models and 16+ workflows.</p>
                 <div className="mb-signup-stats">
                   <div><strong>7+</strong><span>AI Models</span></div>
                   <div><strong>16+</strong><span>Workflows</span></div>
                   <div><strong>RM10</strong><span>Min Top Up</span></div>
                 </div>
-              </div>
-            </ScrollReveal>
-            <ScrollReveal delay={0.15}>
-              <div className="mb-form-card">
-                <form onSubmit={handleSubmit} className="mb-form">
-                  <div className="mb-field">
-                    <label htmlFor="name">Full Name *</label>
-                    <input type="text" id="name" name="name" value={form.name} onChange={handleChange} placeholder="Your full name" required />
-                  </div>
-                  <div className="mb-field">
-                    <label htmlFor="email">Email *</label>
-                    <input type="email" id="email" name="email" value={form.email} onChange={handleChange} placeholder="your@email.com" required />
-                  </div>
-                  <div className="mb-field">
-                    <label htmlFor="phone">WhatsApp *</label>
-                    <input type="tel" id="phone" name="phone" value={form.phone} onChange={handleChange} placeholder="+60 12-345 6789" required />
-                  </div>
-                  <div className="mb-field">
-                    <label htmlFor="plan">Plan</label>
-                    <select id="plan" name="plan" value={form.plan} onChange={handleChange}>
-                      {pricingPlans.map(p => <option key={p.name} value={p.name}>{p.name} — RM{p.price}/mo ({p.concurrent ?? '∞'} simultaneous)</option>)}
-                    </select>
-                  </div>
-                  <button type="submit" className="btn btn-primary btn-xl mb-form-submit">
-                    ⚡ Join Waitlist via WhatsApp
+                <div style={{ marginTop: '2rem' }}>
+                  <button className="btn btn-primary btn-xl" onClick={goToApp}>
+                    🚀 Register Free & Start Creating
                   </button>
-                  <p className="mb-form-note">You'll be redirected to WhatsApp to confirm your spot.</p>
-                </form>
+                  <p style={{ marginTop: '0.75rem', fontSize: '0.75rem', opacity: 0.5 }}>Free to register. Pay only when you generate.</p>
+                </div>
               </div>
             </ScrollReveal>
           </div>
@@ -462,7 +432,7 @@ export default function WaitlistPage() {
 }
 
 /* ── Prompts Big Section ── */
-function PromptsBigSection({ prompts, scrollToForm }) {
+function PromptsBigSection({ prompts, goToApp }) {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const bgX = useTransform(scrollYProgress, [0, 1], ['5%', '-15%'])
@@ -482,7 +452,7 @@ function PromptsBigSection({ prompts, scrollToForm }) {
         <div className="mb-prompts-grid">
           {prompts.map((p, i) => (
             <ScrollReveal key={i} delay={i * 0.06}>
-              <div className="mb-prompt-card" onClick={scrollToForm}>
+              <div className="mb-prompt-card" onClick={goToApp}>
                 <div className="mb-prompt-top">
                   <span className="mb-prompt-model">{p.model}</span>
                 </div>
@@ -498,15 +468,15 @@ function PromptsBigSection({ prompts, scrollToForm }) {
 }
 
 /* ── How It Works Section ── */
-function HowItWorksSection() {
+function HowItWorksSection({ goToApp }) {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const lineScale = useTransform(scrollYProgress, [0.1, 0.6], [0, 1])
 
   const steps = [
-    { num: '01', title: 'SUBSCRIBE', desc: 'From 4 simultaneous (RM10) to unlimited (RM500/mo)', color: '#f26522' },
-    { num: '02', title: 'GENERATE', desc: 'Pick any AI model. Any workflow. Any style. Your choice.', color: '#ec4899' },
-    { num: '03', title: 'TOP UP', desc: 'Need more? Add credits from just RM10. No waiting.', color: '#22c55e' },
+    { num: '01', title: 'REGISTER', desc: 'Create your free account at motionboards.vercel.app', color: '#f26522' },
+    { num: '02', title: 'TOP UP', desc: 'Add credits from just RM10. Any amount you want.', color: '#ec4899' },
+    { num: '03', title: 'GENERATE', desc: 'Pick any AI model. Any workflow. Any style. Generate.', color: '#22c55e' },
   ]
 
   return (
@@ -515,7 +485,7 @@ function HowItWorksSection() {
         <ScrollReveal>
           <div className="mb-section-header">
             <h2>HOW IT WORKS</h2>
-            <p>Generations included. Need more? Top up from RM10.</p>
+            <p>Register free. Top up from RM10. Start generating.</p>
           </div>
         </ScrollReveal>
 
@@ -537,7 +507,7 @@ function HowItWorksSection() {
 
         <ScrollReveal>
           <div className="mb-how-callout">
-            <strong>Bigger plan = more speed.</strong> Starter: 4 at once. Creator: 20 at once. Studio: Unlimited. All on top-up credits.
+            <strong>No subscriptions. No packages.</strong> Just top up any amount from RM10 and generate with all 7+ AI models and 16+ workflows.
           </div>
         </ScrollReveal>
       </div>
@@ -545,8 +515,8 @@ function HowItWorksSection() {
   )
 }
 
-/* ── Feature Block (Leonardo-style split layout) ── */
-function FeatureBlock({ title, desc, img, video, label, labelColor, reverse }) {
+/* ── Feature Block ── */
+function FeatureBlock({ title, desc, img, video, label, labelColor, reverse, goToApp }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
@@ -581,7 +551,7 @@ function FeatureBlock({ title, desc, img, video, label, labelColor, reverse }) {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          <button className="btn btn-ghost-sm" onClick={() => document.getElementById('signup-form')?.scrollIntoView({ behavior: 'smooth' })}>Join Waitlist</button>
+          <button className="btn btn-ghost-sm" onClick={goToApp}>Try It Now</button>
         </motion.div>
       </div>
       <motion.div className="mb-feature-visual" style={{ y: mediaY }}>

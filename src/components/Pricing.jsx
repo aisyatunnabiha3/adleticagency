@@ -237,10 +237,10 @@ export default function Pricing() {
                   ))}
                 </ul>
 
-                <button className="btn btn-primary cpb-waitlist-btn" onClick={() => navigate('/motionboards-ai-video-software')}>
-                  🚀 Join the Waitlist
+                <button className="btn btn-primary cpb-waitlist-btn" onClick={() => window.open('https://motionboards.vercel.app/signup', '_blank')}>
+                  🚀 Start Creating
                 </button>
-                <p className="cpb-note">Lock in RM18/mo forever — limited to first 50 members.</p>
+                <p className="cpb-note">Free to register. Top up from RM10. Pay per use.</p>
               </div>
             </div>
           </div>
