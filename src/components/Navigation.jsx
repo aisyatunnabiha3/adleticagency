@@ -46,7 +46,7 @@ export default function Navigation() {
             </button>
           ))}
           <button className="nav-waitlist-btn" onClick={() => { navigate('/motionboards-ai-video-software'); setMenuOpen(false) }}>
-            🎬 AI Video Studio
+            🎬 Motionboards - AI Video Canvas
           </button>
           <button className="btn btn-primary nav-cta-mobile" onClick={() => scrollTo('contact')}>
             Get Started
@@ -55,7 +55,7 @@ export default function Navigation() {
 
         <div className="nav-right-btns">
           <button className="nav-waitlist-btn nav-waitlist-desktop" onClick={() => navigate('/motionboards-ai-video-software')}>
-            🎬 AI Video Studio
+            🎬 Motionboards - AI Video Canvas
           </button>
           <button className="btn btn-primary nav-cta-desktop" onClick={() => scrollTo('contact')}>
             Get Started
