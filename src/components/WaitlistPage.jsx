@@ -28,6 +28,45 @@ const heroImages = [
   '/images/models/kl-tube.jpg', '/images/models/laptop-guy.png', '/images/models/solar.jpg',
 ]
 
+const appShots = [
+  {
+    img: '/images/motionboards-app/01-canvas.png',
+    title: 'Infinite Canvas',
+    desc: 'Drop references, generate new shots, organize scenes — all on one zoomable board. Your creative flow, visualized.',
+  },
+  {
+    img: '/images/motionboards-app/09-modelpanel.png',
+    title: 'All Models, One Panel',
+    desc: 'Browse the curated catalog — Veo, Nano Banana, Sora-class models — and switch in a click. No juggling tabs.',
+  },
+  {
+    img: '/images/motionboards-app/16-darkfull.png',
+    title: 'Dark Mode Native',
+    desc: 'Work late without frying your eyes. The full board, toolbar, and model picker in a deep cinematic dark theme.',
+  },
+  {
+    img: '/images/motionboards-app/14-connect.png',
+    title: 'Connect Generations',
+    desc: 'Chain an image into a video, a reference into a remix. The AI sees the history so every next shot stays on-brand.',
+  },
+  {
+    img: '/images/motionboards-app/13-timeline.png',
+    title: 'Timeline Editor',
+    desc: 'Pick your favorite clips, stitch them into a reel. Export a finished video straight from the board — no extra app.',
+  },
+  {
+    img: '/images/motionboards-app/08-tutorials.png',
+    title: 'Built-in Tutorials',
+    desc: 'Ten guided walkthroughs — from first image to start-to-end video. Learn the craft without leaving the tool.',
+  },
+]
+
+const canvasTools = [
+  { img: '/images/motionboards-app/02-toolbar.png', title: 'One Toolbar, Every Tool', desc: 'Select, text, draw, connect, import, export. Everything you need in one row.' },
+  { img: '/images/motionboards-app/06-texttool.png', title: 'Text Annotations', desc: 'Label references, leave notes, spec shots — right on the canvas.' },
+  { img: '/images/motionboards-app/07-drawtool.png', title: 'Freehand Sketching', desc: 'Draw storyboards, composition hints, arrows. Adjust color and stroke instantly.' },
+]
+
 const samplePrompts = [
   { title: 'Desert Warrior Walk', model: 'Veo 3.1 S2E', prompt: 'Two people standing in the Saharan desert wearing cream desert headwraps. Slow dolly push-in, golden hour rim lighting.' },
   { title: 'Porsche Highway POV', model: 'Kling 3.0 S2E', prompt: 'POV inside Porsche cockpit on Malaysian highway. Two motorcycles rip past at insane speed.' },
@@ -206,6 +245,74 @@ export default function WaitlistPage() {
         </div>
       </section>
 
+      {/* ══════ BIG HERO SHOT ══════ */}
+      <section className="mb-section mb-heroshot-section">
+        <div className="container">
+          <ScrollReveal>
+            <div className="mb-section-header">
+              <h2>SEE IT IN<br /><span className="text-accent">ACTION</span></h2>
+              <p>The full board. Real interface. Every generation, reference, and idea — one canvas.</p>
+            </div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <div className="mb-heroshot-frame">
+              <img src="/images/motionboards-app/16-darkfull.png" alt="MotionBoards dark canvas" loading="lazy" />
+              <span className="mb-heroshot-label">CANVAS</span>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ══════ INSIDE THE BOARD — FLASHBOARDS-STYLE CARDS ══════ */}
+      <section className="mb-section mb-inside-section">
+        <div className="container">
+          <ScrollReveal>
+            <div className="mb-section-header">
+              <h2>INSIDE THE BOARD</h2>
+              <p>Everything built into MotionBoards — designed for how creators actually work.</p>
+            </div>
+          </ScrollReveal>
+          <div className="mb-inside-grid">
+            {appShots.map((f, i) => (
+              <ScrollReveal key={i} delay={(i % 3) * 0.08}>
+                <div className="mb-inside-card" onClick={goToApp}>
+                  <div className="mb-inside-thumb">
+                    <img src={f.img} alt={f.title} loading="lazy" />
+                  </div>
+                  <h3>{f.title}</h3>
+                  <p>{f.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════ CANVAS TOOLS STRIP ══════ */}
+      <section className="mb-section mb-tools-section">
+        <div className="container">
+          <ScrollReveal>
+            <div className="mb-section-header">
+              <h2>EVERY TOOL<br /><span className="text-accent">ONE CLICK AWAY</span></h2>
+              <p>No menus to dig through. No tabs to switch. Just the tools, right where you need them.</p>
+            </div>
+          </ScrollReveal>
+          <div className="mb-tools-grid">
+            {canvasTools.map((t, i) => (
+              <ScrollReveal key={i} delay={i * 0.1}>
+                <div className="mb-tools-card">
+                  <div className="mb-tools-thumb">
+                    <img src={t.img} alt={t.title} loading="lazy" />
+                  </div>
+                  <h3>{t.title}</h3>
+                  <p>{t.desc}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ══════ FEATURE BLOCKS ══════ */}
       <section className="mb-section mb-features-section">
         <div className="container">
@@ -347,6 +454,35 @@ export default function WaitlistPage() {
                   <span>Cinematic</span><span>Cool Effects</span><span>Product Ads</span><span>Viral Hooks</span>
                 </div>
                 <span className="mb-builtfor-tag">Included</span>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════ MODEL PANEL CLOSE-UP ══════ */}
+      <section className="mb-section mb-modelpanel-section">
+        <div className="container">
+          <div className="mb-modelpanel-wrap">
+            <ScrollReveal>
+              <div className="mb-modelpanel-text">
+                <h2>PICK A MODEL.<br /><span className="text-accent">GENERATE.</span></h2>
+                <p>
+                  Every curated AI model — image, video, sound effects, voice — in a single panel.
+                  Pricing surfaced up front. Click, generate, move on.
+                </p>
+                <ul className="mb-modelpanel-list">
+                  <li>Curated top 2 cheapest per category</li>
+                  <li>Pricing + speed shown before you spend</li>
+                  <li>One-click switch between models</li>
+                  <li>Image, video, SFX, and voice — one place</li>
+                </ul>
+                <button className="btn btn-primary btn-lg" onClick={goToApp}>Open MotionBoards</button>
+              </div>
+            </ScrollReveal>
+            <ScrollReveal delay={0.15}>
+              <div className="mb-modelpanel-shot">
+                <img src="/images/motionboards-app/05-models.png" alt="Model panel" loading="lazy" />
               </div>
             </ScrollReveal>
           </div>
