@@ -491,14 +491,14 @@ export default function WaitlistPage() {
         <div className="container">
           <ScrollReveal>
             <div className="mb-section-header">
-              <h2>PRICING</h2>
-              <p>No subscriptions. No packages. Just pay for what you use.</p>
+              <h2>START CREATING<br /><span className="text-accent">TODAY</span></h2>
+              <p>MotionBoards is live. Register free, top up from RM50, start generating.</p>
             </div>
           </ScrollReveal>
 
-          <ScrollReveal>
-            <div className="mb-pricing-grid" style={{ justifyContent: 'center' }}>
-              <div className="mb-pricing-card popular" style={{ maxWidth: 420 }}>
+          <div className="mb-pricing-combo">
+            <ScrollReveal>
+              <div className="mb-pricing-card popular">
                 <span className="mb-pricing-badge">Pay Per Use</span>
                 <h3>Top Up & Generate</h3>
                 <p className="mb-pricing-desc">No commitments. No monthly fees. Just add credits and create.</p>
@@ -517,30 +517,24 @@ export default function WaitlistPage() {
                   onClick={goToApp}
                 >Start Creating Now</button>
               </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+            </ScrollReveal>
 
-      {/* ══════ CTA SECTION ══════ */}
-      <section className="mb-section mb-signup-section" id="signup-form">
-        <div className="container">
-          <div className="mb-signup-wrap" style={{ justifyContent: 'center', textAlign: 'center' }}>
-            <ScrollReveal>
-              <div className="mb-signup-left" style={{ maxWidth: 600 }}>
-                <h2>START CREATING<br /><span className="text-accent">TODAY</span></h2>
-                <p>MotionBoards is live. Register for free, top up from RM50, and start generating AI videos with 7+ models and 16+ workflows.</p>
+            <ScrollReveal delay={0.1}>
+              <div className="mb-pricing-cta-side">
+                <h3>Everything you need to ship AI video — on one board.</h3>
+                <p>
+                  7+ AI models. 16+ workflows. One canvas. Register free, top up from
+                  RM50 and the credits work across every model.
+                </p>
                 <div className="mb-signup-stats">
                   <div><strong>7+</strong><span>AI Models</span></div>
                   <div><strong>16+</strong><span>Workflows</span></div>
                   <div><strong>RM50</strong><span>Min Top Up</span></div>
                 </div>
-                <div style={{ marginTop: '2rem' }}>
-                  <button className="btn btn-primary btn-xl" onClick={goToApp}>
-                    🚀 Register Free & Start Creating
-                  </button>
-                  <p style={{ marginTop: '0.75rem', fontSize: '0.75rem', opacity: 0.5 }}>Free to register. Pay only when you generate.</p>
-                </div>
+                <button className="btn btn-primary btn-xl mb-pricing-cta-btn" onClick={goToApp}>
+                  🚀 Register Free & Start Creating
+                </button>
+                <p className="mb-pricing-cta-note">Free to register. Pay only when you generate.</p>
               </div>
             </ScrollReveal>
           </div>

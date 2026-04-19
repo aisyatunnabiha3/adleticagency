@@ -458,6 +458,44 @@
 .mb-pricing-features li::before { content: '\2713'; position: absolute; left: 0; color: #f26522; font-weight: 700; }
 .mb-pricing-cta { width: 100%; }
 
+/* ═══ PRICING + CTA COMBO ═══ */
+.mb-pricing-combo {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 60px;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.mb-pricing-combo .mb-pricing-card.popular { transform: none; }
+.mb-pricing-combo .mb-pricing-card.popular:hover { transform: translateY(-6px); }
+
+.mb-pricing-cta-side { color: #fff; }
+.mb-pricing-cta-side h3 {
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0 0 16px;
+}
+.mb-pricing-cta-side > p {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  margin: 0 0 28px;
+  max-width: 460px;
+}
+.mb-pricing-cta-side .mb-signup-stats { margin-bottom: 32px; }
+.mb-pricing-cta-side .mb-signup-stats span { color: rgba(255,255,255,0.45); }
+
+.mb-pricing-cta-btn { margin-top: 4px; }
+.mb-pricing-cta-note {
+  margin: 12px 0 0;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.35);
+}
+
 /* ═══ SIGNUP FORM (white) ═══ */
 .mb-signup-section { background: #fff; border-top: 1px solid #E5E7EB; }
 
@@ -506,6 +544,9 @@
   .mb-inside-grid { grid-template-columns: repeat(2, 1fr); }
   .mb-tools-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
   .mb-modelpanel-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .mb-pricing-combo { grid-template-columns: 1fr; max-width: 460px; gap: 40px; text-align: center; }
+  .mb-pricing-cta-side > p { margin-left: auto; margin-right: auto; }
+  .mb-pricing-cta-side .mb-signup-stats { justify-content: center; }
 }
 
 @media (max-width: 768px) {
