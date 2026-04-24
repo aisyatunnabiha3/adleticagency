@@ -89,8 +89,11 @@ const courses = [
 ]
 
 const payPerUseFeatures = [
-  'RM50 credited to use across every AI model',
+  'RM100 of credits refreshed every month',
+  'Access to every AI model on the canvas',
+  'ADletic AI prompt assistant built in',
   'Creator community access',
+  'Cancel anytime — no long commitment',
 ]
 
 function ScrollReveal({ children, className, delay = 0 }) {
@@ -492,22 +495,22 @@ export default function WaitlistPage() {
           <ScrollReveal>
             <div className="mb-section-header">
               <h2>START CREATING<br /><span className="text-accent">TODAY</span></h2>
-              <p>MotionBoards is live. Register free, top up from RM50, start generating.</p>
+              <p>MotionBoards is live. Subscribe for RM100/month — credits refreshed every cycle, every model unlocked.</p>
             </div>
           </ScrollReveal>
 
           <div className="mb-pricing-combo">
             <ScrollReveal>
               <div className="mb-pricing-card popular">
-                <span className="mb-pricing-badge">Pay Per Use</span>
-                <h3>Top Up & Generate</h3>
-                <p className="mb-pricing-desc">No commitments. No monthly fees. Just add credits and create.</p>
+                <span className="mb-pricing-badge">Monthly Subscription</span>
+                <h3>MotionBoards Monthly</h3>
+                <p className="mb-pricing-desc">RM100 of credits added to your account every month. Every AI model, every workflow, one subscription.</p>
                 <div className="mb-pricing-price">
                   <span className="rm">RM</span>
-                  <span className="num">50</span>
-                  <span className="period">min</span>
+                  <span className="num">100</span>
+                  <span className="period">/mo</span>
                 </div>
-                <div className="mb-pricing-gens">Starts at RM50</div>
+                <div className="mb-pricing-gens">Renews monthly · Cancel anytime</div>
                 <div className="mb-pricing-concurrent">Credits unlock every model on the canvas</div>
                 <ul className="mb-pricing-features">
                   {payPerUseFeatures.map((f, i) => <li key={i}>{f}</li>)}
@@ -515,7 +518,7 @@ export default function WaitlistPage() {
                 <button
                   className="btn btn-primary btn-lg mb-pricing-cta"
                   onClick={goToApp}
-                >Start Creating Now</button>
+                >Subscribe & Start Creating</button>
               </div>
             </ScrollReveal>
 
@@ -523,18 +526,18 @@ export default function WaitlistPage() {
               <div className="mb-pricing-cta-side">
                 <h3>Everything you need to ship AI video — on one board.</h3>
                 <p>
-                  7+ AI models. 16+ workflows. One canvas. Register free, top up from
-                  RM50 and the credits work across every model.
+                  7+ AI models. 16+ workflows. One canvas. Subscribe for RM100/month —
+                  credits refresh automatically so you can keep generating without thinking about top-ups.
                 </p>
                 <div className="mb-signup-stats">
                   <div><strong>7+</strong><span>AI Models</span></div>
                   <div><strong>16+</strong><span>Workflows</span></div>
-                  <div><strong>RM50</strong><span>Min Top Up</span></div>
+                  <div><strong>RM100</strong><span>/month</span></div>
                 </div>
                 <button className="btn btn-primary btn-xl mb-pricing-cta-btn" onClick={goToApp}>
-                  🚀 Register Free & Start Creating
+                  🚀 Subscribe & Start Creating
                 </button>
-                <p className="mb-pricing-cta-note">Free to register. Pay only when you generate.</p>
+                <p className="mb-pricing-cta-note">Cancel anytime from your profile. Credits you haven&apos;t used stay in your account.</p>
               </div>
             </ScrollReveal>
           </div>
@@ -599,7 +602,7 @@ function HowItWorksSection({ goToApp }) {
 
   const steps = [
     { num: '01', title: 'REGISTER', desc: 'Create your free account at motionboards.vercel.app', color: '#f26522' },
-    { num: '02', title: 'TOP UP', desc: 'Add credits starting from RM50. Use them on any model.', color: '#ec4899' },
+    { num: '02', title: 'SUBSCRIBE', desc: 'RM100/month — credits refresh every cycle, unlock every model.', color: '#ec4899' },
     { num: '03', title: 'GENERATE', desc: 'Pick any AI model. Any workflow. Any style. Generate.', color: '#22c55e' },
   ]
 
@@ -609,7 +612,7 @@ function HowItWorksSection({ goToApp }) {
         <ScrollReveal>
           <div className="mb-section-header">
             <h2>HOW IT WORKS</h2>
-            <p>Register free. Top up from RM50. Start generating.</p>
+            <p>Register free. Subscribe for RM100/month. Start generating.</p>
           </div>
         </ScrollReveal>
 
@@ -631,7 +634,7 @@ function HowItWorksSection({ goToApp }) {
 
         <ScrollReveal>
           <div className="mb-how-callout">
-            <strong>No subscriptions. No packages.</strong> Just top up from RM50 and generate with all 7+ AI models and 16+ workflows.
+            <strong>One subscription, every model.</strong> RM100/month, credits refresh every cycle, all 7+ AI models and 16+ workflows included.
           </div>
         </ScrollReveal>
       </div>
