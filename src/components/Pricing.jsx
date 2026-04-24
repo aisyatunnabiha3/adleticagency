@@ -63,14 +63,15 @@ const aiPlans = [
 ]
 
 const communityIncludes = [
+  'RM100 of credits refreshed every month',
+  'Access to every model on MotionBoards — Veo, Sora, Seedance, Wan Animate, Lipsync, MiniMax Music, and more',
+  'ADletic AI prompt assistant built into the canvas',
   'Private community chat & forums',
   'Direct access to AI video experts & leaders',
   'Step-by-step video creation walkthroughs',
   'Prompt library — tested & ready to use',
   'Weekly live sessions & Q&A',
-  'Tutorials for next-gen AI video creation tools',
-  'Network with creators & marketers across Malaysia',
-  'Early access to new AI video tools & techniques',
+  'Cancel anytime — no long-term commitment',
 ]
 
 export default function Pricing() {
@@ -220,11 +221,10 @@ export default function Pricing() {
             <div className="cpb-right">
               <div className="cpb-card">
                 <div className="cpb-card-header">
-                  <div className="cpb-early-badge">🔥 Early Bird — 50 Spots</div>
-                  <h4>Community Membership</h4>
+                  <div className="cpb-early-badge">🔥 Monthly — Cancel Anytime</div>
+                  <h4>MotionBoards Monthly</h4>
                   <div className="cpb-price-row">
-                    <span className="cpb-price-early">RM18<span>/mo</span></span>
-                    <span className="cpb-price-original">RM50/mo</span>
+                    <span className="cpb-price-early">RM100<span>/mo</span></span>
                   </div>
                 </div>
 
@@ -238,9 +238,9 @@ export default function Pricing() {
                 </ul>
 
                 <button className="btn btn-primary cpb-waitlist-btn" onClick={() => window.open('https://motionboards.vercel.app', '_blank')}>
-                  🚀 Start Creating
+                  🚀 Subscribe Now
                 </button>
-                <p className="cpb-note">Free to register. Top up from RM10. Pay per use.</p>
+                <p className="cpb-note">RM100 monthly subscription. RM100 of credits added to your account each cycle. Cancel anytime.</p>
               </div>
             </div>
           </div>
