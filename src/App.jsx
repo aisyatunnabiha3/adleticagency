@@ -10,6 +10,7 @@ import Objections from './components/Objections'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import WaitlistPage from './components/WaitlistPage'
+import Policy from './components/Policy'
 import './App.css'
 
 function HomePage() {
@@ -35,6 +36,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/motionboards-ai-video-software" element={<WaitlistPage />} />
+        <Route path="/policy" element={<Policy />} />
+        <Route path="/privacy" element={<Policy />} />
       </Routes>
     </div>
   )
