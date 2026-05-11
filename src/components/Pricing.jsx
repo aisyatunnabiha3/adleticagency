@@ -4,29 +4,53 @@ import './Pricing.css'
 
 const paidAdsPlans = [
   {
-    name: '3-Week Trial',
-    price: 'RM 450',
-    period: '3 weeks',
-    tagline: 'Low commitment, proper testing.',
-    features: ['Full campaign setup', 'Retargeting strategy', 'Daily KPI reports', 'Dedicated support'],
-    cta: 'Start Trial',
+    name: 'Starter',
+    price: 'RM 850',
+    period: 'month',
+    tagline: 'Test the waters with proper ads.',
+    features: [
+      '2 videos + 1 poster every month',
+      'A/B split testing to find what sells',
+      'Facebook ads setup + full management',
+      'Retargeting strategy',
+      'Daily KPI reports',
+      'Weekly check-in calls',
+      'Dedicated support',
+    ],
+    cta: 'Get Started',
     highlighted: false,
   },
   {
-    name: 'Poster Package',
-    price: 'RM 1,050',
+    name: 'Growth',
+    price: 'RM 1,199',
     period: 'month',
-    tagline: 'Most popular for SMEs.',
-    features: ['2 Poster Campaigns Management', 'Ad poster creation', 'Retargeting strategy', 'Daily KPI reports', 'Weekly discussions', 'Dedicated support'],
+    setupFee: 'RM 4,999 first month, then RM 1,199/month',
+    tagline: 'Most popular — sell more, reply faster.',
+    features: [
+      '4 videos + 2 posters every month',
+      'Everything in Starter',
+      'Unlimited AI auto-replies for customer messages',
+      'A/B split testing',
+      'Facebook ads setup + full management',
+      'Priority support',
+    ],
     cta: 'Get Started',
     highlighted: true,
   },
   {
-    name: 'Video Package',
-    price: 'RM 2,250',
+    name: 'AI Specialist',
+    price: 'RM 5,599',
     period: 'month',
-    tagline: 'Best for higher conversions and scaling.',
-    features: ['2 Video Campaigns Management', 'Ad video & poster creation', 'Video editing & optimisation', 'Retargeting strategy', 'Daily KPI reports', 'Weekly discussions', 'Priority support'],
+    setupFee: 'RM 12,599 first month, then RM 5,599/month',
+    tagline: 'Become an AI-first company, month by month.',
+    features: [
+      '40 videos + 20 posters every month',
+      'Everything in Growth',
+      '1 department automated with AI every month',
+      'Weekly AI training for your staff (online or in-person)',
+      'Build your team into AI specialists',
+      'Dedicated account manager',
+    ],
     cta: 'Schedule Consultation',
     highlighted: false,
   },
@@ -129,6 +153,9 @@ export default function Pricing() {
                       <span className="price-amount">{plan.price}</span>
                       {plan.period && <span className="price-period">/{plan.period}</span>}
                     </div>
+                    {plan.setupFee && (
+                      <p className="plan-setup-fee">{plan.setupFee}</p>
+                    )}
                     <p className="plan-tagline">{plan.tagline}</p>
                   </div>
                   <button
