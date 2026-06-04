@@ -40,7 +40,7 @@ export default function Hero() {
           </p>
 
           <div className="hero-cta">
-            <button className="btn btn-primary btn-large" onClick={() => scrollTo('pricing')}>
+            <button className="btn btn-primary btn-large" onClick={() => scrollTo('solutions')}>
               View Our Solutions
             </button>
             <button className="btn btn-secondary btn-large" onClick={() => scrollTo('contact')}>
@@ -72,7 +72,7 @@ export default function Hero() {
         </div>
 
         <div className="hero-solution-cards">
-          <button className="solution-preview-card" onClick={() => scrollTo('pricing')}>
+          <button className="solution-preview-card" onClick={() => scrollTo('solutions')}>
             <div className="spc-icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M12 2L2 7l10 5 10-5-10-5z"/>
@@ -86,7 +86,7 @@ export default function Hero() {
             </div>
             <span className="spc-arrow">→</span>
           </button>
-          <button className="solution-preview-card" onClick={() => scrollTo('pricing')}>
+          <button className="solution-preview-card" onClick={() => scrollTo('solutions')}>
             <div className="spc-icon spc-icon-ai">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="3"/>

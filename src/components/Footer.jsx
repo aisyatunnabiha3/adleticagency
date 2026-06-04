@@ -24,7 +24,6 @@ export default function Footer() {
             <ul>
               <li><button onClick={() => scrollTo('solutions')}>Paid Ads Management</button></li>
               <li><button onClick={() => scrollTo('solutions')}>AI Chatbot Solutions</button></li>
-              <li><button onClick={() => scrollTo('pricing')}>Pricing</button></li>
             </ul>
           </div>
 

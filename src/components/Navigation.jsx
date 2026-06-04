@@ -27,7 +27,6 @@ export default function Navigation() {
   const navLinks = [
     { id: 'home', label: 'Home' },
     { id: 'solutions', label: 'Solutions' },
-    { id: 'pricing', label: 'Pricing' },
     { id: 'results', label: 'Results' },
     { id: 'contact', label: 'Contact' },
   ]
